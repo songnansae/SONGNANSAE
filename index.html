@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SONG NANSAE</title>
+    <style>
+        /* 기본 여백 초기화 및 미니멀 폰트 설정 */
+        body, html { margin: 0; padding: 0; font-family: 'Helvetica Neue', Arial, sans-serif; background: #fff; color: #111; }
+        a { text-decoration: none; color: inherit; }
+        
+        /* 상단 고정 네비게이션 바 */
+        header { position: sticky; top: 0; background: rgba(255, 255, 255, 0.95); display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; z-index: 100; font-size: 13px; font-weight: 500; letter-spacing: 0.5px; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a:hover { color: #888; transition: color 0.3s ease; }
+        
+        /* 반응형 사진 갤러리 (그리드) */
+        .gallery { padding: 0 40px 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; }
+        .gallery-item { position: relative; overflow: hidden; cursor: pointer; background: #f9f9f9; }
+        
+        /* 사진 꽉 차게 비율 유지 */
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/5; display: block; transition: opacity 0.4s ease; }
+        
+        /* 마우스 오버 시 사진 어두워지며 캡션 등장 */
+        .gallery-item:hover img { opacity: 0.6; }
+        .caption { position: absolute; bottom: 20px; left: 20px; opacity: 0; transition: opacity 0.4s ease; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; color: #111; }
+        .gallery-item:hover .caption { opacity: 1; }
+        
+        /* 하단 푸터 */
+        footer { text-align: left; padding: 40px; font-size: 11px; color: #999; border-top: 1px solid #eee; margin-top: 20px; }
+        
+        /* 모바일 화면 대응 */
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 15px; padding: 20px; }
+            .gallery { padding: 0 20px 20px; grid-template-columns: 1fr; }
+            .gallery-item img { aspect-ratio: auto; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo"><a href="#">SONG NANSAE</a></div>
+    <div class="nav-links">
+        <a href="#">Fashion</a>
+        <a href="#">Commercial</a>
+        <a href="#">Archive</a>
+        <a href="#">About</a>
+    </div>
+</header>
+
+<div class="gallery">
+    <!-- 작업물 1 -->
+    <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1550614000-4b95d41b0712?auto=format&fit=crop&w=800&q=80" alt="Wrangler 25SS Lookbook">
+        <div class="caption">Wrangler 25SS Lookbook</div>
+    </div>
+    
+    <!-- 작업물 2 -->
+    <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80" alt="Fennec Campaign">
+        <div class="caption">Fennec Campaign</div>
+    </div>
+    
+    <!-- 작업물 3 -->
+    <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1571908598047-9b0049221e4e?auto=format&fit=crop&w=800&q=80" alt="RHUNHER Editorial">
+        <div class="caption">RHUNHER Editorial</div>
+    </div>
+    
+    <!-- 작업물 4 -->
+    <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?auto=format&fit=crop&w=800&q=80" alt="Personal Archive GFX100">
+        <div class="caption">Personal Archive (GFX100)</div>
+    </div>
+</div>
+
+<footer>
+    © 2026 SONG NANSAE STUDIO.
+</footer>
+
+</body>
+</html>
