@@ -1,226 +1,205 @@
-<!DOCTYPE html>
-<html lang="ko">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Song Nansae — Photographer</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #ffffff;
-            color: #111111;
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-        }
-        /* Layout */
-        .wrapper {
-            display: flex;
-            min-height: 100vh;
-        }
-        /* Sidebar Navigation */
-        sidebar {
-            width: 280px;
-            padding: 60px 40px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            background: #ffffff;
-            z-index: 10;
-        }
-        .logo a {
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            color: #111111;
-            letter-spacing: -0.01em;
-        }
-        .nav-links {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: #777777;
-            font-size: 0.95rem;
-            transition: color 0.2s ease;
-        }
-        .nav-links a:hover, .nav-links a.active {
-            color: #111111;
-        }
-        .footer-info {
-            font-size: 0.8rem;
-            color: #888888;
-            line-height: 1.4;
-        }
-        .footer-info a {
-            color: #111111;
-            text-decoration: none;
-        }
-        /* Main Content Area */
-        main {
-            margin-left: 280px;
-            flex: 1;
-            padding: 60px 60px 100px 60px;
-        }
-        .section {
-            display: none;
-        }
-        .section.active {
-            display: block;
-        }
-        .section-title {
-            font-size: 0.95rem;
-            font-weight: 500;
-            margin-bottom: 30px;
-            color: #555555;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        /* Image Grid Layout */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-        }
-        .grid-item {
-            width: 100%;
-            background: #f4f4f4;
-            overflow: hidden;
-            aspect-ratio: 3/2;
-            cursor: pointer;
-        }
-        .grid-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-        .grid-item:hover img {
-            transform: scale(1.02);
-        }
-        .placeholder-box {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f7f7f7;
-            color: #aaaaaa;
-            font-size: 0.85rem;
-        }
-        /* Responsive */
-        @media (max-width: 900px) {
-            .wrapper {
-                flex-direction: column;
-            }
-            sidebar {
-                position: relative;
-                width: 100%;
-                height: auto;
-                padding: 40px 30px 20px 30px;
-            }
-            main {
-                margin-left: 0;
-                padding: 20px 30px 60px 30px;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.2px '.SF NS'; color: #0e0e0e; -webkit-text-stroke: #0e0e0e; background-color: #ffffff}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.2px '.SF NS'; color: #0e0e0e; -webkit-text-stroke: #0e0e0e; background-color: #ffffff; min-height: 16.0px}
+    span.s1 {font-kerning: none}
+  </style>
 </head>
 <body>
-
-    <div class="wrapper">
-        <!-- Sidebar Navigation -->
-        <sidebar>
-            <div class="logo">
-                <a href="#" onclick="switchTab('commercial', event)">Song Nansae</a>
-            </div>
-            <div class="nav-links">
-                <a href="#" onclick="switchTab('commercial', event)" class="active" id="nav-commercial">Commercial</a>
-                <a href="#" onclick="switchTab('magazine', event)" id="nav-magazine">Magazine</a>
-                <a href="#" onclick="switchTab('personal', event)" id="nav-personal">Personal</a>
-                <a href="#" onclick="switchTab('film', event)" id="nav-film">Film</a>
-            </div>
-            <div class="footer-info">
-                Song Nansae Studio<br>
-                <a href="mailto:contact@songnansae.com">contact@songnansae.com</a><br>
-                <a href="https://instagram.com" target="_blank">Instagram</a>
-            </div>
-        </sidebar>
-
-        <!-- Main Content -->
-        <main>
-            <!-- Commercial Section -->
-            <section id="commercial" class="section active">
-                <div class="section-title">Commercial</div>
-                <div class="grid">
-                    <div class="grid-item"><div class="placeholder-box">Commercial Image 01</div></div>
-                    <div class="grid-item"><div class="placeholder-box">Commercial Image 02</div></div>
-                    <div class="grid-item"><div class="placeholder-box">Commercial Image 03</div></div>
-                    <div class="grid-item"><div class="placeholder-box">Commercial Image 04</div></div>
-                </div>
-            </section>
-
-            <!-- Magazine Section -->
-            <section id="magazine" class="section">
-                <div class="section-title">Magazine</div>
-                <div class="grid">
-                    <div class="grid-item"><div class="placeholder-box">Magazine Image 01</div></div>
-                    <div class="grid-item"><div class="placeholder-box">Magazine Image 02</div></div>
-                    <div class="grid-item"><div class="placeholder-box">Magazine Image 03</div></div>
-                </div>
-            </section>
-
-            <!-- Personal Section -->
-            <section id="personal" class="section">
-                <div class="section-title">Personal</div>
-                <div class="grid">
-                    <div class="grid-item"><div class="placeholder-box">Personal Image 01</div></div>
-                    <div class="grid-item"><div class="placeholder-box">Personal Image 02</div></div>
-                </div>
-            </section>
-
-            <!-- Film Section -->
-            <section id="film" class="section">
-                <div class="section-title">Film</div>
-                <div class="grid">
-                    <div class="grid-item"><div class="placeholder-box">Film Image 01</div></div>
-                    <div class="grid-item"><div class="placeholder-box">Film Image 02</div></div>
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <script>
-        function switchTab(tabId, event) {
-            event.preventDefault();
-            
-            // Hide all sections
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(sec => sec.classList.remove('active'));
-            
-            // Remove active class from all links
-            const links = document.querySelectorAll('.nav-links a');
-            links.forEach(link => link.classList.remove('active'));
-            
-            // Show target section and activate link
-            document.getElementById(tabId).classList.add('active');
-            document.getElementById('nav-' + tabId).classList.add('active');
-            
-            window.scrollTo(0, 0);
-        }
-    </script>
+<p class="p1"><span class="s1"><b>&lt;!DOCTYPE html&gt;</b></span></p>
+<p class="p1"><span class="s1"><b>&lt;html lang="ko"&gt;</b></span></p>
+<p class="p1"><span class="s1"><b>&lt;head&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">    </span>&lt;title&gt;Song Nansae - Photographer&lt;/title&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">    </span>&lt;style&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>* { margin: 0; padding: 0; box-sizing: border-box; }</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>body, html {<span class="Apple-converted-space"> </span></b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;<span class="Apple-converted-space"> </span></b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>background: #fff;<span class="Apple-converted-space"> </span></b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>color: #111;<span class="Apple-converted-space"> </span></b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>height: 100vh;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>overflow: hidden;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>a { text-decoration: none; color: inherit; cursor: pointer; }</b></span></p>
+<p class="p2"><span class="s1"><b></b></span><br></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>.wrapper {</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>display: flex;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>height: 100vh;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>width: 100vw;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></p>
+<p class="p2"><span class="s1"><b></b></span><br></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>/* 왼쪽 고정 사이드바 */</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>sidebar {</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>width: 320px;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>padding: 50px 40px;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>display: flex;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>flex-direction: column;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>justify-content: space-between;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>flex-shrink: 0;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>border-right: 1px solid #f0f0f0;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>background: #fff;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>z-index: 10;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></p>
+<p class="p2"><span class="s1"><b></b></span><br></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>.logo a {</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>font-size: 15px;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>font-weight: 600;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>letter-spacing: 1px;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></p>
+<p class="p2"><span class="s1"><b></b></span><br></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>.nav-links {</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>display: flex;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>flex-direction: column;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>gap: 12px;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>margin-top: 40px;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></p>
+<p class="p2"><span class="s1"><b></b></span><br></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>.nav-links a {</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>font-size: 14px;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>font-weight: 400;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>color: #888;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>transition: color 0.2s ease;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></p>
+<p class="p2"><span class="s1"><b></b></span><br></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>.nav-links a:hover, .nav-links a.active {</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>color: #111;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>font-weight: 500;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></p>
+<p class="p2"><span class="s1"><b></b></span><br></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>.footer-info {</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>font-size: 12px;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>color: #aaa;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>line-height: 1.5;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></p>
+<p class="p2"><span class="s1"><b></b></span><br></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>/* 오른쪽 컨텐츠 영역 */</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>main {</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>flex-grow: 1;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>height: 100vh;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>overflow-y: auto;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>padding: 60px;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>background: #fff;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></p>
+<p class="p2"><span class="s1"><b></b></span><br></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>.section-content {</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>display: none;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></p>
+<p class="p2"><span class="s1"><b></b></span><br></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>.section-content.active {</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>display: block;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></p>
+<p class="p2"><span class="s1"><b></b></span><br></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>/* 프로젝트 리스트 스타일 (친구분 레퍼런스 스타일) */</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>.project-list {</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>display: flex;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>flex-direction: column;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>gap: 16px;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></p>
+<p class="p2"><span class="s1"><b></b></span><br></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>.project-item {</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>font-size: 16px;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>color: #333;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>transition: color 0.2s;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></p>
+<p class="p2"><span class="s1"><b></b></span><br></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>.project-item:hover {</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>color: #000;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>text-decoration: underline;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></p>
+<p class="p2"><span class="s1"><b></b></span><br></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>/* 반응형 모바일 대응 */</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>@media (max-width: 900px) {</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>body, html { overflow: auto; height: auto; }</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>.wrapper { flex-direction: column; height: auto; }</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>sidebar { width: 100%; height: auto; padding: 30px 20px; border-right: none; border-bottom: 1px solid #f0f0f0; }</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>main { height: auto; padding: 30px 20px; overflow-y: visible; }</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>.nav-links { flex-direction: row; flex-wrap: wrap; gap: 15px; margin-top: 20px; }</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">    </span>&lt;/style&gt;</b></span></p>
+<p class="p1"><span class="s1"><b>&lt;/head&gt;</b></span></p>
+<p class="p1"><span class="s1"><b>&lt;body&gt;</b></span></p>
+<p class="p2"><span class="s1"><b></b></span><br></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">    </span>&lt;div class="wrapper"&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>&lt;!-- 왼쪽 사이드바 --&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>&lt;sidebar&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>&lt;div&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;div class="logo"&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                    </span>&lt;a href="#" onclick="switchSection('commercial')"&gt;SONG NANSAE&lt;/a&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;/div&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;div class="nav-links"&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                    </span>&lt;a onclick="switchSection('commercial')" id="nav-commercial" class="active"&gt;Commercial&lt;/a&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                    </span>&lt;a onclick="switchSection('magazine')" id="nav-magazine"&gt;Magazine&lt;/a&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                    </span>&lt;a onclick="switchSection('personal')" id="nav-personal"&gt;Personal&lt;/a&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                    </span>&lt;a onclick="switchSection('film')" id="nav-film"&gt;Film&lt;/a&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;/div&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>&lt;/div&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>&lt;div class="footer-info"&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                </span>&amp;copy; 2026 Song Nansae.&lt;br&gt;All rights reserved.</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>&lt;/div&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>&lt;/sidebar&gt;</b></span></p>
+<p class="p2"><span class="s1"><b></b></span><br></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>&lt;!-- 오른쪽 컨텐츠 영역 --&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>&lt;main&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>&lt;!-- Commercial 섹션 --&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>&lt;div id="content-commercial" class="section-content active"&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;div class="project-list"&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                    </span>&lt;div class="project-item"&gt;Commercial 프로젝트들이 이곳에 표시됩니다.&lt;/div&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;/div&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>&lt;/div&gt;</b></span></p>
+<p class="p2"><span class="s1"><b></b></span><br></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>&lt;!-- Magazine 섹션 --&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>&lt;div id="content-magazine" class="section-content"&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;div class="project-list"&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                    </span>&lt;a href="#" class="project-item"&gt;Vogue, 2025&lt;/a&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                    </span>&lt;a href="#" class="project-item"&gt;Vogue Tom Sachs, 2025&lt;/a&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                    </span>&lt;a href="#" class="project-item"&gt;GQ Cha Joo Young, 2025&lt;/a&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                    </span>&lt;a href="#" class="project-item"&gt;Esquire, 2025&lt;/a&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                    </span>&lt;a href="#" class="project-item"&gt;Vogue, 2024&lt;/a&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;/div&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>&lt;/div&gt;</b></span></p>
+<p class="p2"><span class="s1"><b></b></span><br></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>&lt;!-- Personal 섹션 --&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>&lt;div id="content-personal" class="section-content"&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;div class="project-list"&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                    </span>&lt;div class="project-item"&gt;Personal 프로젝트들이 이곳에 표시됩니다.&lt;/div&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;/div&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>&lt;/div&gt;</b></span></p>
+<p class="p2"><span class="s1"><b></b></span><br></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>&lt;!-- Film 섹션 --&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>&lt;div id="content-film" class="section-content"&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;div class="project-list"&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                    </span>&lt;div class="project-item"&gt;Film 작업물이 이곳에 표시됩니다.&lt;/div&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;/div&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>&lt;/div&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>&lt;/main&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">    </span>&lt;/div&gt;</b></span></p>
+<p class="p2"><span class="s1"><b></b></span><br></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">    </span>&lt;script&gt;</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>function switchSection(sectionId) {</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>// 모든 콘텐츠 숨기기</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>document.querySelectorAll('.section-content').forEach(el =&gt; {</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                </span>el.classList.remove('active');</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>});</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>// 모든 메뉴 활성 해제</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>document.querySelectorAll('.nav-links a').forEach(el =&gt; {</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">                </span>el.classList.remove('active');</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>});</b></span></p>
+<p class="p2"><span class="s1"><b></b></span><br></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>// 선택한 섹션 및 메뉴 활성화</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>document.getElementById('content-' + sectionId).classList.add('active');</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">            </span>document.getElementById('nav-' + sectionId).classList.add('active');</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></p>
+<p class="p1"><span class="s1"><b><span class="Apple-converted-space">    </span>&lt;/script&gt;</b></span></p>
+<p class="p2"><span class="s1"><b></b></span><br></p>
+<p class="p1"><span class="s1"><b>&lt;/body&gt;</b></span></p>
+<p class="p1"><span class="s1"><b>&lt;/html&gt;</b></span></p>
 </body>
 </html>
