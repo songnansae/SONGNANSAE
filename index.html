@@ -3,81 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SONG NANSAE</title>
+    <title>Song Nansae — Photographer</title>
     <style>
-        /* 기본 여백 초기화 및 미니멀 폰트 설정 */
-        body, html { margin: 0; padding: 0; font-family: 'Helvetica Neue', Arial, sans-serif; background: #fff; color: #111; }
-        a { text-decoration: none; color: inherit; }
-        
-        /* 상단 고정 네비게이션 바 */
-        header { position: sticky; top: 0; background: rgba(255, 255, 255, 0.95); display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; z-index: 100; font-size: 13px; font-weight: 500; letter-spacing: 0.5px; }
-        .nav-links { display: flex; gap: 30px; }
-        .nav-links a:hover { color: #888; transition: color 0.3s ease; }
-        
-        /* 반응형 사진 갤러리 (그리드) */
-        .gallery { padding: 0 40px 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; }
-        .gallery-item { position: relative; overflow: hidden; cursor: pointer; background: #f9f9f9; }
-        
-        /* 사진 꽉 차게 비율 유지 */
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/5; display: block; transition: opacity 0.4s ease; }
-        
-        /* 마우스 오버 시 사진 어두워지며 캡션 등장 */
-        .gallery-item:hover img { opacity: 0.6; }
-        .caption { position: absolute; bottom: 20px; left: 20px; opacity: 0; transition: opacity 0.4s ease; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; color: #111; }
-        .gallery-item:hover .caption { opacity: 1; }
-        
-        /* 하단 푸터 */
-        footer { text-align: left; padding: 40px; font-size: 11px; color: #999; border-top: 1px solid #eee; margin-top: 20px; }
-        
-        /* 모바일 화면 대응 */
-        @media (max-width: 768px) {
-            header { flex-direction: column; gap: 15px; padding: 20px; }
-            .gallery { padding: 0 20px 20px; grid-template-columns: 1fr; }
-            .gallery-item img { aspect-ratio: auto; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #ffffff;
+            color: #111111;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+        /* Layout */
+        .wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+        /* Sidebar Navigation */
+        sidebar {
+            width: 280px;
+            padding: 60px 40px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: #ffffff;
+            z-index: 10;
+        }
+        .logo a {
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: #111111;
+            letter-spacing: -0.01em;
+        }
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #777777;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: #111111;
+        }
+        .footer-info {
+            font-size: 0.8rem;
+            color: #888888;
+            line-height: 1.4;
+        }
+        .footer-info a {
+            color: #111111;
+            text-decoration: none;
+        }
+        /* Main Content Area */
+        main {
+            margin-left: 280px;
+            flex: 1;
+            padding: 60px 60px 100px 60px;
+        }
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+        .section-title {
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 30px;
+            color: #555555;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        /* Image Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+        .grid-item {
+            width: 100%;
+            background: #f4f4f4;
+            overflow: hidden;
+            aspect-ratio: 3/2;
+            cursor: pointer;
+        }
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .grid-item:hover img {
+            transform: scale(1.02);
+        }
+        .placeholder-box {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f7f7f7;
+            color: #aaaaaa;
+            font-size: 0.85rem;
+        }
+        /* Responsive */
+        @media (max-width: 900px) {
+            .wrapper {
+                flex-direction: column;
+            }
+            sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 40px 30px 20px 30px;
+            }
+            main {
+                margin-left: 0;
+                padding: 20px 30px 60px 30px;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="logo"><a href="#">SONG NANSAE</a></div>
-    <div class="nav-links">
-        <a href="#">Fashion</a>
-        <a href="#">Commercial</a>
-        <a href="#">Archive</a>
-        <a href="#">About</a>
-    </div>
-</header>
+    <div class="wrapper">
+        <!-- Sidebar Navigation -->
+        <sidebar>
+            <div class="logo">
+                <a href="#" onclick="switchTab('commercial', event)">Song Nansae</a>
+            </div>
+            <div class="nav-links">
+                <a href="#" onclick="switchTab('commercial', event)" class="active" id="nav-commercial">Commercial</a>
+                <a href="#" onclick="switchTab('magazine', event)" id="nav-magazine">Magazine</a>
+                <a href="#" onclick="switchTab('personal', event)" id="nav-personal">Personal</a>
+                <a href="#" onclick="switchTab('film', event)" id="nav-film">Film</a>
+            </div>
+            <div class="footer-info">
+                Song Nansae Studio<br>
+                <a href="mailto:contact@songnansae.com">contact@songnansae.com</a><br>
+                <a href="https://instagram.com" target="_blank">Instagram</a>
+            </div>
+        </sidebar>
 
-<div class="gallery">
-    <!-- 작업물 1 -->
-    <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1550614000-4b95d41b0712?auto=format&fit=crop&w=800&q=80" alt="Wrangler 25SS Lookbook">
-        <div class="caption">Wrangler 25SS Lookbook</div>
-    </div>
-    
-    <!-- 작업물 2 -->
-    <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80" alt="Fennec Campaign">
-        <div class="caption">Fennec Campaign</div>
-    </div>
-    
-    <!-- 작업물 3 -->
-    <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1571908598047-9b0049221e4e?auto=format&fit=crop&w=800&q=80" alt="RHUNHER Editorial">
-        <div class="caption">RHUNHER Editorial</div>
-    </div>
-    
-    <!-- 작업물 4 -->
-    <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?auto=format&fit=crop&w=800&q=80" alt="Personal Archive GFX100">
-        <div class="caption">Personal Archive (GFX100)</div>
-    </div>
-</div>
+        <!-- Main Content -->
+        <main>
+            <!-- Commercial Section -->
+            <section id="commercial" class="section active">
+                <div class="section-title">Commercial</div>
+                <div class="grid">
+                    <div class="grid-item"><div class="placeholder-box">Commercial Image 01</div></div>
+                    <div class="grid-item"><div class="placeholder-box">Commercial Image 02</div></div>
+                    <div class="grid-item"><div class="placeholder-box">Commercial Image 03</div></div>
+                    <div class="grid-item"><div class="placeholder-box">Commercial Image 04</div></div>
+                </div>
+            </section>
 
-<footer>
-    © 2026 SONG NANSAE STUDIO.
-</footer>
+            <!-- Magazine Section -->
+            <section id="magazine" class="section">
+                <div class="section-title">Magazine</div>
+                <div class="grid">
+                    <div class="grid-item"><div class="placeholder-box">Magazine Image 01</div></div>
+                    <div class="grid-item"><div class="placeholder-box">Magazine Image 02</div></div>
+                    <div class="grid-item"><div class="placeholder-box">Magazine Image 03</div></div>
+                </div>
+            </section>
 
+            <!-- Personal Section -->
+            <section id="personal" class="section">
+                <div class="section-title">Personal</div>
+                <div class="grid">
+                    <div class="grid-item"><div class="placeholder-box">Personal Image 01</div></div>
+                    <div class="grid-item"><div class="placeholder-box">Personal Image 02</div></div>
+                </div>
+            </section>
+
+            <!-- Film Section -->
+            <section id="film" class="section">
+                <div class="section-title">Film</div>
+                <div class="grid">
+                    <div class="grid-item"><div class="placeholder-box">Film Image 01</div></div>
+                    <div class="grid-item"><div class="placeholder-box">Film Image 02</div></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function switchTab(tabId, event) {
+            event.preventDefault();
+            
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(sec => sec.classList.remove('active'));
+            
+            // Remove active class from all links
+            const links = document.querySelectorAll('.nav-links a');
+            links.forEach(link => link.classList.remove('active'));
+            
+            // Show target section and activate link
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById('nav-' + tabId).classList.add('active');
+            
+            window.scrollTo(0, 0);
+        }
+    </script>
 </body>
 </html>
