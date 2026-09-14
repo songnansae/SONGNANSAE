@@ -254,7 +254,9 @@ body {
 }
 
 
-/* 메인 3장 */
+/* =========================
+   메인 사진 3장
+========================= */
 
 .hero {
     width: 100%;
@@ -268,13 +270,18 @@ body {
 }
 
 
-/* 대표 작업 */
+/* 각각의 사진 */
 
 .hero-card {
     width: 100%;
 
     cursor: pointer;
+
+    min-width: 0;
 }
+
+
+/* 메인 이미지 */
 
 .hero-image {
     display: block;
@@ -288,16 +295,19 @@ body {
     object-fit: cover;
 }
 
+
+/* 사진 아래 텍스트 */
+
 .hero-caption {
     padding: 7px 5px 18px;
 
     font-size: 11px;
 
-    line-height: 1.3;
+    line-height: 1.4;
 }
 
 
-/* 이미지가 아직 없을 때 */
+/* 사진이 아직 없을 경우 */
 
 .empty-hero {
     width: 100%;
@@ -311,7 +321,7 @@ body {
 
 
 /* =========================
-   CATEGORY
+   CATEGORY PAGE
 ========================= */
 
 .category-page {
@@ -445,12 +455,6 @@ body {
     display: block;
 
     object-fit: contain;
-}
-
-
-.gallery-single {
-
-    max-width: 100%;
 }
 
 
@@ -694,8 +698,6 @@ body {
         id="hero"
     >
 
-        <!-- JavaScript가 자동으로 생성 -->
-
     </section>
 
 </main>
@@ -770,13 +772,6 @@ body {
 
 /* =========================================================
    GITHUB 설정
-
-   네 GitHub 주소가
-
-   github.com/songnansae/SONGNANSAE
-
-   라면 아래 그대로 사용.
-
 ========================================================= */
 
 const GITHUB_OWNER = "songnansae";
@@ -785,39 +780,48 @@ const GITHUB_REPO = "SONGNANSAE";
 
 const GITHUB_BRANCH = "main";
 
-
-/* 이미지가 들어가는 기본 폴더 */
-
 const IMAGE_ROOT = "images";
 
 
-/* 카테고리 */
+/* =========================================================
+   카테고리
+========================================================= */
 
 const CATEGORIES = [
+
     "commercial",
+
     "magazine",
+
     "personal",
+
     "film"
+
 ];
 
 
-/* 현재 선택 */
+/* =========================================================
+   사이트 데이터
+========================================================= */
+
+let siteData = {
+
+    commercial: [],
+
+    magazine: [],
+
+    personal: [],
+
+    film: []
+
+};
+
+
+/* 현재 위치 */
 
 let currentCategory = "";
 
 let currentWork = "";
-
-
-/* 데이터 저장 */
-
-const siteData = {
-
-    commercial: [],
-    magazine: [],
-    personal: [],
-    film: []
-
-};
 
 
 /* =========================================================
@@ -856,7 +860,7 @@ const gallery =
 
 
 /* =========================================================
-   GITHUB API
+   GitHub API
 ========================================================= */
 
 async function githubAPI(path) {
@@ -866,8 +870,10 @@ async function githubAPI(path) {
         `${GITHUB_OWNER}/${GITHUB_REPO}/contents/` +
         `${path}?ref=${GITHUB_BRANCH}`;
 
+
     const response =
         await fetch(url);
+
 
     if (!response.ok) {
 
@@ -877,13 +883,14 @@ async function githubAPI(path) {
 
     }
 
+
     return await response.json();
 
 }
 
 
 /* =========================================================
-   RAW IMAGE URL
+   이미지 URL
 ========================================================= */
 
 function imageURL(path) {
@@ -900,7 +907,7 @@ function imageURL(path) {
 
 
 /* =========================================================
-   폴더 안의 작업 목록 가져오기
+   카테고리 안의 작업 폴더 가져오기
 ========================================================= */
 
 async function getWorks(category) {
@@ -924,7 +931,10 @@ async function getWorks(category) {
                 (a, b) =>
                     a.name.localeCompare(
                         b.name,
-                        "ko"
+                        undefined,
+                        {
+                            numeric: true
+                        }
                     )
             );
 
@@ -933,7 +943,7 @@ async function getWorks(category) {
     catch (error) {
 
         console.log(
-            "카테고리 없음:",
+            "카테고리를 찾을 수 없습니다:",
             category
         );
 
@@ -945,7 +955,7 @@ async function getWorks(category) {
 
 
 /* =========================================================
-   작업 폴더 안의 사진 가져오기
+   작업 폴더 안의 이미지 가져오기
 ========================================================= */
 
 async function getImages(path) {
@@ -996,7 +1006,7 @@ async function getImages(path) {
 
 
 /* =========================================================
-   전체 사이트 데이터 읽기
+   전체 사이트 데이터 불러오기
 ========================================================= */
 
 async function loadSiteData() {
@@ -1006,7 +1016,9 @@ async function loadSiteData() {
     ) {
 
         const works =
-            await getWorks(category);
+            await getWorks(
+                category
+            );
 
 
         siteData[category] = [];
@@ -1040,7 +1052,18 @@ async function loadSiteData() {
 
 
 /* =========================================================
-   메인 화면 생성
+   ★ 메인 화면
+=========================================================
+
+   무조건
+
+   1. Commercial
+   2. Magazine
+   3. Personal
+
+   순서로 표시한다.
+
+   Film은 메인에 표시하지 않는다.
 ========================================================= */
 
 function renderHome() {
@@ -1048,163 +1071,178 @@ function renderHome() {
     hero.innerHTML = "";
 
 
-    const allWorks = [];
+    const mainCategories = [
+
+        "commercial",
+
+        "magazine",
+
+        "personal"
+
+    ];
 
 
-    CATEGORIES.forEach(
+    mainCategories.forEach(
 
         category => {
 
-            siteData[category]
-                .forEach(
 
-                    work => {
+            const works =
+                siteData[category] || [];
 
-                        if (
-                            work.images.length > 0
-                        ) {
 
-                            allWorks.push({
+            /*
+               해당 카테고리의
+               첫 번째 작업을 대표작으로 사용
+            */
 
-                                category:
-                                    category,
+            const work =
+                works.length > 0
+                    ? works[0]
+                    : null;
 
-                                work:
-                                    work
 
-                            });
+            const card =
+                document.createElement(
+                    "article"
+                );
 
-                        }
+
+            card.className =
+                "hero-card";
+
+
+            /*
+               사진이 있는 경우
+            */
+
+            if (
+
+                work &&
+
+                work.images &&
+
+                work.images.length > 0
+
+            ) {
+
+
+                const image =
+                    document.createElement(
+                        "img"
+                    );
+
+
+                image.className =
+                    "hero-image";
+
+
+                image.src =
+                    imageURL(
+                        work.images[0].path
+                    );
+
+
+                image.alt =
+                    work.name;
+
+
+                /*
+                   사진 밑 캡션
+                */
+
+                const caption =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                caption.className =
+                    "hero-caption";
+
+
+                caption.textContent =
+
+                    `${capitalize(category)}, ` +
+                    `${work.name}`;
+
+
+                card.appendChild(
+                    image
+                );
+
+
+                card.appendChild(
+                    caption
+                );
+
+
+                /*
+                   메인 사진 클릭
+                */
+
+                card.addEventListener(
+
+                    "click",
+
+                    () => {
+
+                        openWork(
+
+                            category,
+
+                            work.name
+
+                        );
 
                     }
 
                 );
 
-        }
-
-    );
+            }
 
 
-    /*
-       첫 번째 3개 작업을 메인에 표시
+            /*
+               해당 카테고리에 아직 사진이 없을 경우
+            */
 
-       나중에 순서를 바꾸고 싶으면
-       폴더 이름 앞에 숫자를 붙이는 방식으로
-       관리할 수도 있음.
-    */
+            else {
 
 
-    const selected =
-        allWorks.slice(0, 3);
-
-
-    if (
-        selected.length === 0
-    ) {
-
-        for (
-            let i = 0;
-            i < 3;
-            i++
-        ) {
-
-            const card =
-                document.createElement(
-                    "article"
-                );
-
-            card.className =
-                "hero-card";
-
-
-            card.innerHTML = `
-
-                <div class="empty-hero"></div>
-
-                <div class="hero-caption">
-                    작업을 추가하면 여기에 표시됩니다.
-                </div>
-
-            `;
-
-
-            hero.appendChild(card);
-
-        }
-
-        return;
-
-    }
-
-
-    selected.forEach(
-
-        item => {
-
-            const card =
-                document.createElement(
-                    "article"
-                );
-
-            card.className =
-                "hero-card";
-
-
-            const image =
-                document.createElement(
-                    "img"
-                );
-
-            image.className =
-                "hero-image";
-
-
-            image.src =
-                imageURL(
-                    item.work.images[0].path
-                );
-
-
-            image.alt =
-                item.work.name;
-
-
-            const caption =
-                document.createElement(
-                    "div"
-                );
-
-            caption.className =
-                "hero-caption";
-
-
-            caption.textContent =
-
-                `${capitalize(item.category)}, ` +
-                `${item.work.name}`;
-
-
-            card.appendChild(
-                image
-            );
-
-
-            card.appendChild(
-                caption
-            );
-
-
-            card.addEventListener(
-                "click",
-                () => {
-
-                    openWork(
-                        item.category,
-                        item.work.name
+                const empty =
+                    document.createElement(
+                        "div"
                     );
 
-                }
-            );
+
+                empty.className =
+                    "empty-hero";
+
+
+                const caption =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                caption.className =
+                    "hero-caption";
+
+
+                caption.textContent =
+                    capitalize(category);
+
+
+                card.appendChild(
+                    empty
+                );
+
+
+                card.appendChild(
+                    caption
+                );
+
+            }
 
 
             hero.appendChild(
@@ -1219,7 +1257,7 @@ function renderHome() {
 
 
 /* =========================================================
-   CATEGORY 열기
+   CATEGORY 화면
 ========================================================= */
 
 function openCategory(category) {
@@ -1256,9 +1294,16 @@ function openCategory(category) {
         siteData[category];
 
 
+    /*
+       작업이 없는 경우
+    */
+
     if (
+
         !works ||
+
         works.length === 0
+
     ) {
 
         workList.innerHTML = `
@@ -1279,9 +1324,14 @@ function openCategory(category) {
     }
 
 
+    /*
+       작업 목록
+    */
+
     works.forEach(
 
         work => {
+
 
             const button =
                 document.createElement(
@@ -1298,15 +1348,21 @@ function openCategory(category) {
 
 
             button.addEventListener(
+
                 "click",
+
                 () => {
 
                     openWork(
+
                         category,
+
                         work.name
+
                     );
 
                 }
+
             );
 
 
@@ -1322,12 +1378,15 @@ function openCategory(category) {
 
 
 /* =========================================================
-   WORK 열기
+   WORK 화면
 ========================================================= */
 
 function openWork(
+
     category,
+
     workName
+
 ) {
 
     currentCategory =
@@ -1361,14 +1420,23 @@ function openWork(
     const work =
         siteData[category]
             .find(
+
                 item =>
                     item.name === workName
+
             );
 
 
+    /*
+       사진이 없는 경우
+    */
+
     if (
+
         !work ||
+
         work.images.length === 0
+
     ) {
 
         gallery.innerHTML = `
@@ -1389,9 +1457,14 @@ function openWork(
     }
 
 
+    /*
+       작업 폴더 안의 모든 사진 표시
+    */
+
     work.images.forEach(
 
         image => {
+
 
             const img =
                 document.createElement(
@@ -1421,7 +1494,7 @@ function openWork(
 
 
 /* =========================================================
-   HOME으로 돌아가기
+   HOME으로
 ========================================================= */
 
 function goHome() {
@@ -1441,7 +1514,7 @@ function goHome() {
 
 
 /* =========================================================
-   메뉴 열기
+   + 버튼
 ========================================================= */
 
 document
@@ -1449,6 +1522,7 @@ document
     .addEventListener(
 
         "click",
+
         () => {
 
             menu.classList
@@ -1460,7 +1534,7 @@ document
 
 
 /* =========================================================
-   메뉴 닫기
+   - 버튼
 ========================================================= */
 
 document
@@ -1468,6 +1542,7 @@ document
     .addEventListener(
 
         "click",
+
         () => {
 
             menu.classList
@@ -1487,6 +1562,7 @@ document
     .addEventListener(
 
         "click",
+
         () => {
 
             infoPanel.classList
@@ -1498,7 +1574,7 @@ document
 
 
 /* =========================================================
-   카테고리 버튼
+   메뉴 카테고리 클릭
 ========================================================= */
 
 document
@@ -1509,10 +1585,13 @@ document
 
         button => {
 
+
             button.addEventListener(
 
                 "click",
+
                 () => {
+
 
                     const category =
                         button.dataset.category;
@@ -1544,6 +1623,7 @@ document
     .addEventListener(
 
         "click",
+
         () => {
 
             goHome();
@@ -1562,6 +1642,7 @@ document
     .addEventListener(
 
         "click",
+
         () => {
 
             openCategory(
@@ -1574,25 +1655,31 @@ document
 
 
 /* =========================================================
-   CAPITALIZE
+   첫 글자 대문자
 ========================================================= */
 
 function capitalize(text) {
 
     if (!text) {
+
         return "";
+
     }
 
+
     return (
+
         text.charAt(0).toUpperCase() +
+
         text.slice(1)
+
     );
 
 }
 
 
 /* =========================================================
-   START
+   사이트 시작
 ========================================================= */
 
 (async function () {
