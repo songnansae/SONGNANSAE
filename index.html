@@ -1,230 +1,1641 @@
-<!DOCTYPE html>
-<html lang="ko">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Song Nansae — Photographer</title>
-<style>
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;min-height:100%;font-family:Arial,Helvetica,sans-serif;color:#111;background:#fff}
-button,a{font:inherit;color:inherit}
-button{border:0;background:none;padding:0;cursor:pointer}
-.header{height:92px;border-top:1px solid #111;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;padding:0 12px;font-size:11px;position:sticky;top:0;background:#fff;z-index:20}
-.header .left{text-align:left}.header .center{text-align:center}.header .right{text-align:right}
-.dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:#111;vertical-align:middle}
-.menu-toggle{font-size:22px;line-height:1}
-.menu-panel{display:none;position:fixed;left:0;top:92px;background:#fff;z-index:19;padding:0 30px 28px;border-bottom:1px solid #111;width:100%}
-.menu-panel.open{display:block}
-.menu-controls{display:flex;gap:26px;font-size:40px;line-height:1;margin-bottom:28px}
-.menu-links{display:flex;gap:42px;flex-wrap:wrap;font-size:25px}
-.menu-links button{cursor:pointer}
-.info-panel{display:none;position:fixed;right:0;top:92px;width:min(480px,100%);background:#fff;border-left:1px solid #111;border-bottom:1px solid #111;z-index:19;padding:30px;font-size:14px;line-height:1.6}
-.info-panel.open{display:block}
-.hero{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
-.hero-card{min-width:0}
-.hero-card img,.placeholder{display:block;width:100%;height:calc(100vh - 92px);min-height:520px;object-fit:cover}
-.placeholder{background:#eee}
-.caption{font-size:11px;padding:7px 5px 18px}
-.view{display:none;padding:0 5px 60px}
-.view.active{display:block}
-.view-title{font-size:24px;margin:0 0 30px}
-.work-list{display:flex;flex-direction:column;gap:10px;max-width:720px}
-.work-list button{text-align:left;font-size:22px}
-.work-list button:hover{text-decoration:underline}
-.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-.gallery img{width:100%;display:block;object-fit:contain;background:#f5f5f5}
-.back{font-size:11px;margin-bottom:20px}
-.empty{font-size:14px;color:#777;padding:30px 0}
-@media(max-width:800px){
-.header{height:62px}.menu-panel{top:62px;padding:0 20px 22px}.info-panel{top:62px}
-.menu-links{font-size:20px;gap:22px}
-.hero{grid-template-columns:1fr}
-.hero-card img,.placeholder{height:calc(100vh - 62px);min-height:420px}
-.hero-card:not(:first-child){display:none}
-.caption{padding-bottom:14px}
-.gallery{grid-template-columns:1fr}
-.work-list button{font-size:19px}
-}
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Apple SD Gothic Neo'; color: #0e0e0e; -webkit-text-stroke: #0e0e0e; background-color: #ffffff}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Apple SD Gothic Neo'; color: #0e0e0e; -webkit-text-stroke: #0e0e0e; background-color: #ffffff; min-height: 27.0px}
+    span.s1 {font-kerning: none}
+  </style>
 </head>
 <body>
-
-<header class="header">
-  <div class="left">
-    <button class="menu-toggle" id="plus" aria-label="Open menu">＋</button>
-    <button class="menu-toggle" id="minus" aria-label="Close menu">−</button>
-  </div>
-  <div class="center">Song Nansae</div>
-  <div class="right">
-    <button id="infoButton">Info</button>
-    &nbsp;&nbsp;<span class="dot"></span>
-  </div>
-</header>
-
-<nav class="menu-panel" id="menuPanel">
-  <div class="menu-controls">
-    <button id="plus2">＋</button>
-    <button id="minus2">−</button>
-  </div>
-  <div class="menu-links">
-    <button data-category="commercial">Commercial</button>
-    <button data-category="magazine">Magazine</button>
-    <button data-category="personal">Personal</button>
-    <button data-category="film">Film</button>
-  </div>
-</nav>
-
-<section class="info-panel" id="infoPanel">
-  <div style="font-size:22px;margin-bottom:20px">Song Nansae</div>
-  Photographer<br>
-  Seoul, Korea<br><br>
-  For commissions and inquiries<br>
-  <a href="mailto:hello@songnansae.com">hello@songnansae.com</a><br>
-  Instagram&nbsp; @songnansae
-</section>
-
-<main id="home">
-  <section class="hero" id="hero"></section>
-</main>
-
-<section class="view" id="categoryView">
-  <button class="back" id="backHome">← Back</button>
-  <h1 class="view-title" id="categoryTitle"></h1>
-  <div class="work-list" id="workList"></div>
-</section>
-
-<section class="view" id="workView">
-  <button class="back" id="backCategory">← Back</button>
-  <h1 class="view-title" id="workTitle"></h1>
-  <div class="gallery" id="gallery"></div>
-</section>
-
-<script>
-/*
-  V1 구조:
-  GitHub Repository의 아래 폴더를 자동으로 읽는다.
-  images/commercial/작업명/01.jpg
-  images/magazine/작업명/01.jpg
-  images/personal/작업명/01.jpg
-  images/film/작업명/01.jpg
-
-  중요: GITHUB_OWNER만 네 실제 GitHub 사용자명으로 맞추면 된다.
-*/
-const GITHUB_OWNER = "songnansae";
-const GITHUB_REPO = "SONGNANSAE";
-const GITHUB_BRANCH = "main";
-const IMAGE_ROOT = "images";
-
-const categories = ["commercial","magazine","personal","film"];
-let cache = {};
-
-const hero = document.getElementById("hero");
-const home = document.getElementById("home");
-const categoryView = document.getElementById("categoryView");
-const workView = document.getElementById("workView");
-const menuPanel = document.getElementById("menuPanel");
-const infoPanel = document.getElementById("infoPanel");
-
-function rawUrl(path){
-  return `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/${path}`;
-}
-async function api(path){
-  const r = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}?ref=${GITHUB_BRANCH}`);
-  if(!r.ok) throw new Error("GitHub API error");
-  return r.json();
-}
-async function listDirs(path){
-  try{
-    const items = await api(path);
-    return items.filter(x=>x.type==="dir");
-  }catch(e){ return []; }
-}
-async function listImages(path){
-  try{
-    const items = await api(path);
-    return items.filter(x=>x.type==="file" && /\.(jpe?g|png|webp|gif)$/i.test(x.name))
-      .sort((a,b)=>a.name.localeCompare(b.name,navigator.language,{numeric:true}));
-  }catch(e){ return []; }
-}
-
-async function loadData(){
-  for(const c of categories){
-    const dirs = await listDirs(`${IMAGE_ROOT}/${c}`);
-    cache[c] = [];
-    for(const d of dirs){
-      const imgs = await listImages(d.path);
-      cache[c].push({name:d.name,path:d.path,images:imgs});
-    }
-  }
-}
-
-function showHome(){
-  home.style.display="block"; categoryView.classList.remove("active"); workView.classList.remove("active");
-}
-function showCategory(c){
-  home.style.display="none"; workView.classList.remove("active"); categoryView.classList.add("active");
-  document.getElementById("categoryTitle").textContent=c[0].toUpperCase()+c.slice(1);
-  const list=document.getElementById("workList"); list.innerHTML="";
-  (cache[c]||[]).forEach(work=>{
-    const b=document.createElement("button");
-    b.textContent=work.name;
-    b.onclick=()=>showWork(c,work.name);
-    list.appendChild(b);
-  });
-  if(!list.children.length) list.innerHTML='<div class="empty">이 카테고리에 아직 작업이 없습니다.</div>';
-}
-function showWork(c,name){
-  home.style.display="none"; categoryView.classList.remove("active"); workView.classList.add("active");
-  const work=(cache[c]||[]).find(x=>x.name===name);
-  document.getElementById("workTitle").textContent=name;
-  const gallery=document.getElementById("gallery"); gallery.innerHTML="";
-  if(!work || !work.images.length){gallery.innerHTML='<div class="empty">사진이 없습니다.</div>';return;}
-  work.images.forEach(img=>{
-    const el=document.createElement("img");
-    el.src=rawUrl(img.path);
-    el.alt=name;
-    gallery.appendChild(el);
-  });
-}
-function renderHero(){
-  hero.innerHTML="";
-  const all=[];
-  for(const c of categories) for(const w of (cache[c]||[])) if(w.images[0]) all.push({c,w});
-  all.slice(0,3).forEach(({c,w})=>{
-    const card=document.createElement("article"); card.className="hero-card";
-    const img=document.createElement("img"); img.src=rawUrl(w.images[0].path); img.alt=w.name;
-    card.appendChild(img);
-    const cap=document.createElement("div"); cap.className="caption"; cap.textContent=`${capitalize(c)}, ${w.name}`;
-    card.appendChild(cap); card.onclick=()=>showWork(c,w.name); hero.appendChild(card);
-  });
-  if(!hero.children.length){
-    for(let i=0;i<3;i++){const card=document.createElement("article");card.className="hero-card";card.innerHTML='<div class="placeholder"></div><div class="caption">작업을 추가하면 여기에 표시됩니다.</div>';hero.appendChild(card);}
-  }
-}
-function capitalize(s){return s[0].toUpperCase()+s.slice(1)}
-
-document.getElementById("plus").onclick=()=>menuPanel.classList.add("open");
-document.getElementById("plus2").onclick=()=>menuPanel.classList.add("open");
-document.getElementById("minus").onclick=()=>menuPanel.classList.remove("open");
-document.getElementById("minus2").onclick=()=>menuPanel.classList.remove("open");
-document.getElementById("infoButton").onclick=()=>infoPanel.classList.toggle("open");
-
-document.querySelectorAll("[data-category]").forEach(b=>{
-  b.onclick=async()=>{
-    menuPanel.classList.remove("open");
-    await loadData();
-    showCategory(b.dataset.category);
-  };
-});
-document.getElementById("backHome").onclick=showHome;
-document.getElementById("backCategory").onclick=()=>showCategory(window.currentCategory);
-
-(async()=>{
-  try{
-    await loadData();
-    renderHero();
-  }catch(e){renderHero();}
-})();
-</script>
+<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;html lang="ko"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;meta charset="UTF-8"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;title&gt;Song Nansae&lt;/title&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;style&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>BASIC</span></p>
+<p class="p1"><span class="s1">========================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">* {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>box-sizing: border-box;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">html,</span></p>
+<p class="p1"><span class="s1">body {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>margin: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>padding: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>width: 100%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>min-height: 100%;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">body {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>background: #fff;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>color: #111;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>font-family:</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>Arial,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>Helvetica,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>sans-serif;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>font-size: 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>font-weight: 400;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>HEADER</span></p>
+<p class="p1"><span class="s1">========================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.header {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>position: fixed;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>top: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>left: 0;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>width: 100%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>height: 92px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>background: #fff;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>border-top: 1px solid #111;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>display: grid;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>grid-template-columns: 1fr 1fr 1fr;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>align-items: center;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>padding: 0 12px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>z-index: 1000;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* 왼쪽 + - */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.header-left {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>display: flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>align-items: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>gap: 14px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.header-button {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>border: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>background: none;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>padding: 0;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>cursor: pointer;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>color: #111;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>font-family: Arial, Helvetica, sans-serif;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>font-size: 22px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>line-height: 1;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>font-weight: 400;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.header-button.minus {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>color: #cfcfcf;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* 가운데 이름 */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.header-center {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>text-align: center;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>font-size: 11px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* 오른쪽 */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.header-right {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>text-align: right;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>display: flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>justify-content: flex-end;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>align-items: center;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>gap: 22px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.info-button {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>border: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>background: none;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>padding: 0;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>cursor: pointer;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>font-size: 11px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.info-dot {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>width: 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>height: 12px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>background: #111;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>border-radius: 50%;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>display: inline-block;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>MENU</span></p>
+<p class="p1"><span class="s1">========================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.menu {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>position: fixed;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>left: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>top: 92px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>width: 100%;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>background: #fff;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>border-bottom: 1px solid #111;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>z-index: 900;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>display: none;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>padding: 0 30px 35px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.menu.open {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>display: block;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* 메뉴 카테고리 */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.menu-list {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>display: flex;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>gap: 42px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>align-items: center;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>flex-wrap: wrap;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.menu-item {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>border: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>background: none;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>padding: 0;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>cursor: pointer;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>font-family: Arial, Helvetica, sans-serif;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>font-size: 28px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>color: #111;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>line-height: 1.2;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.menu-item:hover {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>text-decoration: underline;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>INFO</span></p>
+<p class="p1"><span class="s1">========================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.info-panel {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>position: fixed;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>top: 92px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>right: 0;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>width: 420px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>background: #fff;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>border-left: 1px solid #111;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>border-bottom: 1px solid #111;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>z-index: 950;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>padding: 30px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>display: none;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>font-size: 12px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>line-height: 1.6;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.info-panel.open {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>display: block;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.info-name {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>font-size: 22px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>margin-bottom: 25px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.info-panel a {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>color: inherit;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>text-decoration: none;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>HOME</span></p>
+<p class="p1"><span class="s1">========================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.home {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>padding-top: 92px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* 메인 3장 */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.hero {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>width: 100%;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>display: grid;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>grid-template-columns:</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>repeat(3, minmax(0, 1fr));</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>gap: 0;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* 대표 작업 */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.hero-card {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>width: 100%;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>cursor: pointer;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.hero-image {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>display: block;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>width: 100%;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>height: calc(100vh - 92px);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>min-height: 500px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>object-fit: cover;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.hero-caption {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>padding: 7px 5px 18px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>font-size: 11px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>line-height: 1.3;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* 이미지가 아직 없을 때 */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.empty-hero {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>width: 100%;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>height: calc(100vh - 92px);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>min-height: 500px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>background: #f2f2f2;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>CATEGORY</span></p>
+<p class="p1"><span class="s1">========================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.category-page {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>display: none;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>padding-top: 120px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>padding-left: 15px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>padding-right: 15px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>padding-bottom: 80px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.category-page.active {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>display: block;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.page-back {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>border: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>background: none;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>padding: 0;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>margin-bottom: 35px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>cursor: pointer;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>font-size: 11px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.category-title {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>font-size: 28px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>font-weight: 400;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>margin: 0 0 35px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.work-list {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>display: flex;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>flex-direction: column;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>gap: 10px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>max-width: 800px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.work-button {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>border: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>background: none;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>padding: 0;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>text-align: left;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>cursor: pointer;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>font-size: 22px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>font-family: Arial, Helvetica, sans-serif;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>color: #111;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>width: fit-content;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.work-button:hover {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>text-decoration: underline;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>WORK PAGE</span></p>
+<p class="p1"><span class="s1">========================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.work-page {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>display: none;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>padding-top: 120px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>padding-left: 15px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>padding-right: 15px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>padding-bottom: 80px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.work-page.active {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>display: block;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.work-title {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>font-size: 28px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>font-weight: 400;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>margin: 0 0 35px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.gallery {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>width: 100%;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>display: flex;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>flex-direction: column;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>gap: 18px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.gallery img {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>width: 100%;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>height: auto;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>display: block;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>object-fit: contain;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.gallery-single {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>max-width: 100%;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>MOBILE</span></p>
+<p class="p1"><span class="s1">========================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">@media (max-width: 800px) {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.header {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>height: 62px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>padding: 0 10px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.home {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>padding-top: 62px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.menu {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>top: 62px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>padding: 0 20px 25px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.menu-list {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>gap: 22px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.menu-item {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>font-size: 21px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.info-panel {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>top: 62px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>width: 100%;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>border-left: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.hero {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>grid-template-columns: 1fr;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.hero-card:not(:first-child) {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>display: none;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.hero-image {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>height: calc(100vh - 62px);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>min-height: 450px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.empty-hero {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>height: calc(100vh - 62px);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>min-height: 450px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.category-page,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.work-page {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>padding-top: 90px;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>padding-left: 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>padding-right: 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.category-title,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.work-title {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>font-size: 24px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.work-button {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>font-size: 19px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/style&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;body&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;!-- =========================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>HEADER</span></p>
+<p class="p1"><span class="s1">========================= --&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;header class="header"&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="header-left"&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;button</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>class="header-button"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>id="openMenu"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>aria-label="Open menu"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>+</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/button&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;button</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>class="header-button minus"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>id="closeMenu"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>aria-label="Close menu"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>−</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/button&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="header-center"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>Song Nansae</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="header-right"&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;button</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>class="info-button"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>id="infoButton"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>Info</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/button&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;span class="info-dot"&gt;&lt;/span&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/header&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;!-- =========================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>MENU</span></p>
+<p class="p1"><span class="s1">========================= --&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;nav</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>class="menu"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>id="menu"</span></p>
+<p class="p1"><span class="s1">&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="menu-list"&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;button</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>class="menu-item"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>data-category="commercial"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>Commercial</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/button&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;button</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>class="menu-item"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>data-category="magazine"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>Magazine</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/button&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;button</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>class="menu-item"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>data-category="personal"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>Personal</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/button&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;button</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>class="menu-item"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>data-category="film"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>Film</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/button&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/nav&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;!-- =========================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>INFO</span></p>
+<p class="p1"><span class="s1">========================= --&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;section</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>class="info-panel"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>id="infoPanel"</span></p>
+<p class="p1"><span class="s1">&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="info-name"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>Song Nansae</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>Photographer&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>Seoul, Korea&lt;br&gt;&lt;br&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>For commissions and inquiries&lt;br&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;a href="mailto:hello@songnansae.com"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>hello@songnansae.com</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/a&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;br&gt;&lt;br&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;a</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>href="https://www.instagram.com/songnansae"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>target="_blank"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>Instagram</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/a&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;!-- =========================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>HOME</span></p>
+<p class="p1"><span class="s1">========================= --&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;main</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>class="home"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>id="home"</span></p>
+<p class="p1"><span class="s1">&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;section</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>class="hero"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>id="hero"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;!-- JavaScript가 자동으로 생성 --&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/main&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;!-- =========================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>CATEGORY PAGE</span></p>
+<p class="p1"><span class="s1">========================= --&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;section</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>class="category-page"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>id="categoryPage"</span></p>
+<p class="p1"><span class="s1">&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;button</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>class="page-back"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>id="categoryBack"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>← Back</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/button&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;h1</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>class="category-title"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>id="categoryTitle"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&gt;&lt;/h1&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>class="work-list"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>id="workList"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&gt;&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;!-- =========================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>WORK PAGE</span></p>
+<p class="p1"><span class="s1">========================= --&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;section</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>class="work-page"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>id="workPage"</span></p>
+<p class="p1"><span class="s1">&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;button</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>class="page-back"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>id="workBack"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>← Back</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/button&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;h1</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>class="work-title"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>id="workTitle"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&gt;&lt;/h1&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>class="gallery"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>id="gallery"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&gt;&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;script&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================================================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>GITHUB 설정</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>네 GitHub 주소가</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>github.com/songnansae/SONGNANSAE</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>라면 아래 그대로 사용.</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">========================================================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">const GITHUB_OWNER = "songnansae";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">const GITHUB_REPO = "SONGNANSAE";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">const GITHUB_BRANCH = "main";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* 이미지가 들어가는 기본 폴더 */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">const IMAGE_ROOT = "images";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* 카테고리 */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">const CATEGORIES = [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>"commercial",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>"magazine",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>"personal",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>"film"</span></p>
+<p class="p1"><span class="s1">];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* 현재 선택 */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">let currentCategory = "";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">let currentWork = "";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* 데이터 저장 */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">const siteData = {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>commercial: [],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>magazine: [],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>personal: [],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>film: []</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================================================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>DOM</span></p>
+<p class="p1"><span class="s1">========================================================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">const menu =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById("menu");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">const infoPanel =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById("infoPanel");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">const home =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById("home");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">const hero =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById("hero");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">const categoryPage =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById("categoryPage");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">const workPage =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById("workPage");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">const categoryTitle =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById("categoryTitle");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">const workTitle =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById("workTitle");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">const workList =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById("workList");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">const gallery =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById("gallery");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================================================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>GITHUB API</span></p>
+<p class="p1"><span class="s1">========================================================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">async function githubAPI(path) {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const url =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>`https://api.github.com/repos/` +</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>`${GITHUB_OWNER}/${GITHUB_REPO}/contents/` +</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>`${path}?ref=${GITHUB_BRANCH}`;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const response =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>await fetch(url);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>if (!response.ok) {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>throw new Error(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>"GitHub API Error: " + path</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>return await response.json();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================================================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>RAW IMAGE URL</span></p>
+<p class="p1"><span class="s1">========================================================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function imageURL(path) {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>return (</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>`https://raw.githubusercontent.com/` +</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>`${GITHUB_OWNER}/` +</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>`${GITHUB_REPO}/` +</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>`${GITHUB_BRANCH}/` +</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>`${path}`</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================================================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>폴더 안의 작업 목록 가져오기</span></p>
+<p class="p1"><span class="s1">========================================================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">async function getWorks(category) {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>try {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const items =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>await githubAPI(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>`${IMAGE_ROOT}/${category}`</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>return items</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>.filter(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>item =&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>item.type === "dir"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>)</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>.sort(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>(a, b) =&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>a.name.localeCompare(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>b.name,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>"ko"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>catch (error) {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>console.log(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>"카테고리 없음:",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>category</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>return [];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================================================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>작업 폴더 안의 사진 가져오기</span></p>
+<p class="p1"><span class="s1">========================================================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">async function getImages(path) {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>try {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const items =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>await githubAPI(path);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>return items</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>.filter(</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>item =&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>item.type === "file" &amp;&amp;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>/\.(jpg|jpeg|png|webp|gif)$/i</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>.test(item.name)</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>)</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>.sort(</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>(a, b) =&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>a.name.localeCompare(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>b.name,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>undefined,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>numeric: true,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>sensitivity: "base"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>)</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>catch (error) {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>return [];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================================================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>전체 사이트 데이터 읽기</span></p>
+<p class="p1"><span class="s1">========================================================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">async function loadSiteData() {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>for (</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const category of CATEGORIES</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>) {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const works =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>await getWorks(category);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>siteData[category] = [];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>for (</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const work of works</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>) {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const images =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>await getImages(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>work.path</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>siteData[category].push({</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>name: work.name,</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>path: work.path,</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>images: images</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================================================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>메인 화면 생성</span></p>
+<p class="p1"><span class="s1">========================================================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function renderHome() {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>hero.innerHTML = "";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const allWorks = [];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>CATEGORIES.forEach(</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>category =&gt; {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>siteData[category]</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>.forEach(</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>work =&gt; {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>if (</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>work.images.length &gt; 0</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>) {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>allWorks.push({</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>category:</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>category,</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>work:</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>work</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>/*</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">       </span>첫 번째 3개 작업을 메인에 표시</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">       </span>나중에 순서를 바꾸고 싶으면</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">       </span>폴더 이름 앞에 숫자를 붙이는 방식으로</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">       </span>관리할 수도 있음.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>*/</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const selected =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>allWorks.slice(0, 3);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>if (</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>selected.length === 0</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>) {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>for (</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>let i = 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>i &lt; 3;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>i++</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>) {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const card =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.createElement(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>"article"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>card.className =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>"hero-card";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>card.innerHTML = `</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="empty-hero"&gt;&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="hero-caption"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>작업을 추가하면 여기에 표시됩니다.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>`;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>hero.appendChild(card);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>return;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>selected.forEach(</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>item =&gt; {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const card =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.createElement(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>"article"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>card.className =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>"hero-card";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const image =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.createElement(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>"img"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>image.className =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>"hero-image";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>image.src =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>imageURL(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>item.work.images[0].path</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>image.alt =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>item.work.name;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const caption =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.createElement(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>"div"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>caption.className =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>"hero-caption";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>caption.textContent =</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>`${capitalize(item.category)}, ` +</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>`${item.work.name}`;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>card.appendChild(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>image</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>card.appendChild(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>caption</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>card.addEventListener(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>"click",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>() =&gt; {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>openWork(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>item.category,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>item.work.name</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>hero.appendChild(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>card</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================================================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>CATEGORY 열기</span></p>
+<p class="p1"><span class="s1">========================================================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function openCategory(category) {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>currentCategory =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>category;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>currentWork =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>"";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>home.style.display =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>"none";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>workPage.classList</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.remove("active");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>categoryPage.classList</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.add("active");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>categoryTitle.textContent =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>capitalize(category);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>workList.innerHTML =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>"";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const works =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>siteData[category];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>if (</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>!works ||</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>works.length === 0</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>) {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>workList.innerHTML = `</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>style="</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>font-size:14px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>color:#999;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>아직 작업이 없습니다.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>`;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>return;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>works.forEach(</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>work =&gt; {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const button =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.createElement(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>"button"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>button.className =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>"work-button";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>button.textContent =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>work.name;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>button.addEventListener(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>"click",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>() =&gt; {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>openWork(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>category,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>work.name</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>workList.appendChild(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>button</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================================================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>WORK 열기</span></p>
+<p class="p1"><span class="s1">========================================================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function openWork(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>category,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>workName</span></p>
+<p class="p1"><span class="s1">) {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>currentCategory =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>category;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>currentWork =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>workName;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>home.style.display =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>"none";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>categoryPage.classList</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.remove("active");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>workPage.classList</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.add("active");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>workTitle.textContent =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>workName;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>gallery.innerHTML =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>"";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const work =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>siteData[category]</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>.find(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>item =&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>item.name === workName</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>if (</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>!work ||</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>work.images.length === 0</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>) {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>gallery.innerHTML = `</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>style="</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>font-size:14px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>color:#999;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>사진이 없습니다.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>`;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>return;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>work.images.forEach(</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>image =&gt; {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const img =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.createElement(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>"img"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>img.src =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>imageURL(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>image.path</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>img.alt =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>workName;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>gallery.appendChild(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>img</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================================================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>HOME으로 돌아가기</span></p>
+<p class="p1"><span class="s1">========================================================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function goHome() {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>home.style.display =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>"block";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>categoryPage.classList</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.remove("active");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>workPage.classList</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.remove("active");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================================================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>메뉴 열기</span></p>
+<p class="p1"><span class="s1">========================================================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">document</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.getElementById("openMenu")</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.addEventListener(</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>"click",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>() =&gt; {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>menu.classList</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>.add("open");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================================================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>메뉴 닫기</span></p>
+<p class="p1"><span class="s1">========================================================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">document</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.getElementById("closeMenu")</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.addEventListener(</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>"click",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>() =&gt; {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>menu.classList</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>.remove("open");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================================================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>INFO</span></p>
+<p class="p1"><span class="s1">========================================================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">document</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.getElementById("infoButton")</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.addEventListener(</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>"click",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>() =&gt; {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>infoPanel.classList</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>.toggle("open");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================================================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>카테고리 버튼</span></p>
+<p class="p1"><span class="s1">========================================================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">document</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.querySelectorAll(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>".menu-item"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.forEach(</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>button =&gt; {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>button.addEventListener(</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>"click",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>() =&gt; {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const category =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>button.dataset.category;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>menu.classList</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>.remove("open");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>openCategory(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>category</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================================================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>CATEGORY BACK</span></p>
+<p class="p1"><span class="s1">========================================================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">document</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.getElementById("categoryBack")</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.addEventListener(</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>"click",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>() =&gt; {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>goHome();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================================================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>WORK BACK</span></p>
+<p class="p1"><span class="s1">========================================================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">document</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.getElementById("workBack")</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.addEventListener(</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>"click",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>() =&gt; {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>openCategory(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>currentCategory</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================================================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>CAPITALIZE</span></p>
+<p class="p1"><span class="s1">========================================================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function capitalize(text) {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>if (!text) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>return "";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>return (</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>text.charAt(0).toUpperCase() +</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>text.slice(1)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/* =========================================================</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">   </span>START</span></p>
+<p class="p1"><span class="s1">========================================================= */</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">(async function () {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>try {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>await loadSiteData();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>renderHome();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>catch (error) {</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>console.error(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>"사이트 데이터를 불러오지 못했습니다.",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>error</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>renderHome();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">})();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/script&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
 </body>
 </html>
