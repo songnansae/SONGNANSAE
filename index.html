@@ -2,22 +2,16 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>SONGNANSAE</title>
 
-
 <style>
 
-/* =========================================================
+/* =========================
    BASIC
-========================================================= */
+========================= */
 
 * {
     box-sizing: border-box;
@@ -27,37 +21,32 @@ html,
 body {
     margin: 0;
     padding: 0;
-
     width: 100%;
     min-height: 100%;
-
-    background: #fff;
-    color: #111;
 }
 
 body {
+    background: #fff;
+    color: #111;
 
     font-family:
-        "Helvetica Neue",
-        Helvetica,
         Arial,
+        Helvetica,
         sans-serif;
 
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 400;
 
-    overflow-x: hidden;
+    line-height: 1.35;
 }
 
 
-/* =========================================================
+/* =========================
    HEADER
-========================================================= */
+========================= */
 
 .header {
-
     position: fixed;
-
     top: 0;
     left: 0;
 
@@ -66,137 +55,66 @@ body {
 
     background: #fff;
 
-    border-top: 1px solid #111;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
 
-    display: grid;
-
-    grid-template-columns:
-        1fr
-        1fr
-        1fr;
-
-    align-items: center;
-
-    padding: 0 12px;
+    padding: 17px 12px;
 
     z-index: 1000;
 }
 
 
-/* LEFT */
+/* 왼쪽 + - */
 
-.header-left {
-
+.menu-control {
     display: flex;
+    gap: 13px;
 
-    align-items: center;
-
-    gap: 14px;
-}
-
-
-/* + / - */
-
-.header-button {
-
-    border: none;
-
-    background: transparent;
-
-    padding: 0;
-
-    margin: 0;
-
-    color: #111;
-
-    cursor: pointer;
-
-    font-family:
-        "Helvetica Neue",
-        Helvetica,
-        Arial,
-        sans-serif;
-
-    font-size: 22px;
-
-    font-weight: 300;
-
+    font-size: 18px;
     line-height: 1;
 
-    appearance: none;
+    cursor: pointer;
+}
+
+.menu-control span {
+    display: block;
+}
+
+#minus {
+    color: #ccc;
 }
 
 
-.header-button.minus {
+/* 가운데 이름 */
 
-    color: #cfcfcf;
-}
+.logo {
+    position: absolute;
 
+    left: 50%;
+    transform: translateX(-50%);
 
-/* CENTER */
+    top: 17px;
 
-.header-center {
-
-    text-align: center;
-
-    font-family:
-        "Helvetica Neue",
-        Helvetica,
-        Arial,
-        sans-serif;
-
-    font-size: 11px;
-
+    font-size: 13px;
     font-weight: 400;
 }
 
 
-/* RIGHT */
-
-.header-right {
-
-    display: flex;
-
-    justify-content: flex-end;
-
-    align-items: center;
-}
-
+/* 오른쪽 Info */
 
 .info-button {
-
-    border: none;
-
-    background: transparent;
-
-    padding: 0;
-
-    margin: 0;
-
-    color: #111;
-
     cursor: pointer;
 
-    font-family:
-        "Helvetica Neue",
-        Helvetica,
-        Arial,
-        sans-serif;
-
-    font-size: 11px;
-
-    font-weight: 400;
-
-    appearance: none;
+    font-size: 13px;
 }
 
 
-/* =========================================================
-   MENU PANEL
-========================================================= */
+/* =========================
+   MENU
+========================= */
 
-.menu-panel {
-
+.menu {
     position: fixed;
 
     top: 58px;
@@ -206,232 +124,56 @@ body {
 
     background: #fff;
 
+    padding: 18px 30px 35px;
+
     border-bottom: 1px solid #111;
 
     z-index: 900;
 
     display: none;
-
-    padding:
-        22px
-        30px
-        35px;
 }
 
-
-.menu-panel.open {
-
+.menu.open {
     display: block;
 }
 
-
-/* =========================================================
-   CATEGORY MENU
-========================================================= */
-
-.category-menu {
-
+.menu-links {
     display: flex;
-
-    align-items: flex-start;
 
     gap: 42px;
 
-    margin-bottom: 35px;
+    align-items: center;
 }
 
-
-.category-button {
-
-    border: none;
-
-    background: transparent;
-
-    padding: 0;
-
-    margin: 0;
-
-    color: #111;
-
-    cursor: pointer;
-
-    font-family:
-        "Helvetica Neue",
-        Helvetica,
-        Arial,
-        sans-serif;
-
-    font-size: 11px;
-
-    font-weight: 400;
-
-    appearance: none;
-}
-
-
-.category-button.active {
-
-    text-decoration: underline;
-}
-
-
-/* =========================================================
-   PROJECT LIST
-========================================================= */
-
-.project-list {
-
-    display: none;
-
-    flex-direction: column;
-
-    gap: 9px;
-
-    max-height: 65vh;
-
-    overflow-y: auto;
-
-    width: 100%;
-}
-
-
-.project-list.visible {
-
-    display: flex;
-}
-
-
-.project-button {
-
-    border: none;
-
-    background: transparent;
-
-    padding: 0;
-
-    margin: 0;
-
-    color: #111;
-
-    cursor: pointer;
-
-    text-align: left;
-
-    width: fit-content;
-
-    font-family:
-        "Helvetica Neue",
-        Helvetica,
-        Arial,
-        sans-serif;
-
-    font-size: 11px;
-
-    font-weight: 400;
-
-    line-height: 1.3;
-
-    appearance: none;
-}
-
-
-.project-button:hover {
-
-    text-decoration: underline;
-}
-
-
-/* =========================================================
-   INFO PANEL
-========================================================= */
-
-.info-panel {
-
-    position: fixed;
-
-    top: 58px;
-    right: 0;
-
-    width: 430px;
-
-    max-width: 100%;
-
-    background: #fff;
-
-    border-left: 1px solid #111;
-
-    border-bottom: 1px solid #111;
-
-    z-index: 950;
-
-    display: none;
-
-    padding:
-        35px
-        60px
-        45px;
-
-    font-family:
-        "Helvetica Neue",
-        Helvetica,
-        Arial,
-        sans-serif;
-
-    font-size: 11px;
-
-    font-weight: 400;
-
-    line-height: 1.6;
-}
-
-
-.info-panel.open {
-
-    display: block;
-}
-
-
-.info-name {
-
-    margin-bottom: 25px;
-
-    font-size: 11px;
-
-    font-weight: 400;
-}
-
-
-.info-panel a {
-
+.menu-links a {
     color: #111;
 
     text-decoration: none;
+
+    font-size: 13px;
+
+    cursor: pointer;
 }
 
-
-.info-panel a:hover {
-
+.menu-links a:hover {
     text-decoration: underline;
 }
 
 
-/* =========================================================
-   HOME
-========================================================= */
+/* =========================
+   MAIN HOME
+========================= */
 
 .home {
+    width: 100%;
 
     padding-top: 58px;
-
-    width: 100%;
 }
 
 
-/* =========================================================
-   HERO
-========================================================= */
+/* 3개 사진 */
 
-.hero {
+.home-grid {
 
     display: grid;
 
@@ -440,147 +182,164 @@ body {
 
     width: 100%;
 
-    gap: 0;
+    height: 70vh;
 }
 
 
-.hero-card {
+/* 각 사진 */
+
+.home-item {
 
     width: 100%;
+    height: 100%;
+
+    overflow: hidden;
 
     cursor: pointer;
+
+    position: relative;
 }
 
-
-.hero-image {
-
-    display: block;
+.home-item img {
 
     width: 100%;
-
-    height:
-        calc(100vh - 58px);
-
-    min-height: 500px;
+    height: 100%;
 
     object-fit: cover;
+
+    display: block;
 }
 
 
-.hero-caption {
+/* 사진 아래 제목 */
 
-    padding:
-        6px
-        5px
-        18px;
+.home-caption {
 
-    font-size: 11px;
+    height: 32px;
 
-    line-height: 1.3;
-}
+    padding: 7px 4px;
 
-
-/* EMPTY */
-
-.empty-image {
-
-    width: 100%;
-
-    height:
-        calc(100vh - 58px);
-
-    min-height: 500px;
-
-    background: #eee;
-}
-
-
-/* =========================================================
-   WORK VIEW
-========================================================= */
-
-.work-view {
-
-    position: fixed;
-
-    top: 58px;
-    left: 0;
-
-    width: 100%;
-
-    height:
-        calc(100vh - 58px);
+    font-size: 13px;
 
     background: #fff;
+}
 
-    z-index: 800;
+
+/* =========================
+   CONTENT PAGE
+========================= */
+
+.page {
 
     display: none;
 
-    overflow-y: auto;
+    width: 100%;
 
-    padding:
-        45px
-        30px
-        80px;
+    padding-top: 95px;
 }
 
 
-.work-view.open {
+/* Back */
 
-    display: block;
-}
+.back {
 
+    display: inline-block;
 
-.work-header {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    margin-bottom: 40px;
-}
-
-
-.work-name {
-
-    font-size: 11px;
-
-    font-weight: 400;
-}
-
-
-.work-close {
-
-    border: none;
-
-    background: transparent;
-
-    padding: 0;
-
-    cursor: pointer;
-
-    font-family:
-        "Helvetica Neue",
-        Helvetica,
-        Arial,
-        sans-serif;
-
-    font-size: 11px;
+    margin-left: 30px;
+    margin-bottom: 60px;
 
     color: #111;
 
-    appearance: none;
+    text-decoration: none;
+
+    font-size: 13px;
+
+    cursor: pointer;
 }
 
 
-/* =========================================================
-   GALLERY
-========================================================= */
+/* 페이지 제목 */
 
-.gallery {
+.page-title {
+
+    margin-left: 30px;
+
+    margin-bottom: 55px;
+
+    font-size: 13px;
+}
+
+
+/* =========================
+   PROJECT LIST
+========================= */
+
+.project-list {
+
+    margin-left: 30px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+
+    padding-bottom: 80px;
+}
+
+.project {
+
+    width: fit-content;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    color: #111;
+}
+
+.project:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   PROJECT PAGE
+========================= */
+
+.project-page {
+
+    display: none;
+
+    width: 100%;
+
+    padding-top: 95px;
+}
+
+.project-back {
+
+    margin-left: 30px;
+
+    margin-bottom: 45px;
+
+    font-size: 13px;
+
+    cursor: pointer;
+}
+
+.project-title {
+
+    margin-left: 30px;
+
+    margin-bottom: 50px;
+
+    font-size: 13px;
+}
+
+
+/* 프로젝트 사진 */
+
+.project-images {
 
     width: 100%;
 
@@ -590,11 +349,10 @@ body {
 
     align-items: center;
 
-    gap: 25px;
+    gap: 0;
 }
 
-
-.gallery img {
+.project-images img {
 
     display: block;
 
@@ -602,168 +360,193 @@ body {
 
     max-width: 100%;
 
+    max-height: none;
+
     height: auto;
-
-    object-fit: contain;
 }
 
 
-/* =========================================================
-   NO PROJECT
-========================================================= */
+/* =========================
+   INFO
+========================= */
 
-.no-project {
+.info-panel {
 
-    color: #999;
+    position: fixed;
 
-    font-size: 11px;
+    top: 58px;
+    right: 0;
+
+    width: 50%;
+
+    min-height: calc(100vh - 58px);
+
+    background: #fff;
+
+    border-left: 1px solid #111;
+
+    z-index: 1100;
+
+    padding: 65px 60px;
+
+    display: none;
+}
+
+.info-panel.open {
+    display: block;
+}
+
+.info-close {
+
+    position: absolute;
+
+    top: 20px;
+    right: 25px;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+.info-content {
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+.info-name {
+
+    margin-bottom: 55px;
+}
+
+.info-block {
+
+    margin-bottom: 45px;
+}
+
+.info-content a {
+
+    color: #111;
+
+    text-decoration: none;
+}
+
+.info-content a:hover {
+
+    text-decoration: underline;
 }
 
 
-/* =========================================================
+/* =========================
    MOBILE
-========================================================= */
+========================= */
 
-@media (max-width: 800px) {
-
+@media (max-width: 700px) {
 
     .header {
+        height: 52px;
 
-        height: 55px;
+        padding: 15px 12px;
     }
-
 
     .home {
-
-        padding-top: 55px;
+        padding-top: 52px;
     }
 
+    .menu {
+        top: 52px;
 
-    .menu-panel {
-
-        top: 55px;
-
-        padding:
-            20px
-            20px
-            25px;
+        padding: 18px 20px 28px;
     }
 
-
-    .category-menu {
+    .menu-links {
 
         gap: 22px;
 
         flex-wrap: wrap;
     }
 
+    .home-grid {
+
+        grid-template-columns: 1fr;
+
+        height: auto;
+    }
+
+    .home-item {
+
+        height: 45vh;
+    }
+
+    .home-caption {
+
+        height: 30px;
+
+        padding-left: 4px;
+    }
+
+    .page,
+    .project-page {
+
+        padding-top: 85px;
+    }
+
+    .back,
+    .page-title,
+    .project-list,
+    .project-back,
+    .project-title {
+
+        margin-left: 20px;
+    }
 
     .info-panel {
 
-        top: 55px;
-
         width: 100%;
 
-        border-left: none;
-
         padding:
-            30px
+            60px
             25px
             40px;
-    }
-
-
-    .hero {
-
-        grid-template-columns: 1fr;
-    }
-
-
-    .hero-card:not(:first-child) {
-
-        display: none;
-    }
-
-
-    .hero-image {
-
-        height:
-            calc(100vh - 55px);
-    }
-
-
-    .empty-image {
-
-        height:
-            calc(100vh - 55px);
-    }
-
-
-    .work-view {
-
-        top: 55px;
-
-        height:
-            calc(100vh - 55px);
-
-        padding:
-            30px
-            15px
-            60px;
     }
 
 }
 
 </style>
-
 </head>
 
 
 <body>
 
 
-<!-- =========================================================
+<!-- =========================
      HEADER
-========================================================= -->
+========================= -->
 
 <header class="header">
 
+    <div class="menu-control">
 
-    <div class="header-left">
+        <span id="plus">+</span>
 
-        <button
-            class="header-button"
-            id="openMenu"
-        >
-            +
-        </button>
-
-
-        <button
-            class="header-button minus"
-            id="closeMenu"
-        >
-            −
-        </button>
+        <span id="minus">−</span>
 
     </div>
 
 
-    <div class="header-center">
+    <div class="logo">
 
         SONGNANSAE
 
     </div>
 
 
-    <div class="header-right">
+    <div
+        class="info-button"
+        onclick="openInfo()">
 
-        <button
-            class="info-button"
-            id="infoButton"
-        >
-            Info
-        </button>
+        Info
 
     </div>
 
@@ -771,1263 +554,663 @@ body {
 
 
 
-<!-- =========================================================
+<!-- =========================
      MENU
-========================================================= -->
+========================= -->
 
 <nav
-    class="menu-panel"
-    id="menuPanel"
->
+    id="menu"
+    class="menu">
 
+    <div class="menu-links">
 
-    <div class="category-menu">
-
-
-        <button
-            class="category-button"
-            data-category="commercial"
-        >
+        <a onclick="showHome()">
             Commercial
-        </button>
+        </a>
 
-
-        <button
-            class="category-button"
-            data-category="magazine"
-        >
+        <a onclick="showPage('magazine')">
             Magazine
-        </button>
+        </a>
 
-
-        <button
-            class="category-button"
-            data-category="personal"
-        >
+        <a onclick="showPage('personal')">
             Personal
-        </button>
+        </a>
 
-
-        <button
-            class="category-button"
-            data-category="film"
-        >
+        <a onclick="showPage('film')">
             Film
-        </button>
-
+        </a>
 
     </div>
-
-
-    <div
-        class="project-list"
-        id="projectList"
-    ></div>
-
 
 </nav>
 
 
 
-<!-- =========================================================
-     INFO
-========================================================= -->
+<!-- =========================
+     HOME
+========================= -->
 
-<section
-    class="info-panel"
-    id="infoPanel"
->
+<main
+    id="home"
+    class="home">
 
 
-    <div class="info-name">
+    <div class="home-grid">
 
-        SONGNANSAE
+
+        <!-- COMMERCIAL -->
+
+        <div
+            class="home-item"
+            onclick="showPage('commercial')">
+
+            <img
+                src="images/commercial.jpg"
+                alt="Commercial">
+
+        </div>
+
+
+
+        <!-- MAGAZINE -->
+
+        <div
+            class="home-item"
+            onclick="showPage('magazine')">
+
+            <img
+                src="images/magazine.jpg"
+                alt="Magazine">
+
+        </div>
+
+
+
+        <!-- PERSONAL -->
+
+        <div
+            class="home-item"
+            onclick="showPage('personal')">
+
+            <img
+                src="images/personal.jpg"
+                alt="Personal">
+
+        </div>
 
     </div>
 
 
-    Commercial Photographer<br>
 
-    Seoul, Korea<br><br>
-
-
-    For commissions and inquiries<br>
+    <div class="home-grid">
 
 
-    <a href="mailto:songnansae@gmail.com">
+        <div class="home-caption">
 
-        songnansae@gmail.com
+            Commercial
 
-    </a>
-
-
-    <br><br>
+        </div>
 
 
-    <a
-        href="https://www.instagram.com/songnansae"
-        target="_blank"
-        rel="noopener"
-    >
+        <div class="home-caption">
 
-        Instagram
+            Magazine, The Neighbor, 2026
 
-    </a>
+        </div>
 
 
-</section>
+        <div class="home-caption">
+
+            Personal
+
+        </div>
 
 
-
-<!-- =========================================================
-     HOME
-========================================================= -->
-
-<main
-    class="home"
-    id="home"
->
-
-
-    <section
-        class="hero"
-        id="hero"
-    ></section>
-
+    </div>
 
 </main>
 
 
 
-<!-- =========================================================
-     WORK VIEW
-========================================================= -->
+<!-- =========================
+     COMMERCIAL PAGE
+========================= -->
 
 <section
-    class="work-view"
-    id="workView"
->
+    id="commercial"
+    class="page">
 
 
-    <div class="work-header">
+    <div
+        class="back"
+        onclick="showHome()">
 
-
-        <div
-            class="work-name"
-            id="workName"
-        ></div>
-
-
-        <button
-            class="work-close"
-            id="workClose"
-        >
-
-            Close
-
-        </button>
-
+        ← Back
 
     </div>
 
 
-    <div
-        class="gallery"
-        id="gallery"
-    ></div>
+    <div class="page-title">
 
+        Commercial
+
+    </div>
+
+
+    <div class="project-list">
+
+
+        <div class="project">
+
+            Commercial Project 01, 2026
+
+        </div>
+
+
+        <div class="project">
+
+            Commercial Project 02, 2026
+
+        </div>
+
+
+        <div class="project">
+
+            Commercial Project 03, 2025
+
+        </div>
+
+
+    </div>
 
 </section>
 
 
 
+<!-- =========================
+     MAGAZINE PAGE
+========================= -->
+
+<section
+    id="magazine"
+    class="page">
+
+
+    <div
+        class="back"
+        onclick="showHome()">
+
+        ← Back
+
+    </div>
+
+
+    <div class="page-title">
+
+        Magazine
+
+    </div>
+
+
+    <div class="project-list">
+
+
+        <!-- THE NEIGHBOR -->
+
+        <div
+            class="project"
+            onclick="showProject('neighbor')">
+
+            The Neighbor, 2026
+
+        </div>
+
+
+        <div class="project">
+
+            Vogue, 2025
+
+        </div>
+
+
+        <div class="project">
+
+            Vogue Tom Sachs, 2025
+
+        </div>
+
+
+        <div class="project">
+
+            GQ Cha Joo Young, 2025
+
+        </div>
+
+
+        <div class="project">
+
+            Esquire, 2025
+
+        </div>
+
+
+        <div class="project">
+
+            Vogue, 2024
+
+        </div>
+
+
+        <div class="project">
+
+            Bazaar, 2024
+
+        </div>
+
+
+        <div class="project">
+
+            Singles, 2024
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     PERSONAL PAGE
+========================= -->
+
+<section
+    id="personal"
+    class="page">
+
+
+    <div
+        class="back"
+        onclick="showHome()">
+
+        ← Back
+
+    </div>
+
+
+    <div class="page-title">
+
+        Personal
+
+    </div>
+
+
+    <div class="project-list">
+
+
+        <div class="project">
+
+            Personal Work 01, 2026
+
+        </div>
+
+
+        <div class="project">
+
+            Travel Series, 2025
+
+        </div>
+
+
+        <div class="project">
+
+            Personal Work 02, 2024
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     FILM PAGE
+========================= -->
+
+<section
+    id="film"
+    class="page">
+
+
+    <div
+        class="back"
+        onclick="showHome()">
+
+        ← Back
+
+    </div>
+
+
+    <div class="page-title">
+
+        Film
+
+    </div>
+
+
+    <div class="project-list">
+
+
+        <div class="project">
+
+            Film Work 01, 2026
+
+        </div>
+
+
+        <div class="project">
+
+            Film Work 02, 2025
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     THE NEIGHBOR PROJECT
+========================= -->
+
+<section
+    id="neighbor"
+    class="project-page">
+
+
+    <div
+        class="project-back"
+        onclick="showPage('magazine')">
+
+        ← Back
+
+    </div>
+
+
+    <div class="project-title">
+
+        The Neighbor, 2026
+
+    </div>
+
+
+    <div class="project-images">
+
+
+        <img
+            src="images/magazine/The Neighbor , 2026/0080_THE NEIGHBOR_260611_R1.JPG"
+            alt="">
+
+
+        <img
+            src="images/magazine/The Neighbor , 2026/0403_THE NEIGHBOR_260611_R1.JPG"
+            alt="">
+
+
+        <img
+            src="images/magazine/The Neighbor , 2026/0909_THE NEIGHBOR_260611_R1.JPG"
+            alt="">
+
+
+        <img
+            src="images/magazine/The Neighbor , 2026/0948_THE NEIGHBOR_260611_R1.JPG"
+            alt="">
+
+
+        <img
+            src="images/magazine/The Neighbor , 2026/1299_THE NEIGHBOR_260611_R1.jpg"
+            alt="">
+
+
+        <img
+            src="images/magazine/The Neighbor , 2026/1559_THE NEIGHBOR_260611_R1(수정).JPG"
+            alt="">
+
+
+        <img
+            src="images/magazine/The Neighbor , 2026/1771_THE NEIGHBOR_260611_R2(수정).JPG"
+            alt="">
+
+
+        <img
+            src="images/magazine/The Neighbor , 2026/2306_THE NEIGHBOR_260611_R1.JPG"
+            alt="">
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     INFO
+========================= -->
+
+<div
+    id="infoPanel"
+    class="info-panel">
+
+
+    <div
+        class="info-close"
+        onclick="closeInfo()">
+
+        ×
+
+    </div>
+
+
+    <div class="info-content">
+
+
+        <div class="info-name">
+
+            SONGNANSAE
+
+        </div>
+
+
+
+        <div class="info-block">
+
+            Commercial Photographer<br>
+            Seoul, Korea
+
+        </div>
+
+
+
+        <div class="info-block">
+
+            For commissions and inquiries<br>
+
+            <a href="mailto:songnansae@gmail.com">
+
+                songnansae@gmail.com
+
+            </a>
+
+        </div>
+
+
+
+        <div class="info-block">
+
+            <a
+                href="https://www.instagram.com/songnansae/"
+                target="_blank">
+
+                Instagram
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
 <script>
 
-/* =========================================================
-   GITHUB SETTINGS
-========================================================= */
+/* =========================
+   MENU
+========================= */
 
-const GITHUB_OWNER = "songnansae";
+const menu = document.getElementById("menu");
 
-const GITHUB_REPO = "SONGNANSAE";
+const plus = document.getElementById("plus");
 
-const GITHUB_BRANCH = "main";
-
-const IMAGE_ROOT = "images";
+const minus = document.getElementById("minus");
 
 
-/* =========================================================
-   CATEGORIES
-========================================================= */
+plus.addEventListener("click", function() {
 
-const CATEGORIES = [
+    menu.classList.add("open");
 
-    "commercial",
-    "magazine",
-    "personal",
-    "film"
-
-];
+});
 
 
-/* =========================================================
-   DATA
-========================================================= */
+minus.addEventListener("click", function() {
 
-let siteData = {
+    menu.classList.remove("open");
 
-    commercial: [],
-    magazine: [],
-    personal: [],
-    film: []
-
-};
+});
 
 
-/* =========================================================
-   DOM
-========================================================= */
+/* =========================
+   SHOW HOME
+========================= */
 
-const menuPanel =
-    document.getElementById(
-        "menuPanel"
-    );
+function showHome() {
 
+    hideAllPages();
 
-const infoPanel =
-    document.getElementById(
-        "infoPanel"
-    );
+    document.getElementById("home").style.display = "block";
 
+    menu.classList.remove("open");
 
-const hero =
-    document.getElementById(
-        "hero"
-    );
+    window.scrollTo(0, 0);
+
+}
 
 
-const projectList =
-    document.getElementById(
-        "projectList"
-    );
+/* =========================
+   SHOW CATEGORY
+========================= */
 
+function showPage(pageName) {
 
-const workView =
-    document.getElementById(
-        "workView"
-    );
+    hideAllPages();
 
+    const page = document.getElementById(pageName);
 
-const workName =
-    document.getElementById(
-        "workName"
-    );
+    if (page) {
 
-
-const gallery =
-    document.getElementById(
-        "gallery"
-    );
-
-
-/* =========================================================
-   GITHUB API
-========================================================= */
-
-async function githubAPI(path) {
-
-
-    const url =
-
-        "https://api.github.com/repos/" +
-
-        GITHUB_OWNER +
-
-        "/" +
-
-        GITHUB_REPO +
-
-        "/contents/" +
-
-        path +
-
-        "?ref=" +
-
-        GITHUB_BRANCH;
-
-
-    const response =
-
-        await fetch(url);
-
-
-    if (!response.ok) {
-
-        throw new Error(
-            "GitHub API Error"
-        );
+        page.style.display = "block";
 
     }
 
+    menu.classList.remove("open");
 
-    return await response.json();
-
-}
-
-
-/* =========================================================
-   IMAGE URL
-========================================================= */
-
-function imageURL(path) {
-
-
-    return (
-
-        "https://raw.githubusercontent.com/" +
-
-        GITHUB_OWNER +
-
-        "/" +
-
-        GITHUB_REPO +
-
-        "/" +
-
-        GITHUB_BRANCH +
-
-        "/" +
-
-        path
-
-    );
+    window.scrollTo(0, 0);
 
 }
 
 
-/* =========================================================
-   GET PROJECT FOLDERS
-========================================================= */
+/* =========================
+   SHOW PROJECT
+========================= */
 
-async function getProjects(category) {
+function showProject(projectName) {
 
+    hideAllPages();
 
-    try {
+    const project = document.getElementById(projectName);
 
+    if (project) {
 
-        const items =
-
-            await githubAPI(
-
-                IMAGE_ROOT +
-
-                "/" +
-
-                category
-
-            );
-
-
-        if (!Array.isArray(items)) {
-
-            return [];
-
-        }
-
-
-        return items
-
-            .filter(
-
-                item =>
-
-                    item.type === "dir"
-
-            )
-
-            .sort(
-
-                (a, b) =>
-
-                    a.name.localeCompare(
-
-                        b.name,
-
-                        undefined,
-
-                        {
-                            numeric: true,
-                            sensitivity: "base"
-                        }
-
-                    )
-
-            );
-
-
-    } catch (error) {
-
-
-        console.log(
-
-            "Could not load:",
-
-            category
-
-        );
-
-
-        return [];
+        project.style.display = "block";
 
     }
 
-}
-
-
-/* =========================================================
-   GET PROJECT IMAGES
-========================================================= */
-
-async function getProjectImages(path) {
-
-
-    try {
-
-
-        const items =
-
-            await githubAPI(path);
-
-
-        if (!Array.isArray(items)) {
-
-            return [];
-
-        }
-
-
-        return items
-
-            .filter(
-
-                item =>
-
-                    item.type === "file" &&
-
-                    /\.(jpg|jpeg|png|webp|gif)$/i
-                        .test(item.name)
-
-            )
-
-            .sort(
-
-                (a, b) =>
-
-                    a.name.localeCompare(
-
-                        b.name,
-
-                        undefined,
-
-                        {
-
-                            numeric: true,
-
-                            sensitivity: "base"
-
-                        }
-
-                    )
-
-            );
-
-
-    } catch (error) {
-
-
-        return [];
-
-    }
+    window.scrollTo(0, 0);
 
 }
 
 
-/* =========================================================
-   LOAD ALL DATA
-========================================================= */
+/* =========================
+   HIDE ALL
+========================= */
 
-async function loadSiteData() {
+function hideAllPages() {
 
-
-    for (
-
-        const category
-
-        of CATEGORIES
-
-    ) {
+    document.getElementById("home").style.display = "none";
 
 
-        const projects =
+    document.querySelectorAll(".page").forEach(function(page) {
 
-            await getProjects(
-                category
-            );
+        page.style.display = "none";
 
-
-        siteData[category] = [];
+    });
 
 
-        for (
+    document.querySelectorAll(".project-page").forEach(function(page) {
 
-            const project
+        page.style.display = "none";
 
-            of projects
-
-        ) {
-
-
-            const images =
-
-                await getProjectImages(
-
-                    project.path
-
-                );
-
-
-            siteData[category].push({
-
-                name:
-                    project.name,
-
-                path:
-                    project.path,
-
-                images:
-                    images
-
-            });
-
-        }
-
-    }
+    });
 
 }
 
 
-/* =========================================================
-   HOME HERO
-========================================================= */
-
-function renderHome() {
-
-
-    hero.innerHTML = "";
-
-
-    const homeCategories = [
-
-        "commercial",
-        "magazine",
-        "personal"
-
-    ];
-
-
-    homeCategories.forEach(
-
-        category => {
-
-
-            const card =
-
-                document.createElement(
-                    "article"
-                );
-
-
-            card.className =
-                "hero-card";
-
-
-            const projects =
-
-                siteData[category] || [];
-
-
-            /*
-             * 첫 번째 작업을
-             * 메인 대표 작업으로 사용
-             */
-
-            const project =
-
-                projects.length > 0
-
-                    ? projects[0]
-
-                    : null;
-
-
-            if (
-
-                project &&
-
-                project.images.length > 0
-
-            ) {
-
-
-                const img =
-
-                    document.createElement(
-                        "img"
-                    );
-
-
-                img.className =
-                    "hero-image";
-
-
-                img.src =
-
-                    imageURL(
-
-                        project.images[0].path
-
-                    );
-
-
-                img.alt =
-                    project.name;
-
-
-                const caption =
-
-                    document.createElement(
-                        "div"
-                    );
-
-
-                caption.className =
-                    "hero-caption";
-
-
-                caption.textContent =
-
-                    capitalize(category) +
-
-                    ", " +
-
-                    project.name;
-
-
-                card.appendChild(
-                    img
-                );
-
-
-                card.appendChild(
-                    caption
-                );
-
-
-                card.addEventListener(
-
-                    "click",
-
-                    () => {
-
-                        openProject(
-
-                            category,
-
-                            project.name
-
-                        );
-
-                    }
-
-                );
-
-            }
-
-
-            else {
-
-
-                const empty =
-
-                    document.createElement(
-                        "div"
-                    );
-
-
-                empty.className =
-                    "empty-image";
-
-
-                const caption =
-
-                    document.createElement(
-                        "div"
-                    );
-
-
-                caption.className =
-                    "hero-caption";
-
-
-                caption.textContent =
-
-                    capitalize(category);
-
-
-                card.appendChild(
-                    empty
-                );
-
-
-                card.appendChild(
-                    caption
-                );
-
-            }
-
-
-            hero.appendChild(
-                card
-            );
-
-        }
-
-    );
-
-}
-
-
-/* =========================================================
-   SHOW CATEGORY PROJECTS
-========================================================= */
-
-function showCategory(category) {
-
-
-    /*
-     * 기존 활성 상태 제거
-     */
+/* =========================
+   INFO
+========================= */
+
+function openInfo() {
 
     document
-        .querySelectorAll(
-            ".category-button"
-        )
-        .forEach(
-
-            button => {
-
-                button.classList.remove(
-                    "active"
-                );
-
-            }
-
-        );
-
-
-    /*
-     * 현재 버튼 활성화
-     */
-
-    const currentButton =
-
-        document.querySelector(
-
-            `.category-button[data-category="${category}"]`
-
-        );
-
-
-    if (currentButton) {
-
-        currentButton.classList.add(
-            "active"
-        );
-
-    }
-
-
-    /*
-     * 프로젝트 목록 초기화
-     */
-
-    projectList.innerHTML =
-        "";
-
-
-    const projects =
-
-        siteData[category] || [];
-
-
-    projectList.classList.add(
-        "visible"
-    );
-
-
-    if (projects.length === 0) {
-
-
-        const empty =
-
-            document.createElement(
-                "div"
-            );
-
-
-        empty.className =
-            "no-project";
-
-
-        empty.textContent =
-            "No projects yet.";
-
-
-        projectList.appendChild(
-            empty
-        );
-
-
-        return;
-
-    }
-
-
-    /*
-     * 프로젝트 목록 출력
-     */
-
-    projects.forEach(
-
-        project => {
-
-
-            const button =
-
-                document.createElement(
-                    "button"
-                );
-
-
-            button.className =
-                "project-button";
-
-
-            button.textContent =
-                project.name;
-
-
-            button.addEventListener(
-
-                "click",
-
-                () => {
-
-                    openProject(
-
-                        category,
-
-                        project.name
-
-                    );
-
-                }
-
-            );
-
-
-            projectList.appendChild(
-                button
-            );
-
-        }
-
-    );
+        .getElementById("infoPanel")
+        .classList.add("open");
 
 }
 
 
-/* =========================================================
-   OPEN PROJECT
-========================================================= */
+function closeInfo() {
 
-function openProject(
-
-    category,
-
-    projectName
-
-) {
-
-
-    const project =
-
-        siteData[category].find(
-
-            item =>
-
-                item.name === projectName
-
-        );
-
-
-    if (!project) {
-
-        return;
-
-    }
-
-
-    workName.textContent =
-        project.name;
-
-
-    gallery.innerHTML =
-        "";
-
-
-    /*
-     * 메뉴 닫기
-     */
-
-    menuPanel.classList.remove(
-        "open"
-    );
-
-
-    infoPanel.classList.remove(
-        "open"
-    );
-
-
-    /*
-     * 사진 출력
-     */
-
-    if (
-
-        project.images.length === 0
-
-    ) {
-
-
-        const empty =
-
-            document.createElement(
-                "div"
-            );
-
-
-        empty.className =
-            "no-project";
-
-
-        empty.textContent =
-            "No images yet.";
-
-
-        gallery.appendChild(
-            empty
-        );
-
-    }
-
-
-    else {
-
-
-        project.images.forEach(
-
-            image => {
-
-
-                const img =
-
-                    document.createElement(
-                        "img"
-                    );
-
-
-                img.src =
-
-                    imageURL(
-                        image.path
-                    );
-
-
-                img.alt =
-                    project.name;
-
-
-                gallery.appendChild(
-                    img
-                );
-
-            }
-
-        );
-
-    }
-
-
-    /*
-     * 프로젝트 화면 열기
-     */
-
-    workView.classList.add(
-        "open"
-    );
-
-
-    window.scrollTo(
-        0,
-        0
-    );
+    document
+        .getElementById("infoPanel")
+        .classList.remove("open");
 
 }
 
 
-/* =========================================================
-   CLOSE PROJECT
-========================================================= */
-
-document
-    .getElementById(
-        "workClose"
-    )
-    .addEventListener(
-
-        "click",
-
-        () => {
-
-            workView.classList.remove(
-                "open"
-            );
-
-        }
-
-    );
-
-
-/* =========================================================
-   OPEN MENU
-========================================================= */
-
-document
-    .getElementById(
-        "openMenu"
-    )
-    .addEventListener(
-
-        "click",
-
-        () => {
-
-
-            /*
-             * Info가 열려 있으면 닫기
-             */
-
-            infoPanel.classList.remove(
-                "open"
-            );
-
-
-            menuPanel.classList.toggle(
-                "open"
-            );
-
-        }
-
-    );
-
-
-/* =========================================================
-   CLOSE MENU
-========================================================= */
-
-document
-    .getElementById(
-        "closeMenu"
-    )
-    .addEventListener(
-
-        "click",
-
-        () => {
-
-            menuPanel.classList.remove(
-                "open"
-            );
-
-
-            projectList.classList.remove(
-                "visible"
-            );
-
-
-            document
-                .querySelectorAll(
-                    ".category-button"
-                )
-                .forEach(
-
-                    button => {
-
-                        button.classList.remove(
-                            "active"
-                        );
-
-                    }
-
-                );
-
-        }
-
-    );
-
-
-/* =========================================================
-   INFO
-========================================================= */
-
-document
-    .getElementById(
-        "infoButton"
-    )
-    .addEventListener(
-
-        "click",
-
-        () => {
-
-
-            /*
-             * 메뉴가 열려 있으면 닫기
-             */
-
-            menuPanel.classList.remove(
-                "open"
-            );
-
-
-            infoPanel.classList.toggle(
-                "open"
-            );
-
-        }
-
-    );
-
-
-/* =========================================================
-   CATEGORY BUTTONS
-========================================================= */
-
-document
-    .querySelectorAll(
-        ".category-button"
-    )
-    .forEach(
-
-        button => {
-
-
-            button.addEventListener(
-
-                "click",
-
-                () => {
-
-
-                    const category =
-
-                        button.dataset.category;
-
-
-                    showCategory(
-                        category
-                    );
-
-                }
-
-            );
-
-        }
-
-    );
-
-
-/* =========================================================
-   CAPITALIZE
-========================================================= */
-
-function capitalize(text) {
-
-
-    if (!text) {
-
-        return "";
-
-    }
-
-
-    return (
-
-        text.charAt(0).toUpperCase() +
-
-        text.slice(1)
-
-    );
-
-}
-
-
-/* =========================================================
-   START
-========================================================= */
-
-(async function () {
-
-
-    try {
-
-
-        await loadSiteData();
-
-
-        renderHome();
-
-
-    } catch (error) {
-
-
-        console.error(
-            error
-        );
-
-
-        renderHome();
-
-    }
-
-
-})();
+/* =========================
+   INITIAL
+========================= */
+
+showHome();
 
 </script>
 
 
 </body>
-
 </html>
