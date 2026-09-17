@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -29,13 +30,12 @@ body {
 
     width: 100%;
     min-height: 100%;
+
+    background: #fff;
+    color: #111;
 }
 
 body {
-
-    background: #fff;
-
-    color: #111;
 
     font-family:
         "Helvetica Neue",
@@ -44,8 +44,9 @@ body {
         sans-serif;
 
     font-size: 11px;
-
     font-weight: 400;
+
+    overflow-x: hidden;
 }
 
 
@@ -61,7 +62,7 @@ body {
     left: 0;
 
     width: 100%;
-    height: 92px;
+    height: 58px;
 
     background: #fff;
 
@@ -82,9 +83,7 @@ body {
 }
 
 
-/* =========================================================
-   LEFT + / -
-========================================================= */
+/* LEFT */
 
 .header-left {
 
@@ -96,19 +95,21 @@ body {
 }
 
 
+/* + / - */
+
 .header-button {
 
-    border: 0;
+    border: none;
 
-    background: none;
+    background: transparent;
 
     padding: 0;
 
     margin: 0;
 
-    cursor: pointer;
-
     color: #111;
+
+    cursor: pointer;
 
     font-family:
         "Helvetica Neue",
@@ -118,9 +119,11 @@ body {
 
     font-size: 22px;
 
-    font-weight: 400;
+    font-weight: 300;
 
     line-height: 1;
+
+    appearance: none;
 }
 
 
@@ -130,9 +133,7 @@ body {
 }
 
 
-/* =========================================================
-   CENTER LOGO
-========================================================= */
+/* CENTER */
 
 .header-center {
 
@@ -150,9 +151,7 @@ body {
 }
 
 
-/* =========================================================
-   RIGHT
-========================================================= */
+/* RIGHT */
 
 .header-right {
 
@@ -161,25 +160,22 @@ body {
     justify-content: flex-end;
 
     align-items: center;
-
 }
 
 
-/* INFO BUTTON */
-
 .info-button {
 
-    border: 0;
+    border: none;
 
-    background: none;
+    background: transparent;
 
     padding: 0;
 
     margin: 0;
 
-    cursor: pointer;
-
     color: #111;
+
+    cursor: pointer;
 
     font-family:
         "Helvetica Neue",
@@ -190,18 +186,20 @@ body {
     font-size: 11px;
 
     font-weight: 400;
+
+    appearance: none;
 }
 
 
 /* =========================================================
-   MENU
+   MENU PANEL
 ========================================================= */
 
-.menu {
+.menu-panel {
 
     position: fixed;
 
-    top: 92px;
+    top: 58px;
     left: 0;
 
     width: 100%;
@@ -215,43 +213,47 @@ body {
     display: none;
 
     padding:
-        0
+        22px
         30px
         35px;
 }
 
 
-.menu.open {
+.menu-panel.open {
 
     display: block;
 }
 
 
-.menu-list {
+/* =========================================================
+   CATEGORY MENU
+========================================================= */
+
+.category-menu {
 
     display: flex;
 
-    align-items: center;
-
-    flex-wrap: wrap;
+    align-items: flex-start;
 
     gap: 42px;
+
+    margin-bottom: 35px;
 }
 
 
-.menu-item {
+.category-button {
 
-    border: 0;
+    border: none;
 
-    background: none;
+    background: transparent;
 
     padding: 0;
 
     margin: 0;
 
-    cursor: pointer;
-
     color: #111;
+
+    cursor: pointer;
 
     font-family:
         "Helvetica Neue",
@@ -263,11 +265,77 @@ body {
 
     font-weight: 400;
 
-    line-height: 1.2;
+    appearance: none;
 }
 
 
-.menu-item:hover {
+.category-button.active {
+
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   PROJECT LIST
+========================================================= */
+
+.project-list {
+
+    display: none;
+
+    flex-direction: column;
+
+    gap: 9px;
+
+    max-height: 65vh;
+
+    overflow-y: auto;
+
+    width: 100%;
+}
+
+
+.project-list.visible {
+
+    display: flex;
+}
+
+
+.project-button {
+
+    border: none;
+
+    background: transparent;
+
+    padding: 0;
+
+    margin: 0;
+
+    color: #111;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    width: fit-content;
+
+    font-family:
+        "Helvetica Neue",
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 400;
+
+    line-height: 1.3;
+
+    appearance: none;
+}
+
+
+.project-button:hover {
 
     text-decoration: underline;
 }
@@ -281,10 +349,12 @@ body {
 
     position: fixed;
 
-    top: 92px;
+    top: 58px;
     right: 0;
 
-    width: 420px;
+    width: 430px;
+
+    max-width: 100%;
 
     background: #fff;
 
@@ -294,9 +364,12 @@ body {
 
     z-index: 950;
 
-    padding: 30px;
-
     display: none;
+
+    padding:
+        35px
+        60px
+        45px;
 
     font-family:
         "Helvetica Neue",
@@ -320,17 +393,17 @@ body {
 
 .info-name {
 
+    margin-bottom: 25px;
+
     font-size: 11px;
 
     font-weight: 400;
-
-    margin-bottom: 25px;
 }
 
 
 .info-panel a {
 
-    color: inherit;
+    color: #111;
 
     text-decoration: none;
 }
@@ -348,25 +421,24 @@ body {
 
 .home {
 
-    padding-top: 92px;
+    padding-top: 58px;
+
+    width: 100%;
 }
 
 
 /* =========================================================
-   MAIN 3 IMAGES
+   HERO
 ========================================================= */
 
 .hero {
 
-    width: 100%;
-
     display: grid;
 
     grid-template-columns:
-        repeat(
-            3,
-            minmax(0, 1fr)
-        );
+        repeat(3, 1fr);
+
+    width: 100%;
 
     gap: 0;
 }
@@ -376,13 +448,9 @@ body {
 
     width: 100%;
 
-    min-width: 0;
-
     cursor: pointer;
 }
 
-
-/* MAIN IMAGE */
 
 .hero-image {
 
@@ -391,9 +459,7 @@ body {
     width: 100%;
 
     height:
-        calc(
-            100vh - 92px
-        );
+        calc(100vh - 58px);
 
     min-height: 500px;
 
@@ -401,146 +467,100 @@ body {
 }
 
 
-/* IMAGE CAPTION */
-
 .hero-caption {
 
     padding:
-        7px
+        6px
         5px
         18px;
 
-    font-family:
-        "Helvetica Neue",
-        Helvetica,
-        Arial,
-        sans-serif;
-
     font-size: 11px;
 
-    font-weight: 400;
-
-    line-height: 1.4;
+    line-height: 1.3;
 }
 
 
-/* EMPTY IMAGE */
+/* EMPTY */
 
-.empty-hero {
+.empty-image {
 
     width: 100%;
 
     height:
-        calc(
-            100vh - 92px
-        );
+        calc(100vh - 58px);
 
     min-height: 500px;
 
-    background: #f2f2f2;
+    background: #eee;
 }
 
 
 /* =========================================================
-   CATEGORY PAGE
+   WORK VIEW
 ========================================================= */
 
-.category-page {
+.work-view {
+
+    position: fixed;
+
+    top: 58px;
+    left: 0;
+
+    width: 100%;
+
+    height:
+        calc(100vh - 58px);
+
+    background: #fff;
+
+    z-index: 800;
 
     display: none;
 
-    padding-top: 120px;
+    overflow-y: auto;
 
-    padding-left: 15px;
-    padding-right: 15px;
-
-    padding-bottom: 80px;
+    padding:
+        45px
+        30px
+        80px;
 }
 
 
-.category-page.active {
+.work-view.open {
 
     display: block;
 }
 
 
-.page-back {
-
-    border: 0;
-
-    background: none;
-
-    padding: 0;
-
-    margin:
-        0
-        0
-        35px;
-
-    cursor: pointer;
-
-    color: #111;
-
-    font-family:
-        "Helvetica Neue",
-        Helvetica,
-        Arial,
-        sans-serif;
-
-    font-size: 11px;
-
-    font-weight: 400;
-}
-
-
-.category-title {
-
-    margin:
-        0
-        0
-        35px;
-
-    font-family:
-        "Helvetica Neue",
-        Helvetica,
-        Arial,
-        sans-serif;
-
-    font-size: 11px;
-
-    font-weight: 400;
-}
-
-
-.work-list {
+.work-header {
 
     display: flex;
 
-    flex-direction: column;
+    align-items: center;
 
-    gap: 10px;
+    justify-content: space-between;
 
-    max-width: 800px;
+    margin-bottom: 40px;
 }
 
 
-.work-button {
+.work-name {
 
-    border: 0;
+    font-size: 11px;
 
-    background: none;
+    font-weight: 400;
+}
+
+
+.work-close {
+
+    border: none;
+
+    background: transparent;
 
     padding: 0;
 
-    margin: 0;
-
-    width: fit-content;
-
-    text-align: left;
-
     cursor: pointer;
-
-    color: #111;
 
     font-family:
         "Helvetica Neue",
@@ -550,57 +570,15 @@ body {
 
     font-size: 11px;
 
-    font-weight: 400;
-}
+    color: #111;
 
-
-.work-button:hover {
-
-    text-decoration: underline;
+    appearance: none;
 }
 
 
 /* =========================================================
-   WORK PAGE
+   GALLERY
 ========================================================= */
-
-.work-page {
-
-    display: none;
-
-    padding-top: 120px;
-
-    padding-left: 15px;
-    padding-right: 15px;
-
-    padding-bottom: 80px;
-}
-
-
-.work-page.active {
-
-    display: block;
-}
-
-
-.work-title {
-
-    margin:
-        0
-        0
-        35px;
-
-    font-family:
-        "Helvetica Neue",
-        Helvetica,
-        Arial,
-        sans-serif;
-
-    font-size: 11px;
-
-    font-weight: 400;
-}
-
 
 .gallery {
 
@@ -610,7 +588,9 @@ body {
 
     flex-direction: column;
 
-    gap: 18px;
+    align-items: center;
+
+    gap: 25px;
 }
 
 
@@ -618,11 +598,25 @@ body {
 
     display: block;
 
-    width: 100%;
+    width: auto;
+
+    max-width: 100%;
 
     height: auto;
 
     object-fit: contain;
+}
+
+
+/* =========================================================
+   NO PROJECT
+========================================================= */
+
+.no-project {
+
+    color: #999;
+
+    font-size: 11px;
 }
 
 
@@ -635,50 +629,47 @@ body {
 
     .header {
 
-        height: 62px;
-
-        padding:
-            0
-            10px;
+        height: 55px;
     }
 
 
     .home {
 
-        padding-top: 62px;
+        padding-top: 55px;
     }
 
 
-    .menu {
+    .menu-panel {
 
-        top: 62px;
+        top: 55px;
 
         padding:
-            0
+            20px
             20px
             25px;
     }
 
 
-    .menu-list {
+    .category-menu {
 
         gap: 22px;
-    }
 
-
-    .menu-item {
-
-        font-size: 11px;
+        flex-wrap: wrap;
     }
 
 
     .info-panel {
 
-        top: 62px;
+        top: 55px;
 
         width: 100%;
 
-        border-left: 0;
+        border-left: none;
+
+        padding:
+            30px
+            25px
+            40px;
     }
 
 
@@ -697,32 +688,28 @@ body {
     .hero-image {
 
         height:
-            calc(
-                100vh - 62px
-            );
-
-        min-height: 450px;
+            calc(100vh - 55px);
     }
 
 
-    .empty-hero {
+    .empty-image {
 
         height:
-            calc(
-                100vh - 62px
-            );
-
-        min-height: 450px;
+            calc(100vh - 55px);
     }
 
 
-    .category-page,
-    .work-page {
+    .work-view {
 
-        padding-top: 90px;
+        top: 55px;
 
-        padding-left: 12px;
-        padding-right: 12px;
+        height:
+            calc(100vh - 55px);
+
+        padding:
+            30px
+            15px
+            60px;
     }
 
 }
@@ -742,14 +729,11 @@ body {
 <header class="header">
 
 
-    <!-- LEFT -->
-
     <div class="header-left">
 
         <button
             class="header-button"
             id="openMenu"
-            aria-label="Open menu"
         >
             +
         </button>
@@ -758,7 +742,6 @@ body {
         <button
             class="header-button minus"
             id="closeMenu"
-            aria-label="Close menu"
         >
             −
         </button>
@@ -766,16 +749,12 @@ body {
     </div>
 
 
-    <!-- CENTER -->
-
     <div class="header-center">
 
         SONGNANSAE
 
     </div>
 
-
-    <!-- RIGHT -->
 
     <div class="header-right">
 
@@ -797,15 +776,16 @@ body {
 ========================================================= -->
 
 <nav
-    class="menu"
-    id="menu"
+    class="menu-panel"
+    id="menuPanel"
 >
 
-    <div class="menu-list">
+
+    <div class="category-menu">
 
 
         <button
-            class="menu-item"
+            class="category-button"
             data-category="commercial"
         >
             Commercial
@@ -813,7 +793,7 @@ body {
 
 
         <button
-            class="menu-item"
+            class="category-button"
             data-category="magazine"
         >
             Magazine
@@ -821,7 +801,7 @@ body {
 
 
         <button
-            class="menu-item"
+            class="category-button"
             data-category="personal"
         >
             Personal
@@ -829,7 +809,7 @@ body {
 
 
         <button
-            class="menu-item"
+            class="category-button"
             data-category="film"
         >
             Film
@@ -837,6 +817,13 @@ body {
 
 
     </div>
+
+
+    <div
+        class="project-list"
+        id="projectList"
+    ></div>
+
 
 </nav>
 
@@ -905,9 +892,7 @@ body {
     <section
         class="hero"
         id="hero"
-    >
-
-    </section>
+    ></section>
 
 
 </main>
@@ -915,65 +900,35 @@ body {
 
 
 <!-- =========================================================
-     CATEGORY PAGE
+     WORK VIEW
 ========================================================= -->
 
 <section
-    class="category-page"
-    id="categoryPage"
+    class="work-view"
+    id="workView"
 >
 
 
-    <button
-        class="page-back"
-        id="categoryBack"
-    >
-
-        ← Back
-
-    </button>
+    <div class="work-header">
 
 
-    <h1
-        class="category-title"
-        id="categoryTitle"
-    ></h1>
+        <div
+            class="work-name"
+            id="workName"
+        ></div>
 
 
-    <div
-        class="work-list"
-        id="workList"
-    ></div>
+        <button
+            class="work-close"
+            id="workClose"
+        >
+
+            Close
+
+        </button>
 
 
-</section>
-
-
-
-<!-- =========================================================
-     WORK PAGE
-========================================================= -->
-
-<section
-    class="work-page"
-    id="workPage"
->
-
-
-    <button
-        class="page-back"
-        id="workBack"
-    >
-
-        ← Back
-
-    </button>
-
-
-    <h1
-        class="work-title"
-        id="workTitle"
-    ></h1>
+    </div>
 
 
     <div
@@ -987,7 +942,6 @@ body {
 
 
 <script>
-
 
 /* =========================================================
    GITHUB SETTINGS
@@ -1009,49 +963,34 @@ const IMAGE_ROOT = "images";
 const CATEGORIES = [
 
     "commercial",
-
     "magazine",
-
     "personal",
-
     "film"
 
 ];
 
 
 /* =========================================================
-   SITE DATA
+   DATA
 ========================================================= */
 
 let siteData = {
 
     commercial: [],
-
     magazine: [],
-
     personal: [],
-
     film: []
 
 };
 
 
 /* =========================================================
-   CURRENT PAGE
-========================================================= */
-
-let currentCategory = "";
-
-let currentWork = "";
-
-
-/* =========================================================
    DOM
 ========================================================= */
 
-const menu =
+const menuPanel =
     document.getElementById(
-        "menu"
+        "menuPanel"
     );
 
 
@@ -1061,45 +1000,27 @@ const infoPanel =
     );
 
 
-const home =
-    document.getElementById(
-        "home"
-    );
-
-
 const hero =
     document.getElementById(
         "hero"
     );
 
 
-const categoryPage =
+const projectList =
     document.getElementById(
-        "categoryPage"
+        "projectList"
     );
 
 
-const workPage =
+const workView =
     document.getElementById(
-        "workPage"
+        "workView"
     );
 
 
-const categoryTitle =
+const workName =
     document.getElementById(
-        "categoryTitle"
-    );
-
-
-const workTitle =
-    document.getElementById(
-        "workTitle"
-    );
-
-
-const workList =
-    document.getElementById(
-        "workList"
+        "workName"
     );
 
 
@@ -1115,26 +1036,35 @@ const gallery =
 
 async function githubAPI(path) {
 
+
     const url =
 
-        `https://api.github.com/repos/` +
+        "https://api.github.com/repos/" +
 
-        `${GITHUB_OWNER}/` +
+        GITHUB_OWNER +
 
-        `${GITHUB_REPO}/contents/` +
+        "/" +
 
-        `${path}?ref=${GITHUB_BRANCH}`;
+        GITHUB_REPO +
+
+        "/contents/" +
+
+        path +
+
+        "?ref=" +
+
+        GITHUB_BRANCH;
 
 
     const response =
+
         await fetch(url);
 
 
     if (!response.ok) {
 
         throw new Error(
-            "GitHub API Error: " +
-            path
+            "GitHub API Error"
         );
 
     }
@@ -1151,17 +1081,24 @@ async function githubAPI(path) {
 
 function imageURL(path) {
 
+
     return (
 
-        `https://raw.githubusercontent.com/` +
+        "https://raw.githubusercontent.com/" +
 
-        `${GITHUB_OWNER}/` +
+        GITHUB_OWNER +
 
-        `${GITHUB_REPO}/` +
+        "/" +
 
-        `${GITHUB_BRANCH}/` +
+        GITHUB_REPO +
 
-        `${path}`
+        "/" +
+
+        GITHUB_BRANCH +
+
+        "/" +
+
+        path
 
     );
 
@@ -1169,20 +1106,33 @@ function imageURL(path) {
 
 
 /* =========================================================
-   GET WORK FOLDERS
+   GET PROJECT FOLDERS
 ========================================================= */
 
-async function getWorks(category) {
+async function getProjects(category) {
+
 
     try {
+
 
         const items =
 
             await githubAPI(
 
-                `${IMAGE_ROOT}/${category}`
+                IMAGE_ROOT +
+
+                "/" +
+
+                category
 
             );
+
+
+        if (!Array.isArray(items)) {
+
+            return [];
+
+        }
 
 
         return items
@@ -1206,25 +1156,26 @@ async function getWorks(category) {
                         undefined,
 
                         {
-                            numeric: true
+                            numeric: true,
+                            sensitivity: "base"
                         }
 
                     )
 
             );
 
-    }
 
+    } catch (error) {
 
-    catch (error) {
 
         console.log(
 
-            "Category not found:",
+            "Could not load:",
 
             category
 
         );
+
 
         return [];
 
@@ -1234,16 +1185,25 @@ async function getWorks(category) {
 
 
 /* =========================================================
-   GET IMAGES
+   GET PROJECT IMAGES
 ========================================================= */
 
-async function getImages(path) {
+async function getProjectImages(path) {
+
 
     try {
+
 
         const items =
 
             await githubAPI(path);
+
+
+        if (!Array.isArray(items)) {
+
+            return [];
+
+        }
 
 
         return items
@@ -1281,10 +1241,9 @@ async function getImages(path) {
 
             );
 
-    }
 
+    } catch (error) {
 
-    catch (error) {
 
         return [];
 
@@ -1294,7 +1253,7 @@ async function getImages(path) {
 
 
 /* =========================================================
-   LOAD SITE
+   LOAD ALL DATA
 ========================================================= */
 
 async function loadSiteData() {
@@ -1309,9 +1268,9 @@ async function loadSiteData() {
     ) {
 
 
-        const works =
+        const projects =
 
-            await getWorks(
+            await getProjects(
                 category
             );
 
@@ -1321,27 +1280,29 @@ async function loadSiteData() {
 
         for (
 
-            const work
+            const project
 
-            of works
+            of projects
 
         ) {
 
 
             const images =
 
-                await getImages(
-                    work.path
+                await getProjectImages(
+
+                    project.path
+
                 );
 
 
             siteData[category].push({
 
                 name:
-                    work.name,
+                    project.name,
 
                 path:
-                    work.path,
+                    project.path,
 
                 images:
                     images
@@ -1356,7 +1317,7 @@ async function loadSiteData() {
 
 
 /* =========================================================
-   HOME
+   HOME HERO
 ========================================================= */
 
 function renderHome() {
@@ -1365,34 +1326,18 @@ function renderHome() {
     hero.innerHTML = "";
 
 
-    const mainCategories = [
+    const homeCategories = [
 
         "commercial",
-
         "magazine",
-
         "personal"
 
     ];
 
 
-    mainCategories.forEach(
+    homeCategories.forEach(
 
         category => {
-
-
-            const works =
-
-                siteData[category] || [];
-
-
-            const work =
-
-                works.length > 0
-
-                    ? works[0]
-
-                    : null;
 
 
             const card =
@@ -1406,43 +1351,56 @@ function renderHome() {
                 "hero-card";
 
 
+            const projects =
+
+                siteData[category] || [];
+
+
             /*
-             * PHOTO EXISTS
+             * 첫 번째 작업을
+             * 메인 대표 작업으로 사용
              */
+
+            const project =
+
+                projects.length > 0
+
+                    ? projects[0]
+
+                    : null;
+
 
             if (
 
-                work &&
+                project &&
 
-                work.images &&
-
-                work.images.length > 0
+                project.images.length > 0
 
             ) {
 
 
-                const image =
+                const img =
 
                     document.createElement(
                         "img"
                     );
 
 
-                image.className =
+                img.className =
                     "hero-image";
 
 
-                image.src =
+                img.src =
 
                     imageURL(
 
-                        work.images[0].path
+                        project.images[0].path
 
                     );
 
 
-                image.alt =
-                    work.name;
+                img.alt =
+                    project.name;
 
 
                 const caption =
@@ -1458,13 +1416,15 @@ function renderHome() {
 
                 caption.textContent =
 
-                    `${capitalize(category)}, ` +
+                    capitalize(category) +
 
-                    `${work.name}`;
+                    ", " +
+
+                    project.name;
 
 
                 card.appendChild(
-                    image
+                    img
                 );
 
 
@@ -1479,11 +1439,11 @@ function renderHome() {
 
                     () => {
 
-                        openWork(
+                        openProject(
 
                             category,
 
-                            work.name
+                            project.name
 
                         );
 
@@ -1493,10 +1453,6 @@ function renderHome() {
 
             }
 
-
-            /*
-             * NO PHOTO
-             */
 
             else {
 
@@ -1509,7 +1465,7 @@ function renderHome() {
 
 
                 empty.className =
-                    "empty-hero";
+                    "empty-image";
 
 
                 const caption =
@@ -1524,6 +1480,7 @@ function renderHome() {
 
 
                 caption.textContent =
+
                     capitalize(category);
 
 
@@ -1551,66 +1508,94 @@ function renderHome() {
 
 
 /* =========================================================
-   OPEN CATEGORY
+   SHOW CATEGORY PROJECTS
 ========================================================= */
 
-function openCategory(category) {
+function showCategory(category) {
 
 
-    currentCategory =
-        category;
+    /*
+     * 기존 활성 상태 제거
+     */
+
+    document
+        .querySelectorAll(
+            ".category-button"
+        )
+        .forEach(
+
+            button => {
+
+                button.classList.remove(
+                    "active"
+                );
+
+            }
+
+        );
 
 
-    currentWork = "";
+    /*
+     * 현재 버튼 활성화
+     */
+
+    const currentButton =
+
+        document.querySelector(
+
+            `.category-button[data-category="${category}"]`
+
+        );
 
 
-    home.style.display =
-        "none";
+    if (currentButton) {
+
+        currentButton.classList.add(
+            "active"
+        );
+
+    }
 
 
-    workPage.classList.remove(
-        "active"
-    );
+    /*
+     * 프로젝트 목록 초기화
+     */
 
-
-    categoryPage.classList.add(
-        "active"
-    );
-
-
-    categoryTitle.textContent =
-        capitalize(category);
-
-
-    workList.innerHTML =
+    projectList.innerHTML =
         "";
 
 
-    const works =
-        siteData[category];
+    const projects =
+
+        siteData[category] || [];
 
 
-    if (
-
-        !works ||
-
-        works.length === 0
-
-    ) {
+    projectList.classList.add(
+        "visible"
+    );
 
 
-        workList.innerHTML = `
+    if (projects.length === 0) {
 
-            <div
-                style="
-                    color:#999;
-                    font-size:11px;
-                "
-            >
-                No projects yet.
-            </div>
 
-        `;
+        const empty =
+
+            document.createElement(
+                "div"
+            );
+
+
+        empty.className =
+            "no-project";
+
+
+        empty.textContent =
+            "No projects yet.";
+
+
+        projectList.appendChild(
+            empty
+        );
 
 
         return;
@@ -1618,9 +1603,13 @@ function openCategory(category) {
     }
 
 
-    works.forEach(
+    /*
+     * 프로젝트 목록 출력
+     */
 
-        work => {
+    projects.forEach(
+
+        project => {
 
 
             const button =
@@ -1631,11 +1620,11 @@ function openCategory(category) {
 
 
             button.className =
-                "work-button";
+                "project-button";
 
 
             button.textContent =
-                work.name;
+                project.name;
 
 
             button.addEventListener(
@@ -1644,11 +1633,11 @@ function openCategory(category) {
 
                 () => {
 
-                    openWork(
+                    openProject(
 
                         category,
 
-                        work.name
+                        project.name
 
                     );
 
@@ -1657,7 +1646,7 @@ function openCategory(category) {
             );
 
 
-            workList.appendChild(
+            projectList.appendChild(
                 button
             );
 
@@ -1669,142 +1658,166 @@ function openCategory(category) {
 
 
 /* =========================================================
-   OPEN WORK
+   OPEN PROJECT
 ========================================================= */
 
-function openWork(
+function openProject(
 
     category,
 
-    workName
+    projectName
 
 ) {
 
 
-    currentCategory =
-        category;
-
-
-    currentWork =
-        workName;
-
-
-    home.style.display =
-        "none";
-
-
-    categoryPage.classList.remove(
-        "active"
-    );
-
-
-    workPage.classList.add(
-        "active"
-    );
-
-
-    workTitle.textContent =
-        workName;
-
-
-    gallery.innerHTML =
-        "";
-
-
-    const work =
+    const project =
 
         siteData[category].find(
 
             item =>
 
-                item.name === workName
+                item.name === projectName
 
         );
 
 
-    if (
-
-        !work ||
-
-        work.images.length === 0
-
-    ) {
-
-
-        gallery.innerHTML = `
-
-            <div
-                style="
-                    color:#999;
-                    font-size:11px;
-                "
-            >
-                No images.
-            </div>
-
-        `;
-
+    if (!project) {
 
         return;
 
     }
 
 
-    work.images.forEach(
-
-        image => {
-
-
-            const img =
-
-                document.createElement(
-                    "img"
-                );
+    workName.textContent =
+        project.name;
 
 
-            img.src =
-
-                imageURL(
-                    image.path
-                );
+    gallery.innerHTML =
+        "";
 
 
-            img.alt =
-                workName;
+    /*
+     * 메뉴 닫기
+     */
+
+    menuPanel.classList.remove(
+        "open"
+    );
 
 
-            gallery.appendChild(
-                img
+    infoPanel.classList.remove(
+        "open"
+    );
+
+
+    /*
+     * 사진 출력
+     */
+
+    if (
+
+        project.images.length === 0
+
+    ) {
+
+
+        const empty =
+
+            document.createElement(
+                "div"
             );
 
-        }
 
+        empty.className =
+            "no-project";
+
+
+        empty.textContent =
+            "No images yet.";
+
+
+        gallery.appendChild(
+            empty
+        );
+
+    }
+
+
+    else {
+
+
+        project.images.forEach(
+
+            image => {
+
+
+                const img =
+
+                    document.createElement(
+                        "img"
+                    );
+
+
+                img.src =
+
+                    imageURL(
+                        image.path
+                    );
+
+
+                img.alt =
+                    project.name;
+
+
+                gallery.appendChild(
+                    img
+                );
+
+            }
+
+        );
+
+    }
+
+
+    /*
+     * 프로젝트 화면 열기
+     */
+
+    workView.classList.add(
+        "open"
+    );
+
+
+    window.scrollTo(
+        0,
+        0
     );
 
 }
 
 
 /* =========================================================
-   HOME
+   CLOSE PROJECT
 ========================================================= */
 
-function goHome() {
+document
+    .getElementById(
+        "workClose"
+    )
+    .addEventListener(
 
+        "click",
 
-    home.style.display =
-        "block";
+        () => {
 
+            workView.classList.remove(
+                "open"
+            );
 
-    categoryPage.classList.remove(
-        "active"
+        }
+
     );
-
-
-    workPage.classList.remove(
-        "active"
-    );
-
-}
 
 
 /* =========================================================
@@ -1812,14 +1825,26 @@ function goHome() {
 ========================================================= */
 
 document
-    .getElementById("openMenu")
+    .getElementById(
+        "openMenu"
+    )
     .addEventListener(
 
         "click",
 
         () => {
 
-            menu.classList.add(
+
+            /*
+             * Info가 열려 있으면 닫기
+             */
+
+            infoPanel.classList.remove(
+                "open"
+            );
+
+
+            menuPanel.classList.toggle(
                 "open"
             );
 
@@ -1833,16 +1858,40 @@ document
 ========================================================= */
 
 document
-    .getElementById("closeMenu")
+    .getElementById(
+        "closeMenu"
+    )
     .addEventListener(
 
         "click",
 
         () => {
 
-            menu.classList.remove(
+            menuPanel.classList.remove(
                 "open"
             );
+
+
+            projectList.classList.remove(
+                "visible"
+            );
+
+
+            document
+                .querySelectorAll(
+                    ".category-button"
+                )
+                .forEach(
+
+                    button => {
+
+                        button.classList.remove(
+                            "active"
+                        );
+
+                    }
+
+                );
 
         }
 
@@ -1854,12 +1903,24 @@ document
 ========================================================= */
 
 document
-    .getElementById("infoButton")
+    .getElementById(
+        "infoButton"
+    )
     .addEventListener(
 
         "click",
 
         () => {
+
+
+            /*
+             * 메뉴가 열려 있으면 닫기
+             */
+
+            menuPanel.classList.remove(
+                "open"
+            );
+
 
             infoPanel.classList.toggle(
                 "open"
@@ -1871,12 +1932,12 @@ document
 
 
 /* =========================================================
-   MENU BUTTONS
+   CATEGORY BUTTONS
 ========================================================= */
 
 document
     .querySelectorAll(
-        ".menu-item"
+        ".category-button"
     )
     .forEach(
 
@@ -1895,62 +1956,12 @@ document
                         button.dataset.category;
 
 
-                    menu.classList.remove(
-                        "open"
-                    );
-
-
-                    infoPanel.classList.remove(
-                        "open"
-                    );
-
-
-                    openCategory(
+                    showCategory(
                         category
                     );
 
                 }
 
-            );
-
-        }
-
-    );
-
-
-/* =========================================================
-   CATEGORY BACK
-========================================================= */
-
-document
-    .getElementById("categoryBack")
-    .addEventListener(
-
-        "click",
-
-        () => {
-
-            goHome();
-
-        }
-
-    );
-
-
-/* =========================================================
-   WORK BACK
-========================================================= */
-
-document
-    .getElementById("workBack")
-    .addEventListener(
-
-        "click",
-
-        () => {
-
-            openCategory(
-                currentCategory
             );
 
         }
@@ -1984,7 +1995,7 @@ function capitalize(text) {
 
 
 /* =========================================================
-   START WEBSITE
+   START
 ========================================================= */
 
 (async function () {
@@ -1992,22 +2003,20 @@ function capitalize(text) {
 
     try {
 
+
         await loadSiteData();
+
 
         renderHome();
 
-    }
 
+    } catch (error) {
 
-    catch (error) {
 
         console.error(
-
-            "Could not load website data.",
-
             error
-
         );
+
 
         renderHome();
 
@@ -2020,4 +2029,5 @@ function capitalize(text) {
 
 
 </body>
+
 </html>
