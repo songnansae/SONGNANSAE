@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,14 +29,12 @@ body {
     color: #111;
 
     font-family:
-        Arial,
         Helvetica,
+        Arial,
         sans-serif;
 
     font-size: 13px;
     font-weight: 400;
-
-    line-height: 1.35;
 }
 
 
@@ -47,46 +44,52 @@ body {
 
 .header {
     position: fixed;
+
     top: 0;
     left: 0;
 
     width: 100%;
-    height: 58px;
+    height: 42px;
 
-    background: #fff;
+    z-index: 100;
 
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
 
-    padding: 17px 12px;
-
-    z-index: 1000;
+    background: #fff;
 }
 
 
 /* 왼쪽 + - */
 
-.menu-control {
-    display: flex;
-    gap: 13px;
+.menu-button {
+    position: absolute;
 
-    font-size: 18px;
+    left: 12px;
+    top: 10px;
+
+    display: flex;
+    gap: 10px;
+
+    font-size: 20px;
     line-height: 1;
 
     cursor: pointer;
+
+    user-select: none;
 }
 
-.menu-control span {
+.menu-button span {
     display: block;
 }
 
-#minus {
+.minus {
     color: #ccc;
 }
 
 
-/* 가운데 이름 */
+/* 가운데 SONGNANSAE */
 
 .logo {
     position: absolute;
@@ -94,19 +97,26 @@ body {
     left: 50%;
     transform: translateX(-50%);
 
-    top: 17px;
-
     font-size: 13px;
     font-weight: 400;
+
+    cursor: pointer;
+
+    white-space: nowrap;
 }
 
 
-/* 오른쪽 Info */
+/* 오른쪽 INFO */
 
 .info-button {
-    cursor: pointer;
+    position: absolute;
+
+    right: 20px;
+    top: 11px;
 
     font-size: 13px;
+
+    cursor: pointer;
 }
 
 
@@ -117,185 +127,171 @@ body {
 .menu {
     position: fixed;
 
-    top: 58px;
+    top: 42px;
     left: 0;
 
     width: 100%;
 
+    padding: 25px 30px 18px;
+
     background: #fff;
 
-    padding: 18px 30px 35px;
-
-    border-bottom: 1px solid #111;
-
-    z-index: 900;
+    z-index: 90;
 
     display: none;
+
+    border-bottom: 1px solid #111;
 }
 
 .menu.open {
     display: block;
 }
 
-.menu-links {
+.menu-items {
     display: flex;
-
     gap: 42px;
 
     align-items: center;
 }
 
-.menu-links a {
+.menu-items a {
     color: #111;
 
     text-decoration: none;
 
     font-size: 13px;
+    font-weight: 400;
 
     cursor: pointer;
 }
 
-.menu-links a:hover {
+.menu-items a:hover {
     text-decoration: underline;
 }
 
 
 /* =========================
-   MAIN HOME
+   HOME
 ========================= */
 
 .home {
     width: 100%;
 
-    padding-top: 58px;
+    padding-top: 42px;
+
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
 }
 
 
-/* 3개 사진 */
+/* 사진 3장 */
 
 .home-grid {
+    flex: 1;
+
+    width: 100%;
 
     display: grid;
 
-    grid-template-columns:
-        repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 
-    width: 100%;
+    gap: 0;
 
-    height: 70vh;
+    align-items: stretch;
 }
 
-
-/* 각 사진 */
-
 .home-item {
+    position: relative;
 
     width: 100%;
-    height: 100%;
+    height: calc(100vh - 82px);
 
     overflow: hidden;
 
     cursor: pointer;
-
-    position: relative;
 }
 
 .home-item img {
-
     width: 100%;
     height: 100%;
 
-    object-fit: cover;
+    display: block;
 
+    object-fit: cover;
+}
+
+
+/* =========================
+   HOME BOTTOM TITLES
+========================= */
+
+.home-caption {
+    width: 100%;
+
+    height: 40px;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    align-items: center;
+
+    background: #fff;
+
+    font-size: 13px;
+}
+
+.home-caption div {
+    padding: 0 4px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================
+   CATEGORY PAGE
+========================= */
+
+.page {
+    display: none;
+
+    padding-top: 42px;
+
+    min-height: 100vh;
+}
+
+.page.active {
     display: block;
 }
 
 
-/* 사진 아래 제목 */
+/* 카테고리 상단 */
 
-.home-caption {
-
-    height: 32px;
-
-    padding: 7px 4px;
-
-    font-size: 13px;
-
-    background: #fff;
-}
-
-
-/* =========================
-   CONTENT PAGE
-========================= */
-
-.page {
-
-    display: none;
-
-    width: 100%;
-
-    padding-top: 95px;
-}
-
-
-/* Back */
-
-.back {
-
-    display: inline-block;
-
-    margin-left: 30px;
-    margin-bottom: 60px;
-
-    color: #111;
-
-    text-decoration: none;
-
-    font-size: 13px;
-
-    cursor: pointer;
-}
-
-
-/* 페이지 제목 */
-
-.page-title {
-
-    margin-left: 30px;
-
-    margin-bottom: 55px;
+.page-header {
+    padding: 30px;
 
     font-size: 13px;
 }
 
 
-/* =========================
-   PROJECT LIST
-========================= */
+/* 프로젝트 리스트 */
 
 .project-list {
-
-    margin-left: 30px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 14px;
-
-    padding-bottom: 80px;
+    padding: 0 30px 60px;
 }
 
 .project {
-
-    width: fit-content;
+    margin-bottom: 14px;
 
     font-size: 13px;
 
     cursor: pointer;
-
-    color: #111;
 }
 
 .project:hover {
@@ -304,23 +300,23 @@ body {
 
 
 /* =========================
-   PROJECT PAGE
+   PROJECT DETAIL
 ========================= */
 
 .project-page {
-
     display: none;
 
-    width: 100%;
+    padding-top: 42px;
 
-    padding-top: 95px;
+    min-height: 100vh;
 }
 
-.project-back {
+.project-page.active {
+    display: block;
+}
 
-    margin-left: 30px;
-
-    margin-bottom: 45px;
+.back {
+    padding: 30px;
 
     font-size: 13px;
 
@@ -328,41 +324,26 @@ body {
 }
 
 .project-title {
-
-    margin-left: 30px;
-
-    margin-bottom: 50px;
+    padding: 0 30px 30px;
 
     font-size: 13px;
 }
 
 
-/* 프로젝트 사진 */
+/* 사진 */
 
 .project-images {
-
     width: 100%;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    gap: 0;
 }
 
 .project-images img {
-
     display: block;
 
-    width: auto;
-
-    max-width: 100%;
-
-    max-height: none;
+    width: 100%;
 
     height: auto;
+
+    margin: 0;
 }
 
 
@@ -370,71 +351,48 @@ body {
    INFO
 ========================= */
 
-.info-panel {
+.info-page {
+    display: none;
 
     position: fixed;
 
-    top: 58px;
-    right: 0;
+    top: 42px;
+    left: 0;
 
-    width: 50%;
-
-    min-height: calc(100vh - 58px);
+    width: 100%;
+    height: calc(100vh - 42px);
 
     background: #fff;
 
-    border-left: 1px solid #111;
-
-    z-index: 1100;
-
-    padding: 65px 60px;
-
-    display: none;
+    z-index: 80;
 }
 
-.info-panel.open {
+.info-page.active {
     display: block;
 }
 
-.info-close {
+.info-inner {
+    width: 100%;
+    height: 100%;
 
-    position: absolute;
+    display: flex;
 
-    top: 20px;
-    right: 25px;
+    align-items: flex-start;
+    justify-content: flex-start;
 
-    font-size: 18px;
-
-    cursor: pointer;
+    padding: 70px 30px;
 }
 
-.info-content {
-
+.info-text {
     font-size: 13px;
 
     line-height: 1.5;
 }
 
-.info-name {
-
-    margin-bottom: 55px;
-}
-
-.info-block {
-
-    margin-bottom: 45px;
-}
-
-.info-content a {
-
+.info-text a {
     color: #111;
 
     text-decoration: none;
-}
-
-.info-content a:hover {
-
-    text-decoration: underline;
 }
 
 
@@ -444,71 +402,33 @@ body {
 
 @media (max-width: 700px) {
 
-    .header {
-        height: 52px;
-
-        padding: 15px 12px;
-    }
-
-    .home {
-        padding-top: 52px;
-    }
-
-    .menu {
-        top: 52px;
-
-        padding: 18px 20px 28px;
-    }
-
-    .menu-links {
-
-        gap: 22px;
-
-        flex-wrap: wrap;
-    }
-
     .home-grid {
+        grid-template-columns: 1fr;
+    }
 
+    .home-item {
+        height: 70vh;
+    }
+
+    .home-caption {
         grid-template-columns: 1fr;
 
         height: auto;
     }
 
-    .home-item {
-
-        height: 45vh;
-    }
-
-    .home-caption {
-
+    .home-caption div {
         height: 30px;
 
-        padding-left: 4px;
+        display: flex;
+        align-items: center;
     }
 
-    .page,
-    .project-page {
-
-        padding-top: 85px;
+    .menu-items {
+        gap: 25px;
     }
 
-    .back,
-    .page-title,
-    .project-list,
-    .project-back,
-    .project-title {
-
-        margin-left: 20px;
-    }
-
-    .info-panel {
-
+    .project-images img {
         width: 100%;
-
-        padding:
-            60px
-            25px
-            40px;
     }
 
 }
@@ -526,28 +446,21 @@ body {
 
 <header class="header">
 
-    <div class="menu-control">
-
-        <span id="plus">+</span>
-
-        <span id="minus">−</span>
-
+    <div class="menu-button" onclick="toggleMenu()">
+        <span>+</span>
+        <span class="minus">−</span>
     </div>
 
 
-    <div class="logo">
+    <!-- 클릭하면 홈으로 -->
 
+    <div class="logo" onclick="goHome()">
         SONGNANSAE
-
     </div>
 
 
-    <div
-        class="info-button"
-        onclick="openInfo()">
-
+    <div class="info-button" onclick="openInfo()">
         Info
-
     </div>
 
 </header>
@@ -558,25 +471,23 @@ body {
      MENU
 ========================= -->
 
-<nav
-    id="menu"
-    class="menu">
+<nav class="menu" id="menu">
 
-    <div class="menu-links">
+    <div class="menu-items">
 
-        <a onclick="showHome()">
+        <a onclick="showCategory('commercial')">
             Commercial
         </a>
 
-        <a onclick="showPage('magazine')">
+        <a onclick="showCategory('magazine')">
             Magazine
         </a>
 
-        <a onclick="showPage('personal')">
+        <a onclick="showCategory('personal')">
             Personal
         </a>
 
-        <a onclick="showPage('film')">
+        <a onclick="showCategory('film')">
             Film
         </a>
 
@@ -590,9 +501,7 @@ body {
      HOME
 ========================= -->
 
-<main
-    id="home"
-    class="home">
+<main class="home" id="home">
 
 
     <div class="home-grid">
@@ -602,11 +511,14 @@ body {
 
         <div
             class="home-item"
-            onclick="showPage('commercial')">
+            onclick="showCategory('commercial')"
+        >
 
             <img
-                src="images/commercial.jpg"
-                alt="Commercial">
+                src="images/commercial/main.jpg"
+                alt="Commercial"
+                onerror="this.style.display='none';"
+            >
 
         </div>
 
@@ -616,11 +528,17 @@ body {
 
         <div
             class="home-item"
-            onclick="showPage('magazine')">
+            onclick="openProject(
+                'magazine',
+                'The Neighbor, 2026'
+            )"
+        >
 
             <img
-                src="images/magazine.jpg"
-                alt="Magazine">
+                src="images/magazine/The Neighbor , 2026/0080_THE NEIGHBOR_260611_R1.JPG"
+                alt="Magazine"
+                onerror="this.style.display='none';"
+            >
 
         </div>
 
@@ -630,11 +548,14 @@ body {
 
         <div
             class="home-item"
-            onclick="showPage('personal')">
+            onclick="showCategory('personal')"
+        >
 
             <img
-                src="images/personal.jpg"
-                alt="Personal">
+                src="images/personal/main.jpg"
+                alt="Personal"
+                onerror="this.style.display='none';"
+            >
 
         </div>
 
@@ -642,29 +563,24 @@ body {
 
 
 
-    <div class="home-grid">
+    <!-- 화면 맨 아래 -->
 
+    <div class="home-caption">
 
-        <div class="home-caption">
-
+        <div onclick="showCategory('commercial')">
             Commercial
-
         </div>
 
-
-        <div class="home-caption">
-
+        <div onclick="openProject(
+            'magazine',
+            'The Neighbor, 2026'
+        )">
             Magazine, The Neighbor, 2026
-
         </div>
 
-
-        <div class="home-caption">
-
+        <div onclick="showCategory('personal')">
             Personal
-
         </div>
-
 
     </div>
 
@@ -673,325 +589,56 @@ body {
 
 
 <!-- =========================
-     COMMERCIAL PAGE
+     CATEGORY PAGE
 ========================= -->
 
 <section
-    id="commercial"
-    class="page">
+    class="page"
+    id="categoryPage"
+>
+
+    <div
+        class="page-header"
+        id="categoryTitle"
+    ></div>
 
 
     <div
-        class="back"
-        onclick="showHome()">
-
-        ← Back
-
-    </div>
-
-
-    <div class="page-title">
-
-        Commercial
-
-    </div>
-
-
-    <div class="project-list">
-
-
-        <div class="project">
-
-            Commercial Project 01, 2026
-
-        </div>
-
-
-        <div class="project">
-
-            Commercial Project 02, 2026
-
-        </div>
-
-
-        <div class="project">
-
-            Commercial Project 03, 2025
-
-        </div>
-
-
-    </div>
+        class="project-list"
+        id="projectList"
+    ></div>
 
 </section>
 
 
 
 <!-- =========================
-     MAGAZINE PAGE
+     PROJECT DETAIL
 ========================= -->
 
 <section
-    id="magazine"
-    class="page">
-
+    class="project-page"
+    id="projectPage"
+>
 
     <div
         class="back"
-        onclick="showHome()">
-
+        onclick="goBack()"
+    >
         ← Back
-
     </div>
-
-
-    <div class="page-title">
-
-        Magazine
-
-    </div>
-
-
-    <div class="project-list">
-
-
-        <!-- THE NEIGHBOR -->
-
-        <div
-            class="project"
-            onclick="showProject('neighbor')">
-
-            The Neighbor, 2026
-
-        </div>
-
-
-        <div class="project">
-
-            Vogue, 2025
-
-        </div>
-
-
-        <div class="project">
-
-            Vogue Tom Sachs, 2025
-
-        </div>
-
-
-        <div class="project">
-
-            GQ Cha Joo Young, 2025
-
-        </div>
-
-
-        <div class="project">
-
-            Esquire, 2025
-
-        </div>
-
-
-        <div class="project">
-
-            Vogue, 2024
-
-        </div>
-
-
-        <div class="project">
-
-            Bazaar, 2024
-
-        </div>
-
-
-        <div class="project">
-
-            Singles, 2024
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================
-     PERSONAL PAGE
-========================= -->
-
-<section
-    id="personal"
-    class="page">
 
 
     <div
-        class="back"
-        onclick="showHome()">
-
-        ← Back
-
-    </div>
-
-
-    <div class="page-title">
-
-        Personal
-
-    </div>
-
-
-    <div class="project-list">
-
-
-        <div class="project">
-
-            Personal Work 01, 2026
-
-        </div>
-
-
-        <div class="project">
-
-            Travel Series, 2025
-
-        </div>
-
-
-        <div class="project">
-
-            Personal Work 02, 2024
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================
-     FILM PAGE
-========================= -->
-
-<section
-    id="film"
-    class="page">
+        class="project-title"
+        id="projectTitle"
+    ></div>
 
 
     <div
-        class="back"
-        onclick="showHome()">
-
-        ← Back
-
-    </div>
-
-
-    <div class="page-title">
-
-        Film
-
-    </div>
-
-
-    <div class="project-list">
-
-
-        <div class="project">
-
-            Film Work 01, 2026
-
-        </div>
-
-
-        <div class="project">
-
-            Film Work 02, 2025
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================
-     THE NEIGHBOR PROJECT
-========================= -->
-
-<section
-    id="neighbor"
-    class="project-page">
-
-
-    <div
-        class="project-back"
-        onclick="showPage('magazine')">
-
-        ← Back
-
-    </div>
-
-
-    <div class="project-title">
-
-        The Neighbor, 2026
-
-    </div>
-
-
-    <div class="project-images">
-
-
-        <img
-            src="images/magazine/The Neighbor , 2026/0080_THE NEIGHBOR_260611_R1.JPG"
-            alt="">
-
-
-        <img
-            src="images/magazine/The Neighbor , 2026/0403_THE NEIGHBOR_260611_R1.JPG"
-            alt="">
-
-
-        <img
-            src="images/magazine/The Neighbor , 2026/0909_THE NEIGHBOR_260611_R1.JPG"
-            alt="">
-
-
-        <img
-            src="images/magazine/The Neighbor , 2026/0948_THE NEIGHBOR_260611_R1.JPG"
-            alt="">
-
-
-        <img
-            src="images/magazine/The Neighbor , 2026/1299_THE NEIGHBOR_260611_R1.jpg"
-            alt="">
-
-
-        <img
-            src="images/magazine/The Neighbor , 2026/1559_THE NEIGHBOR_260611_R1(수정).JPG"
-            alt="">
-
-
-        <img
-            src="images/magazine/The Neighbor , 2026/1771_THE NEIGHBOR_260611_R2(수정).JPG"
-            alt="">
-
-
-        <img
-            src="images/magazine/The Neighbor , 2026/2306_THE NEIGHBOR_260611_R1.JPG"
-            alt="">
-
-    </div>
+        class="project-images"
+        id="projectImages"
+    ></div>
 
 </section>
 
@@ -1001,216 +648,430 @@ body {
      INFO
 ========================= -->
 
-<div
-    id="infoPanel"
-    class="info-panel">
+<section
+    class="info-page"
+    id="infoPage"
+>
 
+    <div class="info-inner">
 
-    <div
-        class="info-close"
-        onclick="closeInfo()">
+        <div class="info-text">
 
-        ×
+            <div>SONGNANSAE</div>
+
+            <br>
+
+            <div>
+                Commercial Photographer
+            </div>
+
+            <div>
+                Seoul, Korea
+            </div>
+
+            <br>
+
+            <div>
+                For commissions and inquiries
+            </div>
+
+            <div>
+                <a href="mailto:songnansae@gmail.com">
+                    songnansae@gmail.com
+                </a>
+            </div>
+
+            <br>
+
+            <div>
+                <a
+                    href="https://www.instagram.com/songnansae/"
+                    target="_blank"
+                >
+                    Instagram
+                </a>
+            </div>
+
+        </div>
 
     </div>
 
-
-    <div class="info-content">
-
-
-        <div class="info-name">
-
-            SONGNANSAE
-
-        </div>
-
-
-
-        <div class="info-block">
-
-            Commercial Photographer<br>
-            Seoul, Korea
-
-        </div>
-
-
-
-        <div class="info-block">
-
-            For commissions and inquiries<br>
-
-            <a href="mailto:songnansae@gmail.com">
-
-                songnansae@gmail.com
-
-            </a>
-
-        </div>
-
-
-
-        <div class="info-block">
-
-            <a
-                href="https://www.instagram.com/songnansae/"
-                target="_blank">
-
-                Instagram
-
-            </a>
-
-        </div>
-
-
-    </div>
-
-</div>
+</section>
 
 
 
 <script>
 
-/* =========================
+/* ==================================================
+   PROJECT DATA
+================================================== */
+
+
+/*
+   여기서 작업을 추가하면 됨.
+
+   지금은 네가 실제로 만든
+   The Neighbor, 2026
+   하나만 넣어둠.
+*/
+
+
+const projects = {
+
+    commercial: [
+
+        /*
+        {
+            title: "RUNHER, 2026",
+            folder: "RUNHER, 2026",
+            images: [
+                "01.jpg",
+                "02.jpg",
+                "03.jpg"
+            ]
+        }
+        */
+
+    ],
+
+
+    magazine: [
+
+        {
+            title: "The Neighbor, 2026",
+
+            folder: "The Neighbor , 2026",
+
+            images: [
+
+                "0080_THE NEIGHBOR_260611_R1.JPG",
+
+                "0403_THE NEIGHBOR_260611_R1.JPG",
+
+                "0909_THE NEIGHBOR_260611_R1.JPG",
+
+                "0948_THE NEIGHBOR_260611_R1.JPG",
+
+                "1299_THE NEIGHBOR_260611_R1.jpg",
+
+                "1559_THE NEIGHBOR_260611_R1(수정).JPG",
+
+                "1771_THE NEIGHBOR_260611_R2(수정).JPG",
+
+                "2306_THE NEIGHBOR_260611_R1.JPG"
+
+            ]
+        }
+
+    ],
+
+
+    personal: [
+
+        /*
+        {
+            title: "Personal Work, 2026",
+            folder: "Personal Work, 2026",
+            images: [
+                "01.jpg",
+                "02.jpg",
+                "03.jpg"
+            ]
+        }
+        */
+
+    ],
+
+
+    film: [
+
+        /*
+        {
+            title: "Film Work, 2026",
+            folder: "Film Work, 2026",
+            images: [
+                "01.jpg",
+                "02.jpg"
+            ]
+        }
+        */
+
+    ]
+
+};
+
+
+
+/* ==================================================
    MENU
-========================= */
+================================================== */
 
-const menu = document.getElementById("menu");
+function toggleMenu() {
 
-const plus = document.getElementById("plus");
+    const menu =
+        document.getElementById("menu");
 
-const minus = document.getElementById("minus");
+    menu.classList.toggle("open");
 
-
-plus.addEventListener("click", function() {
-
-    menu.classList.add("open");
-
-});
+}
 
 
-minus.addEventListener("click", function() {
 
-    menu.classList.remove("open");
+/* ==================================================
+   HOME
+================================================== */
 
-});
+function goHome() {
 
+    document
+        .getElementById("home")
+        .style.display = "flex";
 
-/* =========================
-   SHOW HOME
-========================= */
+    document
+        .getElementById("categoryPage")
+        .classList.remove("active");
 
-function showHome() {
+    document
+        .getElementById("projectPage")
+        .classList.remove("active");
 
-    hideAllPages();
+    document
+        .getElementById("infoPage")
+        .classList.remove("active");
 
-    document.getElementById("home").style.display = "block";
-
-    menu.classList.remove("open");
+    document
+        .getElementById("menu")
+        .classList.remove("open");
 
     window.scrollTo(0, 0);
 
 }
 
 
-/* =========================
-   SHOW CATEGORY
-========================= */
 
-function showPage(pageName) {
+/* ==================================================
+   CATEGORY
+================================================== */
 
-    hideAllPages();
+function showCategory(category) {
 
-    const page = document.getElementById(pageName);
+    document
+        .getElementById("home")
+        .style.display = "none";
 
-    if (page) {
+    document
+        .getElementById("projectPage")
+        .classList.remove("active");
 
-        page.style.display = "block";
+    document
+        .getElementById("infoPage")
+        .classList.remove("active");
+
+    document
+        .getElementById("categoryPage")
+        .classList.add("active");
+
+    document
+        .getElementById("menu")
+        .classList.remove("open");
+
+
+    const title =
+        document.getElementById("categoryTitle");
+
+    const list =
+        document.getElementById("projectList");
+
+
+    title.innerHTML =
+        category.charAt(0).toUpperCase()
+        + category.slice(1);
+
+
+    list.innerHTML = "";
+
+
+    const categoryProjects =
+        projects[category] || [];
+
+
+    if (categoryProjects.length === 0) {
+
+        list.innerHTML =
+            '<div style="color:#999;">No projects yet.</div>';
+
+        return;
+    }
+
+
+    categoryProjects.forEach(project => {
+
+        const item =
+            document.createElement("div");
+
+        item.className = "project";
+
+        item.textContent =
+            project.title;
+
+
+        item.onclick = function() {
+
+            openProject(
+                category,
+                project.title
+            );
+
+        };
+
+
+        list.appendChild(item);
+
+    });
+
+}
+
+
+
+/* ==================================================
+   OPEN PROJECT
+================================================== */
+
+function openProject(
+    category,
+    title
+) {
+
+    document
+        .getElementById("home")
+        .style.display = "none";
+
+    document
+        .getElementById("categoryPage")
+        .classList.remove("active");
+
+    document
+        .getElementById("infoPage")
+        .classList.remove("active");
+
+    document
+        .getElementById("menu")
+        .classList.remove("open");
+
+
+    const project =
+        projects[category]
+        .find(item => item.title === title);
+
+
+    if (!project) {
+
+        return;
 
     }
 
-    menu.classList.remove("open");
 
-    window.scrollTo(0, 0);
+    const projectPage =
+        document.getElementById("projectPage");
 
-}
+    const projectTitle =
+        document.getElementById("projectTitle");
 
-
-/* =========================
-   SHOW PROJECT
-========================= */
-
-function showProject(projectName) {
-
-    hideAllPages();
-
-    const project = document.getElementById(projectName);
-
-    if (project) {
-
-        project.style.display = "block";
-
-    }
-
-    window.scrollTo(0, 0);
-
-}
+    const projectImages =
+        document.getElementById("projectImages");
 
 
-/* =========================
-   HIDE ALL
-========================= */
-
-function hideAllPages() {
-
-    document.getElementById("home").style.display = "none";
+    projectPage.classList.add("active");
 
 
-    document.querySelectorAll(".page").forEach(function(page) {
+    projectTitle.textContent =
+        project.title;
 
-        page.style.display = "none";
+
+    projectImages.innerHTML = "";
+
+
+    project.images.forEach(filename => {
+
+        const img =
+            document.createElement("img");
+
+
+        img.src =
+            "images/"
+            + category
+            + "/"
+            + project.folder
+            + "/"
+            + filename;
+
+
+        img.alt =
+            project.title;
+
+
+        projectImages.appendChild(img);
 
     });
 
 
-    document.querySelectorAll(".project-page").forEach(function(page) {
-
-        page.style.display = "none";
-
-    });
+    window.scrollTo(0, 0);
 
 }
 
 
-/* =========================
+
+/* ==================================================
+   BACK
+================================================== */
+
+function goBack() {
+
+    document
+        .getElementById("projectPage")
+        .classList.remove("active");
+
+    document
+        .getElementById("categoryPage")
+        .classList.add("active");
+
+    window.scrollTo(0, 0);
+
+}
+
+
+
+/* ==================================================
    INFO
-========================= */
+================================================== */
 
 function openInfo() {
 
     document
-        .getElementById("infoPanel")
-        .classList.add("open");
-
-}
-
-
-function closeInfo() {
+        .getElementById("home")
+        .style.display = "none";
 
     document
-        .getElementById("infoPanel")
+        .getElementById("categoryPage")
+        .classList.remove("active");
+
+    document
+        .getElementById("projectPage")
+        .classList.remove("active");
+
+    document
+        .getElementById("infoPage")
+        .classList.add("active");
+
+    document
+        .getElementById("menu")
         .classList.remove("open");
+
+    window.scrollTo(0, 0);
 
 }
 
-
-/* =========================
-   INITIAL
-========================= */
-
-showHome();
-
 </script>
-
 
 </body>
 </html>
