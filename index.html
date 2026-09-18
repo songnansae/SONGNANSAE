@@ -7,722 +7,599 @@
 <title>SONGNANSAE</title>
 
 <style>
-
-/* =========================
-   BASIC
-========================= */
-
-* {
-    box-sizing: border-box;
-}
-
-html,
-body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 100%;
-}
-
-body {
-    background: #fff;
-    color: #111;
-
-    font-family:
-        Helvetica,
-        Arial,
-        sans-serif;
-
-    font-size: 13px;
-    font-weight: 400;
-}
-
-
-/* =========================
-   HEADER
-========================= */
-
-.header {
-    width: 100%;
-    height: 52px;
-
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-
-    padding: 0 14px;
-}
-
-.header-left {
-    justify-self: start;
-}
-
-.header-center {
-    justify-self: center;
-}
-
-.header-right {
-    justify-self: end;
-}
-
-
-/* + / - */
-
-.menu-button {
-    border: none;
-    background: none;
-
-    padding: 0;
-    margin: 0;
-
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 18px;
-    line-height: 1;
-
-    cursor: pointer;
-}
-
-.menu-button.minus {
-    color: #bbb;
-    margin-left: 10px;
-}
-
-
-/* SONGNANSAE */
-
-.logo {
-    font-size: 11px;
-    font-weight: 400;
-
-    cursor: pointer;
-}
-
-
-/* INFO */
-
-.info-button {
-    border: none;
-    background: none;
-
-    padding: 0;
-
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 11px;
-
-    cursor: pointer;
-}
-
-
-/* =========================
-   MENU
-========================= */
-
-.menu {
-    display: none;
-
-    width: 100%;
-
-    padding: 20px 30px 30px;
-
-    border-bottom: 1px solid #111;
-}
-
-.menu.open {
-    display: block;
-}
-
-.menu-links {
-    display: flex;
-    gap: 38px;
-}
-
-.menu-links button {
-    border: none;
-    background: none;
-
-    padding: 0;
-
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 15px;
-    font-weight: 400;
-
-    cursor: pointer;
-}
-
-.menu-links button:hover {
-    text-decoration: underline;
-}
-
-
-/* =========================
-   MAIN
-========================= */
-
-.home {
-    width: 100%;
-}
-
-.projects {
-    width: 100%;
-
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-}
-
-
-/* =========================
-   PROJECT CARD
-========================= */
-
-.project-card {
-    width: 100%;
-
-    cursor: pointer;
-
-    overflow: hidden;
-}
-
-.project-image-wrap {
-    width: 100%;
-
-    aspect-ratio: 3 / 4;
-
-    background: #f1f1f1;
-
-    overflow: hidden;
-}
-
-.project-image {
-    width: 100%;
-    height: 100%;
-
-    display: block;
-
-    object-fit: cover;
-}
-
-.project-info {
-    width: 100%;
-
-    padding: 7px 4px 10px;
-
-    font-family: Helvetica, Arial, sans-serif;
-
-    font-size: 13px;
-    line-height: 1.2;
-}
-
-
-/* =========================
-   INFO PAGE
-========================= */
-
-.info-page {
-    display: none;
-
-    width: 100%;
-    min-height: calc(100vh - 52px);
-
-    border-top: 1px solid #111;
-}
-
-.info-page.open {
-    display: block;
-}
-
-.info-inner {
-    padding: 60px 8%;
-
-    font-size: 15px;
-    line-height: 1.5;
-}
-
-.info-inner h1 {
-    margin: 0 0 45px;
-
-    font-size: 15px;
-    font-weight: 400;
-}
-
-.info-inner p {
-    margin: 0 0 28px;
-}
-
-.info-inner a {
-    color: inherit;
-    text-decoration: none;
-}
-
-.info-inner a:hover {
-    text-decoration: underline;
-}
-
-
-/* =========================
-   CATEGORY PAGE
-========================= */
-
-.category-page {
-    display: none;
-
-    width: 100%;
-}
-
-.category-page.open {
-    display: block;
-}
-
-.category-inner {
-    padding: 35px 30px 80px;
-}
-
-.back {
-    border: none;
-    background: none;
-
-    padding: 0;
-    margin: 0 0 70px;
-
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 15px;
-
-    cursor: pointer;
-}
-
-.category-title {
-    font-size: 15px;
-    margin-bottom: 35px;
-}
-
-.category-list {
-    display: flex;
-    flex-direction: column;
-    gap: 13px;
-}
-
-.category-item {
-    border: none;
-    background: none;
-
-    padding: 0;
-
-    width: fit-content;
-
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 15px;
-
-    cursor: pointer;
-}
-
-.category-item:hover {
-    text-decoration: underline;
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 700px) {
-
-    .header {
-        height: 48px;
-        padding: 0 10px;
+    * {
+        box-sizing: border-box;
     }
 
-    .projects {
-        grid-template-columns: 1fr;
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100%;
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 13px;
+        font-weight: 400;
+        background: #fff;
+        color: #000;
     }
 
-    .project-image-wrap {
-        aspect-ratio: 3 / 4;
+    button {
+        font: inherit;
+        color: inherit;
+        background: none;
+        border: 0;
+        padding: 0;
+        cursor: pointer;
     }
 
-    .menu {
-        padding: 20px 20px 25px;
+    a {
+        color: inherit;
+        text-decoration: none;
     }
 
-    .menu-links {
-        gap: 20px;
-        flex-wrap: wrap;
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 52px;
+        padding: 0 14px;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        z-index: 1000;
+        background: #fff;
     }
 
-    .menu-links button {
-        font-size: 14px;
+    .header-left {
+        justify-self: start;
     }
 
-    .info-inner {
-        padding: 45px 30px;
+    .header-center {
+        justify-self: center;
     }
 
-}
+    .header-right {
+        justify-self: end;
+    }
 
+    .menu-button {
+        font-size: 20px;
+        line-height: 1;
+        width: 20px;
+        text-align: left;
+    }
+
+    .logo {
+        cursor: pointer;
+        white-space: nowrap;
+    }
+
+    .info-button {
+        cursor: pointer;
+    }
+
+    /* =========================
+       INFO
+    ========================= */
+
+    .info-panel {
+        position: fixed;
+        top: 52px;
+        right: 14px;
+        width: 260px;
+        z-index: 900;
+        display: none;
+        line-height: 1.35;
+        background: #fff;
+    }
+
+    .info-panel.active {
+        display: block;
+    }
+
+    .info-panel a {
+        text-decoration: underline;
+    }
+
+    /* =========================
+       MENU
+    ========================= */
+
+    .menu-panel {
+        position: fixed;
+        top: 52px;
+        left: 14px;
+        z-index: 900;
+        display: none;
+        background: #fff;
+        line-height: 1.5;
+    }
+
+    .menu-panel.active {
+        display: block;
+    }
+
+    .menu-category {
+        margin-bottom: 12px;
+    }
+
+    .menu-category-title {
+        cursor: pointer;
+        margin-bottom: 4px;
+    }
+
+    .menu-project {
+        display: block;
+        cursor: pointer;
+        margin-left: 12px;
+        margin-bottom: 2px;
+    }
+
+    .menu-project:hover {
+        text-decoration: underline;
+    }
+
+    /* =========================
+       HOME
+    ========================= */
+
+    main {
+        padding-top: 52px;
+    }
+
+    .home {
+        min-height: calc(100vh - 52px);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .home-grid {
+        flex: 1;
+        min-height: 0;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        padding: 0 14px;
+    }
+
+    .home-card {
+        min-width: 0;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .home-image {
+        width: 100%;
+        height: calc(100vh - 110px);
+        object-fit: cover;
+        display: block;
+        background: #f2f2f2;
+    }
+
+    .home-image.loading {
+        visibility: hidden;
+    }
+
+    .home-caption {
+        padding-top: 7px;
+        line-height: 1.25;
+        min-height: 34px;
+    }
+
+    .home-caption-category {
+        display: block;
+    }
+
+    .home-caption-project {
+        display: block;
+    }
+
+    /* =========================
+       DETAIL
+    ========================= */
+
+    .detail {
+        display: none;
+        padding: 0 14px 40px;
+    }
+
+    .detail.active {
+        display: block;
+    }
+
+    .detail-header {
+        padding: 15px 0 25px;
+    }
+
+    .detail-title {
+        margin-bottom: 3px;
+    }
+
+    .detail-category {
+        opacity: 0.6;
+    }
+
+    .detail-images {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .detail-images img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .back-button {
+        margin-top: 30px;
+        cursor: pointer;
+    }
+
+    .back-button:hover {
+        text-decoration: underline;
+    }
+
+    /* =========================
+       EMPTY / LOADING
+    ========================= */
+
+    .empty-card {
+        width: 100%;
+        height: calc(100vh - 110px);
+        background: #f2f2f2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .loading-text {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 700px) {
+
+        header {
+            height: 48px;
+            padding: 0 10px;
+        }
+
+        main {
+            padding-top: 48px;
+        }
+
+        .home {
+            min-height: calc(100vh - 48px);
+        }
+
+        .home-grid {
+            grid-template-columns: 1fr;
+            gap: 25px;
+            padding: 0 10px 30px;
+        }
+
+        .home-image,
+        .empty-card {
+            height: 65vh;
+        }
+
+        .home-caption {
+            padding-top: 6px;
+        }
+
+        .info-panel {
+            top: 48px;
+            right: 10px;
+        }
+
+        .menu-panel {
+            top: 48px;
+            left: 10px;
+        }
+
+        .detail {
+            padding: 0 10px 30px;
+        }
+
+        .detail-images {
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+    }
 </style>
 </head>
 
 
 <body>
 
-
-<!-- =========================
-     HEADER
-========================= -->
-
-<header class="header">
+<header>
 
     <div class="header-left">
-
         <button
+            id="menuButton"
             class="menu-button"
-            id="plusButton">
-            +
-        </button>
-
-        <button
-            class="menu-button minus"
-            id="minusButton">
-            −
-        </button>
-
+            aria-label="Open menu"
+        >+</button>
     </div>
 
-
-    <div
-        class="header-center logo"
-        id="logo">
-        SONGNANSAE
+    <div class="header-center">
+        <div
+            id="logo"
+            class="logo"
+            onclick="goHome()"
+        >
+            SONGNANSAE
+        </div>
     </div>
-
 
     <div class="header-right">
-
         <button
+            id="infoButton"
             class="info-button"
-            id="infoButton">
+        >
             Info
         </button>
-
     </div>
 
 </header>
 
 
-
 <!-- =========================
-     MENU
+     INFO PANEL
 ========================= -->
 
-<nav
-    class="menu"
-    id="menu">
+<div id="infoPanel" class="info-panel">
 
-    <div class="menu-links">
+    <div>Commercial Photographer</div>
+    <div>Seoul, Korea</div>
+    <br>
 
-        <button data-category="commercial">
+    <div>For commissions and inquiries</div>
+
+    <div>
+        <a href="mailto:songnansae@gmail.com">
+            songnansae@gmail.com
+        </a>
+    </div>
+
+    <div>
+        <a
+            href="https://www.instagram.com/songnansae/"
+            target="_blank"
+        >
+            Instagram
+        </a>
+    </div>
+
+</div>
+
+
+<!-- =========================
+     MENU PANEL
+========================= -->
+
+<div id="menuPanel" class="menu-panel">
+
+    <div class="menu-category">
+
+        <div
+            class="menu-category-title"
+            onclick="showCategory('commercial')"
+        >
             Commercial
-        </button>
+        </div>
 
-        <button data-category="magazine">
+        <div id="commercialMenu"></div>
+
+    </div>
+
+
+    <div class="menu-category">
+
+        <div
+            class="menu-category-title"
+            onclick="showCategory('magazine')"
+        >
             Magazine
-        </button>
+        </div>
 
-        <button data-category="personal">
+        <div id="magazineMenu"></div>
+
+    </div>
+
+
+    <div class="menu-category">
+
+        <div
+            class="menu-category-title"
+            onclick="showCategory('personal')"
+        >
             Personal
-        </button>
+        </div>
 
-        <button data-category="film">
+        <div id="personalMenu"></div>
+
+    </div>
+
+
+    <div class="menu-category">
+
+        <div
+            class="menu-category-title"
+            onclick="showCategory('film')"
+        >
             Film
-        </button>
+        </div>
+
+        <div id="filmMenu"></div>
 
     </div>
 
-</nav>
+</div>
 
 
+<main>
 
-<!-- =========================
-     HOME
-========================= -->
+    <!-- =========================
+         HOME
+    ========================= -->
 
-<main
-    class="home"
-    id="home">
+    <section
+        id="home"
+        class="home"
+    >
 
-    <div
-        class="projects"
-        id="projects">
+        <div class="home-grid">
 
-    </div>
+            <div
+                id="commercialCard"
+                class="home-card"
+                onclick="nextProject('commercial')"
+            >
+
+                <div id="commercialImageContainer"></div>
+
+                <div
+                    id="commercialCaption"
+                    class="home-caption"
+                ></div>
+
+            </div>
+
+
+            <div
+                id="magazineCard"
+                class="home-card"
+                onclick="nextProject('magazine')"
+            >
+
+                <div id="magazineImageContainer"></div>
+
+                <div
+                    id="magazineCaption"
+                    class="home-caption"
+                ></div>
+
+            </div>
+
+
+            <div
+                id="personalCard"
+                class="home-card"
+                onclick="nextProject('personal')"
+            >
+
+                <div id="personalImageContainer"></div>
+
+                <div
+                    id="personalCaption"
+                    class="home-caption"
+                ></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         DETAIL
+    ========================= -->
+
+    <section
+        id="detail"
+        class="detail"
+    >
+
+        <div class="detail-header">
+
+            <div
+                id="detailTitle"
+                class="detail-title"
+            ></div>
+
+            <div
+                id="detailCategory"
+                class="detail-category"
+            ></div>
+
+        </div>
+
+
+        <div
+            id="detailImages"
+            class="detail-images"
+        ></div>
+
+
+        <div
+            class="back-button"
+            onclick="goHome()"
+        >
+            ← Back
+        </div>
+
+    </section>
 
 </main>
 
 
-
-<!-- =========================
-     CATEGORY PAGE
-========================= -->
-
-<section
-    class="category-page"
-    id="categoryPage">
-
-    <div class="category-inner">
-
-        <button
-            class="back"
-            id="backButton">
-            ← Back
-        </button>
-
-        <div
-            class="category-title"
-            id="categoryTitle">
-        </div>
-
-        <div
-            class="category-list"
-            id="categoryList">
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================
-     INFO PAGE
-========================= -->
-
-<section
-    class="info-page"
-    id="infoPage">
-
-    <div class="info-inner">
-
-        <h1>SONGNANSAE</h1>
-
-        <p>
-            Commercial Photographer<br>
-            Seoul, Korea
-        </p>
-
-        <p>
-            For commissions and inquiries<br>
-            <a href="mailto:songnansae@gmail.com">
-                songnansae@gmail.com
-            </a>
-        </p>
-
-        <p>
-            <a
-                href="https://www.instagram.com/songnansae/"
-                target="_blank">
-                Instagram
-            </a>
-        </p>
-
-    </div>
-
-</section>
-
-
-
 <script>
 
-/* =====================================================
-   PROJECT DATA
-=====================================================
+/* =========================================================
+   GITHUB SETTINGS
+========================================================= */
 
-   여기만 수정하면 됨.
+const GITHUB_OWNER = "songnansae";
+const GITHUB_REPO = "SONGNANSAE";
+const GITHUB_BRANCH = "main";
 
-   각 작업은:
-
-   title  = 사이트에 표시되는 이름
-   year   = 연도
-   cover  = 메인 화면에서 보여줄 대표사진
-   images = 작업 안에서 사용할 사진들
-
-===================================================== */
+const IMAGE_ROOT = "images";
 
 
-/* =========================
-   COMMERCIAL
-========================= */
+/* =========================================================
+   CATEGORY
+========================================================= */
 
-const commercialProjects = [
-
-    {
-        title: "Commercial Project 01",
-        year: "2026",
-
-        cover: "images/commercial/Commercial Project 01/01.jpg",
-
-        images: [
-            "images/commercial/Commercial Project 01/01.jpg",
-            "images/commercial/Commercial Project 01/02.jpg",
-            "images/commercial/Commercial Project 01/03.jpg"
-        ]
-    },
-
-    {
-        title: "Commercial Project 02",
-        year: "2026",
-
-        cover: "images/commercial/Commercial Project 02/01.jpg",
-
-        images: [
-            "images/commercial/Commercial Project 02/01.jpg",
-            "images/commercial/Commercial Project 02/02.jpg",
-            "images/commercial/Commercial Project 02/03.jpg"
-        ]
-    }
-
+const categories = [
+    "commercial",
+    "magazine",
+    "personal",
+    "film"
 ];
 
 
+/* =========================================================
+   DATA
+========================================================= */
 
-/* =========================
-   MAGAZINE
-========================= */
+const projects = {
 
-const magazineProjects = [
-
-    {
-        title: "The Neighbor",
-        year: "2026",
-
-        cover: "images/magazine/The Neighbor, 2026/0080_THE NEIGHBOR_260611_R1.JPG",
-
-        images: [
-            "images/magazine/The Neighbor, 2026/0080_THE NEIGHBOR_260611_R1.JPG",
-            "images/magazine/The Neighbor, 2026/0403_THE NEIGHBOR_260611_R1.JPG",
-            "images/magazine/The Neighbor, 2026/0909_THE NEIGHBOR_260611_R1.JPG",
-            "images/magazine/The Neighbor, 2026/0948_THE NEIGHBOR_260611_R1.JPG",
-            "images/magazine/The Neighbor, 2026/1299_THE NEIGHBOR_260611_R1.jpg",
-            "images/magazine/The Neighbor, 2026/1559_THE NEIGHBOR_260611_R1(수정).JPG",
-            "images/magazine/The Neighbor, 2026/1771_THE NEIGHBOR_260611_R2(수정).JPG",
-            "images/magazine/The Neighbor, 2026/2306_THE NEIGHBOR_260611_R1.JPG"
-        ]
-    },
-
-
-    {
-        title: "Arena",
-        year: "2026",
-
-        cover: "images/magazine/Arena, 2026/01.jpg",
-
-        images: [
-            "images/magazine/Arena, 2026/01.jpg",
-            "images/magazine/Arena, 2026/02.jpg",
-            "images/magazine/Arena, 2026/03.jpg"
-        ]
-    }
-
-];
-
-
-
-/* =========================
-   PERSONAL
-========================= */
-
-const personalProjects = [
-
-    {
-        title: "Personal Project 01",
-        year: "2026",
-
-        cover: "images/personal/Personal Project 01/01.jpg",
-
-        images: [
-            "images/personal/Personal Project 01/01.jpg",
-            "images/personal/Personal Project 01/02.jpg",
-            "images/personal/Personal Project 01/03.jpg"
-        ]
-    },
-
-    {
-        title: "Personal Project 02",
-        year: "2026",
-
-        cover: "images/personal/Personal Project 02/01.jpg",
-
-        images: [
-            "images/personal/Personal Project 02/01.jpg",
-            "images/personal/Personal Project 02/02.jpg"
-        ]
-    }
-
-];
-
-
-
-/* =========================
-   FILM
-========================= */
-
-const filmProjects = [
-
-    {
-        title: "Film Project 01",
-        year: "2026",
-
-        cover: "images/film/Film Project 01/01.jpg",
-
-        images: [
-            "images/film/Film Project 01/01.jpg",
-            "images/film/Film Project 01/02.jpg"
-        ]
-    }
-
-];
-
-
-
-/* =====================================================
-   ALL CATEGORIES
-===================================================== */
-
-const categories = {
-
-    commercial: {
-        name: "Commercial",
-        projects: commercialProjects
-    },
-
-    magazine: {
-        name: "Magazine",
-        projects: magazineProjects
-    },
-
-    personal: {
-        name: "Personal",
-        projects: personalProjects
-    },
-
-    film: {
-        name: "Film",
-        projects: filmProjects
-    }
+    commercial: [],
+    magazine: [],
+    personal: [],
+    film: []
 
 };
 
 
-
-/* =====================================================
-   MAIN PAGE
-===================================================== */
-
-const projectsContainer =
-    document.getElementById("projects");
-
-
-/*
-   현재 메인 화면에서 각각 몇 번째 작업을
-   보여주고 있는지 기억함.
-*/
+/* 현재 메인에서 몇 번째 프로젝트를 보여주는지 */
 
 const currentIndex = {
 
@@ -733,575 +610,753 @@ const currentIndex = {
 };
 
 
+/* =========================================================
+   GITHUB API URL
+========================================================= */
 
-/* =====================================================
-   MAIN 3개 만들기
-===================================================== */
+function githubContentsURL(path) {
 
-function renderHome() {
+    const encodedPath = path
+        .split("/")
+        .map(part => encodeURIComponent(part))
+        .join("/");
 
-    projectsContainer.innerHTML = "";
+    return (
+        "https://api.github.com/repos/" +
+        GITHUB_OWNER +
+        "/" +
+        GITHUB_REPO +
+        "/contents/" +
+        encodedPath +
+        "?ref=" +
+        encodeURIComponent(GITHUB_BRANCH)
+    );
 
-    const mainCategories = [
-        "commercial",
-        "magazine",
-        "personal"
-    ];
-
-
-    mainCategories.forEach(categoryKey => {
-
-        const category =
-            categories[categoryKey];
-
-        const projects =
-            category.projects;
+}
 
 
-        const card =
-            document.createElement("div");
+/* =========================================================
+   NATURAL SORT
+========================================================= */
 
-        card.className =
-            "project-card";
+function naturalSort(a, b) {
+
+    return a.localeCompare(
+        b,
+        undefined,
+        {
+            numeric: true,
+            sensitivity: "base"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   GITHUB CONTENTS 가져오기
+========================================================= */
+
+async function getGitHubContents(path) {
+
+    try {
+
+        const response = await fetch(
+            githubContentsURL(path)
+        );
+
+        if (!response.ok) {
+
+            console.log(
+                "GitHub API error:",
+                path,
+                response.status
+            );
+
+            return [];
+
+        }
+
+        const data = await response.json();
+
+        if (!Array.isArray(data)) {
+
+            return [];
+
+        }
+
+        return data;
+
+    } catch (error) {
+
+        console.log(
+            "GitHub fetch error:",
+            error
+        );
+
+        return [];
+
+    }
+
+}
+
+
+/* =========================================================
+   IMAGE CHECK
+========================================================= */
+
+function isImage(file) {
+
+    if (!file || !file.name) {
+        return false;
+    }
+
+    const extension =
+        file.name
+            .split(".")
+            .pop()
+            .toLowerCase();
+
+    return [
+        "jpg",
+        "jpeg",
+        "png",
+        "webp",
+        "gif"
+    ].includes(extension);
+
+}
+
+
+/* =========================================================
+   CATEGORY 불러오기
+========================================================= */
+
+async function loadCategory(category) {
+
+    const categoryPath =
+        `${IMAGE_ROOT}/${category}`;
+
+    const contents =
+        await getGitHubContents(categoryPath);
+
+
+    /*
+       images/category 안에서
+       실제로 DIRECTORY인 것만 프로젝트로 사용
+    */
+
+    const folders = contents
+        .filter(item => item.type === "dir")
+        .sort((a, b) =>
+            naturalSort(a.name, b.name)
+        );
+
+
+    const loadedProjects = [];
+
+
+    for (const folder of folders) {
+
+        const folderPath =
+            `${categoryPath}/${folder.name}`;
+
+        const files =
+            await getGitHubContents(folderPath);
 
 
         /*
-           프로젝트가 없는 경우
+           실제 이미지 파일만 가져오기
         */
 
-        if (!projects || projects.length === 0) {
+        const imageFiles = files
+            .filter(file =>
+                file.type === "file" &&
+                isImage(file)
+            )
+            .sort((a, b) =>
+                naturalSort(a.name, b.name)
+            );
 
-            card.innerHTML = `
 
-                <div class="project-image-wrap"></div>
+        /*
+           사진이 하나도 없는 폴더는 표시하지 않음
+        */
 
-                <div class="project-info">
-                    ${category.name}
-                </div>
+        if (imageFiles.length === 0) {
+            continue;
+        }
 
-            `;
 
-            projectsContainer.appendChild(card);
+        loadedProjects.push({
 
+            name: folder.name,
+
+            category: category,
+
+            images: imageFiles.map(file => ({
+
+                name: file.name,
+
+                url: file.download_url
+
+            }))
+
+        });
+
+    }
+
+
+    projects[category] =
+        loadedProjects;
+
+}
+
+
+/* =========================================================
+   전체 프로젝트 불러오기
+========================================================= */
+
+async function loadAllProjects() {
+
+    document.body.classList.add("loading");
+
+
+    await Promise.all(
+        categories.map(category =>
+            loadCategory(category)
+        )
+    );
+
+
+    renderHome();
+
+    renderMenu();
+
+
+    document.body.classList.remove("loading");
+
+}
+
+
+/* =========================================================
+   HOME RENDER
+========================================================= */
+
+function renderHome() {
+
+    renderHomeCard(
+        "commercial",
+        "commercialImageContainer",
+        "commercialCaption"
+    );
+
+    renderHomeCard(
+        "magazine",
+        "magazineImageContainer",
+        "magazineCaption"
+    );
+
+    renderHomeCard(
+        "personal",
+        "personalImageContainer",
+        "personalCaption"
+    );
+
+}
+
+
+/* =========================================================
+   HOME CARD 하나 렌더링
+========================================================= */
+
+function renderHomeCard(
+    category,
+    imageContainerId,
+    captionId
+) {
+
+    const imageContainer =
+        document.getElementById(
+            imageContainerId
+        );
+
+    const caption =
+        document.getElementById(
+            captionId
+        );
+
+
+    imageContainer.innerHTML = "";
+    caption.innerHTML = "";
+
+
+    const categoryProjects =
+        projects[category];
+
+
+    /*
+       해당 카테고리에
+       프로젝트가 없으면 빈 화면
+    */
+
+    if (
+        !categoryProjects ||
+        categoryProjects.length === 0
+    ) {
+
+        imageContainer.innerHTML = `
+            <div class="empty-card"></div>
+        `;
+
+        caption.innerHTML = `
+            <span class="home-caption-category">
+                ${capitalize(category)}
+            </span>
+        `;
+
+        return;
+
+    }
+
+
+    /*
+       현재 프로젝트
+    */
+
+    let index =
+        currentIndex[category] %
+        categoryProjects.length;
+
+
+    const project =
+        categoryProjects[index];
+
+
+    /*
+       프로젝트의 첫 번째 사진을
+       메인 대표 이미지로 사용
+    */
+
+    const cover =
+        project.images[0];
+
+
+    if (!cover) {
+
+        imageContainer.innerHTML = `
+            <div class="empty-card"></div>
+        `;
+
+        return;
+
+    }
+
+
+    const img =
+        document.createElement("img");
+
+    img.className =
+        "home-image loading";
+
+    img.src =
+        cover.url;
+
+    img.alt =
+        project.name;
+
+    img.onload = () => {
+
+        img.classList.remove("loading");
+
+    };
+
+
+    img.onerror = () => {
+
+        img.style.display = "none";
+
+        imageContainer.innerHTML = `
+            <div class="empty-card"></div>
+        `;
+
+    };
+
+
+    imageContainer.appendChild(img);
+
+
+    /*
+       캡션
+    */
+
+    caption.innerHTML = `
+
+        <span class="home-caption-category">
+            ${capitalize(category)}
+        </span>
+
+        <span class="home-caption-project">
+            ${escapeHTML(project.name)}
+        </span>
+
+    `;
+
+}
+
+
+/* =========================================================
+   메인 카드 클릭 → 다음 프로젝트
+========================================================= */
+
+function nextProject(category) {
+
+    if (
+        !projects[category] ||
+        projects[category].length === 0
+    ) {
+
+        return;
+
+    }
+
+
+    currentIndex[category]++;
+
+
+    if (
+        currentIndex[category] >=
+        projects[category].length
+    ) {
+
+        currentIndex[category] = 0;
+
+    }
+
+
+    renderHomeCard(
+        category,
+        `${category}ImageContainer`,
+        `${category}Caption`
+    );
+
+}
+
+
+/* =========================================================
+   MENU RENDER
+========================================================= */
+
+function renderMenu() {
+
+    categories.forEach(category => {
+
+        const container =
+            document.getElementById(
+                `${category}Menu`
+            );
+
+
+        if (!container) {
             return;
         }
 
 
-        /*
-           현재 순서의 프로젝트
-        */
-
-        const index =
-            currentIndex[categoryKey] %
-            projects.length;
-
-        const project =
-            projects[index];
+        container.innerHTML = "";
 
 
-        card.innerHTML = `
+        projects[category].forEach(
+            (project, index) => {
 
-            <div class="project-image-wrap">
-
-                <img
-                    class="project-image"
-                    src="${project.cover}"
-                    alt="${project.title}"
-                >
-
-            </div>
-
-            <div class="project-info">
-                ${category.name}, ${project.title}, ${project.year}
-            </div>
-
-        `;
+                const button =
+                    document.createElement(
+                        "div"
+                    );
 
 
-        /*
-           메인 사진 클릭
-           ↓
-           다음 프로젝트
-        */
+                button.className =
+                    "menu-project";
 
-        card.addEventListener(
-            "click",
-            function () {
 
-                currentIndex[categoryKey]++;
+                button.textContent =
+                    project.name;
 
-                if (
-                    currentIndex[categoryKey]
-                    >= projects.length
-                ) {
 
-                    currentIndex[categoryKey] = 0;
+                button.onclick = () => {
 
-                }
+                    openProject(
+                        category,
+                        index
+                    );
 
-                renderHome();
+                };
+
+
+                container.appendChild(
+                    button
+                );
 
             }
         );
-
-
-        projectsContainer.appendChild(card);
 
     });
 
 }
 
 
+/* =========================================================
+   프로젝트 상세 페이지
+========================================================= */
 
-/* =====================================================
-   MENU
-===================================================== */
+function openProject(
+    category,
+    index
+) {
 
-const menu =
-    document.getElementById("menu");
-
-const plusButton =
-    document.getElementById("plusButton");
-
-const minusButton =
-    document.getElementById("minusButton");
+    const project =
+        projects[category][index];
 
 
-plusButton.addEventListener(
-    "click",
-    function () {
-
-        menu.classList.add("open");
-
-    }
-);
-
-
-minusButton.addEventListener(
-    "click",
-    function () {
-
-        menu.classList.remove("open");
-
-    }
-);
-
-
-
-/* =====================================================
-   CATEGORY PAGE
-===================================================== */
-
-const home =
-    document.getElementById("home");
-
-const categoryPage =
-    document.getElementById("categoryPage");
-
-const categoryTitle =
-    document.getElementById("categoryTitle");
-
-const categoryList =
-    document.getElementById("categoryList");
-
-const backButton =
-    document.getElementById("backButton");
-
-
-
-function openCategory(categoryKey) {
-
-    const category =
-        categories[categoryKey];
-
-
-    if (!category) {
+    if (!project) {
         return;
     }
 
 
-    home.style.display = "none";
+    document.getElementById(
+        "home"
+    ).style.display = "none";
 
-    menu.classList.remove("open");
 
-    categoryPage.classList.add("open");
+    document.getElementById(
+        "detail"
+    ).classList.add("active");
 
 
-    categoryTitle.textContent =
-        category.name;
+    document.getElementById(
+        "detailTitle"
+    ).textContent =
+        project.name;
 
 
-    categoryList.innerHTML = "";
+    document.getElementById(
+        "detailCategory"
+    ).textContent =
+        capitalize(category);
 
 
-    category.projects.forEach(
-        function (project) {
-
-            const button =
-                document.createElement("button");
-
-            button.className =
-                "category-item";
-
-
-            button.textContent =
-                `${project.title}, ${project.year}`;
-
-
-            button.addEventListener(
-                "click",
-                function () {
-
-                    openProject(
-                        category,
-                        project
-                    );
-
-                }
-            );
-
-
-            categoryList.appendChild(button);
-
-        }
-    );
-
-}
-
-
-
-/* =====================================================
-   PROJECT PAGE
-===================================================== */
-
-function openProject(category, project) {
-
-    categoryPage.innerHTML = "";
-
-
-    const wrapper =
-        document.createElement("div");
-
-    wrapper.style.padding =
-        "35px 30px 80px";
-
-
-    const back =
-        document.createElement("button");
-
-    back.className =
-        "back";
-
-    back.textContent =
-        "← Back";
-
-
-    back.addEventListener(
-        "click",
-        function () {
-
-            categoryPage.innerHTML = "";
-
-            categoryPage.classList.remove(
-                "open"
-            );
-
-            categoryPage.appendChild(
-                createCategoryContent(
-                    category
-                )
-            );
-
-        }
-    );
-
-
-    wrapper.appendChild(back);
-
-
-    const title =
-        document.createElement("div");
-
-    title.style.fontSize =
-        "15px";
-
-    title.style.marginBottom =
-        "35px";
-
-    title.textContent =
-        `${category.name}, ${project.title}, ${project.year}`;
-
-
-    wrapper.appendChild(title);
-
-
-    /*
-       작업 사진들
-    */
-
-    project.images.forEach(
-        function (image) {
-
-            const img =
-                document.createElement("img");
-
-            img.src =
-                image;
-
-            img.alt =
-                project.title;
-
-            img.style.width =
-                "100%";
-
-            img.style.height =
-                "auto";
-
-            img.style.display =
-                "block";
-
-            img.style.marginBottom =
-                "10px";
-
-
-            wrapper.appendChild(img);
-
-        }
-    );
-
-
-    categoryPage.appendChild(wrapper);
-
-}
-
-
-
-/* =====================================================
-   CATEGORY CONTENT
-===================================================== */
-
-function createCategoryContent(category) {
-
-    const wrapper =
-        document.createElement("div");
-
-    wrapper.className =
-        "category-inner";
-
-
-    const back =
-        document.createElement("button");
-
-    back.className =
-        "back";
-
-    back.textContent =
-        "← Back";
-
-
-    back.addEventListener(
-        "click",
-        function () {
-
-            categoryPage.classList.remove(
-                "open"
-            );
-
-            home.style.display =
-                "block";
-
-            renderHome();
-
-        }
-    );
-
-
-    wrapper.appendChild(back);
-
-
-    const title =
-        document.createElement("div");
-
-    title.className =
-        "category-title";
-
-    title.textContent =
-        category.name;
-
-
-    wrapper.appendChild(title);
-
-
-    const list =
-        document.createElement("div");
-
-    list.className =
-        "category-list";
-
-
-    category.projects.forEach(
-        function (project) {
-
-            const button =
-                document.createElement("button");
-
-            button.className =
-                "category-item";
-
-            button.textContent =
-                `${project.title}, ${project.year}`;
-
-
-            button.addEventListener(
-                "click",
-                function () {
-
-                    openProject(
-                        category,
-                        project
-                    );
-
-                }
-            );
-
-
-            list.appendChild(button);
-
-        }
-    );
-
-
-    wrapper.appendChild(list);
-
-
-    return wrapper;
-
-}
-
-
-
-/* =====================================================
-   MENU CATEGORY BUTTONS
-===================================================== */
-
-document
-    .querySelectorAll(".menu-links button")
-    .forEach(
-        function (button) {
-
-            button.addEventListener(
-                "click",
-                function () {
-
-                    const category =
-                        button.dataset.category;
-
-                    openCategory(category);
-
-                }
-            );
-
-        }
-    );
-
-
-
-/* =====================================================
-   BACK BUTTON
-===================================================== */
-
-backButton.addEventListener(
-    "click",
-    function () {
-
-        categoryPage.classList.remove(
-            "open"
+    const detailImages =
+        document.getElementById(
+            "detailImages"
         );
 
-        home.style.display =
-            "block";
 
-        renderHome();
+    detailImages.innerHTML = "";
+
+
+    project.images.forEach(image => {
+
+        const img =
+            document.createElement("img");
+
+
+        img.src =
+            image.url;
+
+
+        img.alt =
+            project.name;
+
+
+        img.loading =
+            "lazy";
+
+
+        detailImages.appendChild(
+            img
+        );
+
+    });
+
+
+    closeMenu();
+
+}
+
+
+/* =========================================================
+   CATEGORY 메뉴
+========================================================= */
+
+function showCategory(category) {
+
+    /*
+       프로젝트가 하나라도 있으면
+       첫 번째 프로젝트 상세페이지로 이동
+    */
+
+    if (
+        projects[category] &&
+        projects[category].length > 0
+    ) {
+
+        openProject(
+            category,
+            0
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   HOME
+========================================================= */
+
+function goHome() {
+
+    document.getElementById(
+        "detail"
+    ).classList.remove("active");
+
+
+    document.getElementById(
+        "home"
+    ).style.display = "";
+
+
+    closeMenu();
+
+}
+
+
+/* =========================================================
+   MENU OPEN / CLOSE
+========================================================= */
+
+const menuButton =
+    document.getElementById(
+        "menuButton"
+    );
+
+
+const menuPanel =
+    document.getElementById(
+        "menuPanel"
+    );
+
+
+menuButton.addEventListener(
+    "click",
+    () => {
+
+        const isOpen =
+            menuPanel.classList.contains(
+                "active"
+            );
+
+
+        if (isOpen) {
+
+            closeMenu();
+
+        } else {
+
+            openMenu();
+
+        }
 
     }
 );
 
 
+function openMenu() {
 
-/* =====================================================
+    menuPanel.classList.add(
+        "active"
+    );
+
+    menuButton.textContent =
+        "−";
+
+}
+
+
+function closeMenu() {
+
+    menuPanel.classList.remove(
+        "active"
+    );
+
+    menuButton.textContent =
+        "+";
+
+}
+
+
+/* =========================================================
    INFO
-===================================================== */
+========================================================= */
 
 const infoButton =
-    document.getElementById("infoButton");
+    document.getElementById(
+        "infoButton"
+    );
 
-const infoPage =
-    document.getElementById("infoPage");
+
+const infoPanel =
+    document.getElementById(
+        "infoPanel"
+    );
 
 
 infoButton.addEventListener(
     "click",
-    function () {
+    () => {
 
-        home.style.display =
-            "none";
-
-        categoryPage.classList.remove(
-            "open"
+        infoPanel.classList.toggle(
+            "active"
         );
 
-        menu.classList.remove(
-            "open"
-        );
-
-        infoPage.classList.add(
-            "open"
-        );
+        closeMenu();
 
     }
 );
 
 
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
 
-/* =====================================================
-   LOGO → HOME
-===================================================== */
+function escapeHTML(value) {
 
-const logo =
-    document.getElementById("logo");
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 
-
-logo.addEventListener(
-    "click",
-    function () {
-
-        infoPage.classList.remove(
-            "open"
-        );
-
-        categoryPage.classList.remove(
-            "open"
-        );
-
-        home.style.display =
-            "block";
-
-        menu.classList.remove(
-            "open"
-        );
-
-        renderHome();
-
-    }
-);
+}
 
 
+/* =========================================================
+   CAPITALIZE
+========================================================= */
 
-/* =====================================================
-   START
-===================================================== */
+function capitalize(value) {
 
-renderHome();
+    return value.charAt(0).toUpperCase() +
+        value.slice(1);
+
+}
+
+
+/* =========================================================
+   시작
+========================================================= */
+
+loadAllProjects();
 
 </script>
 
