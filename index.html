@@ -84,6 +84,7 @@
         cursor: pointer;
     }
 
+
     /* =========================
        INFO
     ========================= */
@@ -106,6 +107,7 @@
     .info-panel a {
         text-decoration: underline;
     }
+
 
     /* =========================
        MENU
@@ -145,6 +147,7 @@
         text-decoration: underline;
     }
 
+
     /* =========================
        HOME
     ========================= */
@@ -162,8 +165,10 @@
     .home-grid {
         flex: 1;
         min-height: 0;
+
         display: grid;
         grid-template-columns: repeat(3, 1fr);
+
         gap: 10px;
         padding: 0 14px;
     }
@@ -171,15 +176,27 @@
     .home-card {
         min-width: 0;
         cursor: pointer;
+
         display: flex;
         flex-direction: column;
     }
 
+
+    /* =========================
+       MAIN IMAGE — 4:5
+    ========================= */
+
     .home-image {
         width: 100%;
-        height: calc(100vh - 110px);
+
+        aspect-ratio: 4 / 5;
+
+        height: auto;
+
         object-fit: cover;
+
         display: block;
+
         background: #f2f2f2;
     }
 
@@ -187,9 +204,16 @@
         visibility: hidden;
     }
 
+
+    /* =========================
+       CAPTION
+    ========================= */
+
     .home-caption {
         padding-top: 7px;
+
         line-height: 1.25;
+
         min-height: 34px;
     }
 
@@ -201,12 +225,35 @@
         display: block;
     }
 
+
+    /* =========================
+       EMPTY CARD
+    ========================= */
+
+    .empty-card {
+        width: 100%;
+
+        aspect-ratio: 4 / 5;
+
+        height: auto;
+
+        background: #f2f2f2;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+    }
+
+
     /* =========================
        DETAIL
     ========================= */
 
     .detail {
         display: none;
+
         padding: 0 14px 40px;
     }
 
@@ -228,7 +275,9 @@
 
     .detail-images {
         display: grid;
+
         grid-template-columns: repeat(2, 1fr);
+
         gap: 10px;
     }
 
@@ -247,26 +296,6 @@
         text-decoration: underline;
     }
 
-    /* =========================
-       EMPTY / LOADING
-    ========================= */
-
-    .empty-card {
-        width: 100%;
-        height: calc(100vh - 110px);
-        background: #f2f2f2;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .loading-text {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        display: none;
-    }
 
     /* =========================
        MOBILE
@@ -289,13 +318,16 @@
 
         .home-grid {
             grid-template-columns: 1fr;
+
             gap: 25px;
+
             padding: 0 10px 30px;
         }
 
         .home-image,
         .empty-card {
-            height: 65vh;
+            aspect-ratio: 4 / 5;
+            height: auto;
         }
 
         .home-caption {
@@ -318,9 +350,11 @@
 
         .detail-images {
             grid-template-columns: 1fr;
+
             gap: 8px;
         }
     }
+
 </style>
 </head>
 
@@ -330,14 +364,20 @@
 <header>
 
     <div class="header-left">
+
         <button
             id="menuButton"
             class="menu-button"
             aria-label="Open menu"
-        >+</button>
+        >
+            +
+        </button>
+
     </div>
 
+
     <div class="header-center">
+
         <div
             id="logo"
             class="logo"
@@ -345,31 +385,47 @@
         >
             SONGNANSAE
         </div>
+
     </div>
 
+
     <div class="header-right">
+
         <button
             id="infoButton"
             class="info-button"
         >
             Info
         </button>
+
     </div>
 
 </header>
 
 
+
 <!-- =========================
-     INFO PANEL
+     INFO
 ========================= -->
 
-<div id="infoPanel" class="info-panel">
+<div
+    id="infoPanel"
+    class="info-panel"
+>
 
-    <div>Commercial Photographer</div>
-    <div>Seoul, Korea</div>
+    <div>
+        Commercial Photographer
+    </div>
+
+    <div>
+        Seoul, Korea
+    </div>
+
     <br>
 
-    <div>For commissions and inquiries</div>
+    <div>
+        For commissions and inquiries
+    </div>
 
     <div>
         <a href="mailto:songnansae@gmail.com">
@@ -389,11 +445,15 @@
 </div>
 
 
+
 <!-- =========================
-     MENU PANEL
+     MENU
 ========================= -->
 
-<div id="menuPanel" class="menu-panel">
+<div
+    id="menuPanel"
+    class="menu-panel"
+>
 
     <div class="menu-category">
 
@@ -453,7 +513,9 @@
 </div>
 
 
+
 <main>
+
 
     <!-- =========================
          HOME
@@ -466,13 +528,18 @@
 
         <div class="home-grid">
 
+
+            <!-- COMMERCIAL -->
+
             <div
                 id="commercialCard"
                 class="home-card"
                 onclick="nextProject('commercial')"
             >
 
-                <div id="commercialImageContainer"></div>
+                <div
+                    id="commercialImageContainer"
+                ></div>
 
                 <div
                     id="commercialCaption"
@@ -482,13 +549,18 @@
             </div>
 
 
+
+            <!-- MAGAZINE -->
+
             <div
                 id="magazineCard"
                 class="home-card"
                 onclick="nextProject('magazine')"
             >
 
-                <div id="magazineImageContainer"></div>
+                <div
+                    id="magazineImageContainer"
+                ></div>
 
                 <div
                     id="magazineCaption"
@@ -498,13 +570,18 @@
             </div>
 
 
+
+            <!-- PERSONAL -->
+
             <div
                 id="personalCard"
                 class="home-card"
                 onclick="nextProject('personal')"
             >
 
-                <div id="personalImageContainer"></div>
+                <div
+                    id="personalImageContainer"
+                ></div>
 
                 <div
                     id="personalCaption"
@@ -516,6 +593,7 @@
         </div>
 
     </section>
+
 
 
     <!-- =========================
@@ -560,21 +638,24 @@
 </main>
 
 
+
 <script>
 
 /* =========================================================
-   GITHUB SETTINGS
+   GITHUB
 ========================================================= */
 
 const GITHUB_OWNER = "songnansae";
+
 const GITHUB_REPO = "SONGNANSAE";
+
 const GITHUB_BRANCH = "main";
 
 const IMAGE_ROOT = "images";
 
 
 /* =========================================================
-   CATEGORY
+   CATEGORIES
 ========================================================= */
 
 const categories = [
@@ -586,40 +667,50 @@ const categories = [
 
 
 /* =========================================================
-   DATA
+   PROJECT DATA
 ========================================================= */
 
 const projects = {
 
     commercial: [],
+
     magazine: [],
+
     personal: [],
+
     film: []
 
 };
 
 
-/* 현재 메인에서 몇 번째 프로젝트를 보여주는지 */
+/* =========================================================
+   CURRENT INDEX
+========================================================= */
 
 const currentIndex = {
 
     commercial: 0,
+
     magazine: 0,
+
     personal: 0
 
 };
 
 
 /* =========================================================
-   GITHUB API URL
+   GITHUB URL
 ========================================================= */
 
 function githubContentsURL(path) {
 
     const encodedPath = path
         .split("/")
-        .map(part => encodeURIComponent(part))
+        .map(
+            part => encodeURIComponent(part)
+        )
         .join("/");
+
 
     return (
         "https://api.github.com/repos/" +
@@ -654,16 +745,18 @@ function naturalSort(a, b) {
 
 
 /* =========================================================
-   GITHUB CONTENTS 가져오기
+   GITHUB CONTENTS
 ========================================================= */
 
 async function getGitHubContents(path) {
 
     try {
 
-        const response = await fetch(
-            githubContentsURL(path)
-        );
+        const response =
+            await fetch(
+                githubContentsURL(path)
+            );
+
 
         if (!response.ok) {
 
@@ -677,13 +770,17 @@ async function getGitHubContents(path) {
 
         }
 
-        const data = await response.json();
+
+        const data =
+            await response.json();
+
 
         if (!Array.isArray(data)) {
 
             return [];
 
         }
+
 
         return data;
 
@@ -702,20 +799,27 @@ async function getGitHubContents(path) {
 
 
 /* =========================================================
-   IMAGE CHECK
+   IMAGE FILE CHECK
 ========================================================= */
 
 function isImage(file) {
 
-    if (!file || !file.name) {
+    if (
+        !file ||
+        !file.name
+    ) {
+
         return false;
+
     }
+
 
     const extension =
         file.name
             .split(".")
             .pop()
             .toLowerCase();
+
 
     return [
         "jpg",
@@ -729,7 +833,7 @@ function isImage(file) {
 
 
 /* =========================================================
-   CATEGORY 불러오기
+   LOAD CATEGORY
 ========================================================= */
 
 async function loadCategory(category) {
@@ -737,54 +841,80 @@ async function loadCategory(category) {
     const categoryPath =
         `${IMAGE_ROOT}/${category}`;
 
+
     const contents =
-        await getGitHubContents(categoryPath);
+        await getGitHubContents(
+            categoryPath
+        );
 
 
     /*
-       images/category 안에서
-       실제로 DIRECTORY인 것만 프로젝트로 사용
+       category 안의
+       실제 폴더만 프로젝트로 인식
     */
 
-    const folders = contents
-        .filter(item => item.type === "dir")
-        .sort((a, b) =>
-            naturalSort(a.name, b.name)
-        );
+    const folders =
+        contents
+            .filter(
+                item =>
+                    item.type === "dir"
+            )
+            .sort(
+                (a, b) =>
+                    naturalSort(
+                        a.name,
+                        b.name
+                    )
+            );
 
 
     const loadedProjects = [];
 
 
-    for (const folder of folders) {
+    for (
+        const folder of folders
+    ) {
 
         const folderPath =
             `${categoryPath}/${folder.name}`;
 
+
         const files =
-            await getGitHubContents(folderPath);
-
-
-        /*
-           실제 이미지 파일만 가져오기
-        */
-
-        const imageFiles = files
-            .filter(file =>
-                file.type === "file" &&
-                isImage(file)
-            )
-            .sort((a, b) =>
-                naturalSort(a.name, b.name)
+            await getGitHubContents(
+                folderPath
             );
 
 
         /*
-           사진이 하나도 없는 폴더는 표시하지 않음
+           실제 이미지 파일만 사용
         */
 
-        if (imageFiles.length === 0) {
+        const imageFiles =
+            files
+                .filter(
+                    file =>
+                        file.type === "file" &&
+                        isImage(file)
+                )
+                .sort(
+                    (a, b) =>
+                        naturalSort(
+                            a.name,
+                            b.name
+                        )
+                );
+
+
+        /*
+           사진이 없는 폴더는 제외
+        */
+
+        if (
+            imageFiles.length === 0
+        ) {
+
             continue;
+
         }
 
 
@@ -794,13 +924,16 @@ async function loadCategory(category) {
 
             category: category,
 
-            images: imageFiles.map(file => ({
+            images:
+                imageFiles.map(
+                    file => ({
 
-                name: file.name,
+                        name: file.name,
 
-                url: file.download_url
+                        url: file.download_url
 
-            }))
+                    })
+                )
 
         });
 
@@ -814,18 +947,18 @@ async function loadCategory(category) {
 
 
 /* =========================================================
-   전체 프로젝트 불러오기
+   LOAD EVERYTHING
 ========================================================= */
 
 async function loadAllProjects() {
 
-    document.body.classList.add("loading");
-
-
     await Promise.all(
-        categories.map(category =>
-            loadCategory(category)
+
+        categories.map(
+            category =>
+                loadCategory(category)
         )
+
     );
 
 
@@ -833,14 +966,11 @@ async function loadAllProjects() {
 
     renderMenu();
 
-
-    document.body.classList.remove("loading");
-
 }
 
 
 /* =========================================================
-   HOME RENDER
+   HOME
 ========================================================= */
 
 function renderHome() {
@@ -851,11 +981,13 @@ function renderHome() {
         "commercialCaption"
     );
 
+
     renderHomeCard(
         "magazine",
         "magazineImageContainer",
         "magazineCaption"
     );
+
 
     renderHomeCard(
         "personal",
@@ -867,7 +999,7 @@ function renderHome() {
 
 
 /* =========================================================
-   HOME CARD 하나 렌더링
+   HOME CARD
 ========================================================= */
 
 function renderHomeCard(
@@ -881,14 +1013,18 @@ function renderHomeCard(
             imageContainerId
         );
 
+
     const caption =
         document.getElementById(
             captionId
         );
 
 
-    imageContainer.innerHTML = "";
-    caption.innerHTML = "";
+    imageContainer.innerHTML =
+        "";
+
+    caption.innerHTML =
+        "";
 
 
     const categoryProjects =
@@ -896,8 +1032,7 @@ function renderHomeCard(
 
 
     /*
-       해당 카테고리에
-       프로젝트가 없으면 빈 화면
+       프로젝트가 없을 경우
     */
 
     if (
@@ -909,11 +1044,13 @@ function renderHomeCard(
             <div class="empty-card"></div>
         `;
 
+
         caption.innerHTML = `
             <span class="home-caption-category">
                 ${capitalize(category)}
             </span>
         `;
+
 
         return;
 
@@ -924,7 +1061,7 @@ function renderHomeCard(
        현재 프로젝트
     */
 
-    let index =
+    const index =
         currentIndex[category] %
         categoryProjects.length;
 
@@ -934,7 +1071,7 @@ function renderHomeCard(
 
 
     /*
-       프로젝트의 첫 번째 사진을
+       첫 번째 사진을
        메인 대표 이미지로 사용
     */
 
@@ -954,27 +1091,37 @@ function renderHomeCard(
 
 
     const img =
-        document.createElement("img");
+        document.createElement(
+            "img"
+        );
+
 
     img.className =
         "home-image loading";
 
+
     img.src =
         cover.url;
+
 
     img.alt =
         project.name;
 
+
     img.onload = () => {
 
-        img.classList.remove("loading");
+        img.classList.remove(
+            "loading"
+        );
 
     };
 
 
     img.onerror = () => {
 
-        img.style.display = "none";
+        img.style.display =
+            "none";
+
 
         imageContainer.innerHTML = `
             <div class="empty-card"></div>
@@ -983,7 +1130,9 @@ function renderHomeCard(
     };
 
 
-    imageContainer.appendChild(img);
+    imageContainer.appendChild(
+        img
+    );
 
 
     /*
@@ -1006,7 +1155,7 @@ function renderHomeCard(
 
 
 /* =========================================================
-   메인 카드 클릭 → 다음 프로젝트
+   NEXT PROJECT
 ========================================================= */
 
 function nextProject(category) {
@@ -1044,68 +1193,72 @@ function nextProject(category) {
 
 
 /* =========================================================
-   MENU RENDER
+   MENU
 ========================================================= */
 
 function renderMenu() {
 
-    categories.forEach(category => {
+    categories.forEach(
+        category => {
 
-        const container =
-            document.getElementById(
-                `${category}Menu`
-            );
-
-
-        if (!container) {
-            return;
-        }
-
-
-        container.innerHTML = "";
-
-
-        projects[category].forEach(
-            (project, index) => {
-
-                const button =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                button.className =
-                    "menu-project";
-
-
-                button.textContent =
-                    project.name;
-
-
-                button.onclick = () => {
-
-                    openProject(
-                        category,
-                        index
-                    );
-
-                };
-
-
-                container.appendChild(
-                    button
+            const container =
+                document.getElementById(
+                    `${category}Menu`
                 );
 
-            }
-        );
 
-    });
+            if (!container) {
+                return;
+            }
+
+
+            container.innerHTML =
+                "";
+
+
+            projects[category]
+                .forEach(
+                    (project, index) => {
+
+                        const button =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        button.className =
+                            "menu-project";
+
+
+                        button.textContent =
+                            project.name;
+
+
+                        button.onclick = () => {
+
+                            openProject(
+                                category,
+                                index
+                            );
+
+                        };
+
+
+                        container.appendChild(
+                            button
+                        );
+
+                    }
+                );
+
+        }
+    );
 
 }
 
 
 /* =========================================================
-   프로젝트 상세 페이지
+   OPEN PROJECT
 ========================================================= */
 
 function openProject(
@@ -1129,7 +1282,9 @@ function openProject(
 
     document.getElementById(
         "detail"
-    ).classList.add("active");
+    ).classList.add(
+        "active"
+    );
 
 
     document.getElementById(
@@ -1150,32 +1305,37 @@ function openProject(
         );
 
 
-    detailImages.innerHTML = "";
+    detailImages.innerHTML =
+        "";
 
 
-    project.images.forEach(image => {
+    project.images.forEach(
+        image => {
 
-        const img =
-            document.createElement("img");
-
-
-        img.src =
-            image.url;
-
-
-        img.alt =
-            project.name;
+            const img =
+                document.createElement(
+                    "img"
+                );
 
 
-        img.loading =
-            "lazy";
+            img.src =
+                image.url;
 
 
-        detailImages.appendChild(
-            img
-        );
+            img.alt =
+                project.name;
 
-    });
+
+            img.loading =
+                "lazy";
+
+
+            detailImages.appendChild(
+                img
+            );
+
+        }
+    );
 
 
     closeMenu();
@@ -1184,15 +1344,10 @@ function openProject(
 
 
 /* =========================================================
-   CATEGORY 메뉴
+   CATEGORY
 ========================================================= */
 
 function showCategory(category) {
-
-    /*
-       프로젝트가 하나라도 있으면
-       첫 번째 프로젝트 상세페이지로 이동
-    */
 
     if (
         projects[category] &&
@@ -1217,12 +1372,15 @@ function goHome() {
 
     document.getElementById(
         "detail"
-    ).classList.remove("active");
+    ).classList.remove(
+        "active"
+    );
 
 
     document.getElementById(
         "home"
-    ).style.display = "";
+    ).style.display =
+        "";
 
 
     closeMenu();
@@ -1276,6 +1434,7 @@ function openMenu() {
         "active"
     );
 
+
     menuButton.textContent =
         "−";
 
@@ -1287,6 +1446,7 @@ function closeMenu() {
     menuPanel.classList.remove(
         "active"
     );
+
 
     menuButton.textContent =
         "+";
@@ -1318,6 +1478,7 @@ infoButton.addEventListener(
             "active"
         );
 
+
         closeMenu();
 
     }
@@ -1331,11 +1492,26 @@ infoButton.addEventListener(
 function escapeHTML(value) {
 
     return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
@@ -1346,14 +1522,16 @@ function escapeHTML(value) {
 
 function capitalize(value) {
 
-    return value.charAt(0).toUpperCase() +
-        value.slice(1);
+    return (
+        value.charAt(0).toUpperCase() +
+        value.slice(1)
+    );
 
 }
 
 
 /* =========================================================
-   시작
+   START
 ========================================================= */
 
 loadAllProjects();
