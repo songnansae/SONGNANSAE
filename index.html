@@ -25,6 +25,7 @@ body {
   overflow-x: hidden;
 }
 
+
 /* =========================
    HEADER
 ========================= */
@@ -33,8 +34,10 @@ header {
   position: fixed;
   top: 0;
   left: 0;
+
   width: 100%;
   height: 52px;
+
   z-index: 1000;
 
   display: grid;
@@ -45,6 +48,7 @@ header {
 
   background: rgba(255, 255, 255, 0.96);
 }
+
 
 .menu-button {
   justify-self: start;
@@ -62,6 +66,7 @@ header {
   cursor: pointer;
 }
 
+
 .logo {
   justify-self: center;
 
@@ -71,6 +76,7 @@ header {
   font-size: 13px;
   line-height: 1;
 }
+
 
 .info-button {
   justify-self: end;
@@ -88,6 +94,7 @@ header {
   cursor: pointer;
 }
 
+
 /* =========================
    INFO
 ========================= */
@@ -96,6 +103,7 @@ header {
   display: none;
 
   position: fixed;
+
   top: 52px;
   right: 14px;
 
@@ -109,18 +117,22 @@ header {
   line-height: 1.4;
 }
 
+
 .info-panel.show {
   display: block;
 }
+
 
 .info-panel a {
   color: #111;
   text-decoration: none;
 }
 
+
 .info-panel a:hover {
   text-decoration: underline;
 }
+
 
 /* =========================
    MENU
@@ -130,6 +142,7 @@ header {
   display: none;
 
   position: fixed;
+
   top: 52px;
   left: 14px;
 
@@ -140,9 +153,11 @@ header {
   background: #fff;
 }
 
+
 .menu-panel.show {
   display: block;
 }
+
 
 .menu-tabs {
   display: flex;
@@ -150,6 +165,7 @@ header {
 
   margin-bottom: 20px;
 }
+
 
 .menu-tab {
   border: 0;
@@ -163,15 +179,19 @@ header {
   cursor: pointer;
 }
 
+
 .menu-tab.active {
   text-decoration: underline;
 }
 
+
 .project-list {
   display: flex;
   flex-direction: column;
+
   gap: 5px;
 }
+
 
 .project-item {
   border: 0;
@@ -187,20 +207,28 @@ header {
   cursor: pointer;
 }
 
+
 .project-item:hover {
   text-decoration: underline;
 }
 
+
 /* =========================
-   HOME
+   MAIN
 ========================= */
 
 main {
   padding-top: 52px;
 }
 
+
+/* =========================
+   HOME
+========================= */
+
 .home {
   width: 100%;
+
   min-height: calc(100vh - 52px);
 
   display: flex;
@@ -210,8 +238,10 @@ main {
   padding: 0;
 }
 
+
 .home-image-wrap {
   width: 100%;
+
   height: calc(100vh - 52px);
 
   display: flex;
@@ -222,6 +252,7 @@ main {
 
   padding: 0;
 }
+
 
 .home-image {
   display: block;
@@ -236,6 +267,7 @@ main {
   -webkit-user-drag: none;
 }
 
+
 /* =========================
    DETAIL
 ========================= */
@@ -246,55 +278,85 @@ main {
   padding: 78px 14px 40px;
 }
 
+
 .detail.show {
   display: block;
 }
 
+
 .detail-header {
   display: flex;
+
   justify-content: space-between;
   align-items: baseline;
 
   margin-bottom: 24px;
 }
 
+
 .detail-title {
   font-size: 13px;
 }
+
 
 .detail-category {
   font-size: 13px;
 }
 
-/*
-  프로젝트 상세 이미지
 
-  한 줄에 한 장.
-  원본 비율 유지.
-  절대 크롭하지 않음.
+/*
+  PROJECT IMAGES
+
+  사진 한 장씩 표시
+  화면 안에 전체가 보이도록 함
 */
 
 .detail-grid {
   display: flex;
+
   flex-direction: column;
 
-  width: 100%;
+  align-items: center;
 
-  gap: 10px;
+  gap: 30px;
+
+  width: 100%;
 }
+
 
 .detail-image {
   display: block;
 
-  width: 100%;
+  /*
+    가로 최대 크기
+  */
+
+  max-width: 100%;
+
+  /*
+    화면 높이를 넘지 않도록 제한
+  */
+
+  max-height: calc(100vh - 150px);
+
+  /*
+    원본 비율 유지
+  */
+
+  width: auto;
   height: auto;
 
   object-fit: contain;
   object-position: center;
 
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
 }
+
+
+/* =========================
+   BACK BUTTON
+========================= */
 
 .back-button {
   margin-top: 40px;
@@ -310,9 +372,11 @@ main {
   cursor: pointer;
 }
 
+
 .back-button:hover {
   text-decoration: underline;
 }
+
 
 /* =========================
    MOBILE
@@ -322,57 +386,74 @@ main {
 
   header {
     height: 48px;
+
     padding: 0 12px;
   }
+
 
   main {
     padding-top: 48px;
   }
+
 
   .info-panel {
     top: 48px;
     right: 12px;
   }
 
+
   .menu-panel {
     top: 48px;
     left: 12px;
+
     width: calc(100% - 24px);
   }
+
 
   .home {
     min-height: calc(100vh - 48px);
   }
 
+
   .home-image-wrap {
     height: calc(100vh - 48px);
   }
+
 
   .detail {
     padding: 68px 10px 30px;
   }
 
-  /*
-    모바일도 한 줄에 한 장
-  */
 
   .detail-grid {
     display: flex;
+
     flex-direction: column;
-    gap: 8px;
+
+    align-items: center;
+
+    gap: 20px;
+
     width: 100%;
   }
 
+
   .detail-image {
-    width: 100%;
+    max-width: 100%;
+
+    max-height: calc(100vh - 120px);
+
+    width: auto;
     height: auto;
   }
 }
+
 </style>
 </head>
 
 
 <body>
+
 
 <!-- =========================
      HEADER
@@ -384,21 +465,30 @@ main {
     id="menuButton"
     class="menu-button"
     type="button"
-  >+</button>
+  >
+    +
+  </button>
+
 
   <a
     href="#"
     id="logo"
     class="logo"
-  >SONGNANSAE</a>
+  >
+    SONGNANSAE
+  </a>
+
 
   <button
     id="infoButton"
     class="info-button"
     type="button"
-  >Info</button>
+  >
+    Info
+  </button>
 
 </header>
+
 
 
 <!-- =========================
@@ -410,12 +500,19 @@ main {
   class="info-panel"
 >
 
-  <div>Commercial Photographer</div>
-  <div>Seoul, Korea</div>
+  <div>
+    Commercial Photographer
+  </div>
+
+  <div>
+    Seoul, Korea
+  </div>
 
   <br>
 
-  <div>For commissions and inquiries</div>
+  <div>
+    For commissions and inquiries
+  </div>
 
   <div>
     <a href="mailto:songnansae@gmail.com">
@@ -436,8 +533,9 @@ main {
 </div>
 
 
+
 <!-- =========================
-     MENU PANEL
+     MENU
 ========================= -->
 
 <div
@@ -458,6 +556,7 @@ main {
       Commercial
     </button>
 
+
     <button
       class="menu-tab"
       data-category="magazine"
@@ -466,6 +565,7 @@ main {
       Magazine
     </button>
 
+
     <button
       class="menu-tab"
       data-category="personal"
@@ -473,6 +573,7 @@ main {
     >
       Personal
     </button>
+
 
     <button
       class="menu-tab"
@@ -493,11 +594,13 @@ main {
 </div>
 
 
+
 <!-- =========================
      MAIN
 ========================= -->
 
 <main>
+
 
   <!-- =====================
        HOME
@@ -525,6 +628,7 @@ main {
   </section>
 
 
+
   <!-- =====================
        PROJECT DETAIL
   ====================== -->
@@ -534,12 +638,15 @@ main {
     class="detail"
   >
 
-    <div class="detail-header">
+    <div
+      class="detail-header"
+    >
 
       <div
         id="detailCategory"
         class="detail-category"
       ></div>
+
 
       <div
         id="detailTitle"
@@ -568,17 +675,28 @@ main {
 </main>
 
 
+
 <script>
 
 /* =========================================================
-   GITHUB SETTINGS
+   GITHUB
 ========================================================= */
 
-const GITHUB_OWNER = "songnansae";
-const GITHUB_REPO = "SONGNANSAE";
-const GITHUB_BRANCH = "main";
+const GITHUB_OWNER =
+  "songnansae";
 
-const IMAGE_ROOT = "images";
+
+const GITHUB_REPO =
+  "SONGNANSAE";
+
+
+const GITHUB_BRANCH =
+  "main";
+
+
+const IMAGE_ROOT =
+  "images";
+
 
 
 /* =========================================================
@@ -586,11 +704,17 @@ const IMAGE_ROOT = "images";
 ========================================================= */
 
 const categories = [
+
   "commercial",
+
   "magazine",
+
   "personal",
+
   "film"
+
 ];
+
 
 
 /* =========================================================
@@ -598,53 +722,97 @@ const categories = [
 ========================================================= */
 
 const menuButton =
-  document.getElementById("menuButton");
+  document.getElementById(
+    "menuButton"
+  );
+
 
 const logo =
-  document.getElementById("logo");
+  document.getElementById(
+    "logo"
+  );
+
 
 const infoButton =
-  document.getElementById("infoButton");
+  document.getElementById(
+    "infoButton"
+  );
+
 
 const menuPanel =
-  document.getElementById("menuPanel");
+  document.getElementById(
+    "menuPanel"
+  );
+
 
 const infoPanel =
-  document.getElementById("infoPanel");
+  document.getElementById(
+    "infoPanel"
+  );
+
 
 const projectList =
-  document.getElementById("projectList");
+  document.getElementById(
+    "projectList"
+  );
+
 
 const home =
-  document.getElementById("home");
+  document.getElementById(
+    "home"
+  );
+
 
 const homeImage =
-  document.getElementById("homeImage");
+  document.getElementById(
+    "homeImage"
+  );
+
 
 const homeImageWrap =
-  document.getElementById("homeImageWrap");
+  document.getElementById(
+    "homeImageWrap"
+  );
+
 
 const detail =
-  document.getElementById("detail");
+  document.getElementById(
+    "detail"
+  );
+
 
 const detailCategory =
-  document.getElementById("detailCategory");
+  document.getElementById(
+    "detailCategory"
+  );
+
 
 const detailTitle =
-  document.getElementById("detailTitle");
+  document.getElementById(
+    "detailTitle"
+  );
+
 
 const detailGrid =
-  document.getElementById("detailGrid");
+  document.getElementById(
+    "detailGrid"
+  );
+
 
 const backButton =
-  document.getElementById("backButton");
+  document.getElementById(
+    "backButton"
+  );
+
 
 
 /* =========================================================
    STATE
 ========================================================= */
 
-let currentCategory = "commercial";
+let currentCategory =
+  "commercial";
+
 
 let projectsByCategory = {
 
@@ -658,7 +826,10 @@ let projectsByCategory = {
 
 };
 
-let currentProjectIndex = 0;
+
+let currentProjectIndex =
+  0;
+
 
 
 /* =========================================================
@@ -667,14 +838,20 @@ let currentProjectIndex = 0;
 
 let homeImages = [];
 
-let currentHomeIndex = 0;
+
+let currentHomeIndex =
+  0;
+
 
 
 /* =========================================================
    NATURAL SORT
 ========================================================= */
 
-function naturalSort(a, b) {
+function naturalSort(
+  a,
+  b
+) {
 
   return a.localeCompare(
     b,
@@ -688,27 +865,34 @@ function naturalSort(a, b) {
 }
 
 
+
 /* =========================================================
-   ENCODE GITHUB PATH
+   ENCODE PATH
 ========================================================= */
 
-function encodePath(path) {
+function encodePath(
+  path
+) {
 
   return path
     .split("/")
-    .map(part =>
-      encodeURIComponent(part)
+    .map(
+      part =>
+        encodeURIComponent(part)
     )
     .join("/");
 
 }
 
 
+
 /* =========================================================
    GITHUB API
 ========================================================= */
 
-async function getGitHubContents(path) {
+async function getGitHubContents(
+  path
+) {
 
   const url =
     `https://api.github.com/repos/` +
@@ -736,11 +920,14 @@ async function getGitHubContents(path) {
 }
 
 
+
 /* =========================================================
-   IMAGE FILE CHECK
+   IMAGE CHECK
 ========================================================= */
 
-function isImage(file) {
+function isImage(
+  file
+) {
 
   if (
     !file ||
@@ -753,13 +940,16 @@ function isImage(file) {
 
 
   return /\.(jpg|jpeg|png|webp|gif|avif)$/i
-    .test(file.name);
+    .test(
+      file.name
+    );
 
 }
 
 
+
 /* =========================================================
-   LOAD HOME IMAGES
+   LOAD HOME
 ========================================================= */
 
 async function loadHome() {
@@ -774,15 +964,19 @@ async function loadHome() {
 
     homeImages =
       contents
-        .filter(item =>
-          item.type === "file"
+        .filter(
+          item =>
+            item.type === "file"
         )
-        .filter(isImage)
-        .sort((a, b) =>
-          naturalSort(
-            a.name,
-            b.name
-          )
+        .filter(
+          isImage
+        )
+        .sort(
+          (a, b) =>
+            naturalSort(
+              a.name,
+              b.name
+            )
         );
 
 
@@ -798,7 +992,9 @@ async function loadHome() {
     }
 
 
-    currentHomeIndex = 0;
+    currentHomeIndex =
+      0;
+
 
     showHomeImage();
 
@@ -811,12 +1007,14 @@ async function loadHome() {
       error
     );
 
+
     homeImage.style.display =
       "none";
 
   }
 
 }
+
 
 
 /* =========================================================
@@ -843,10 +1041,12 @@ function showHomeImage() {
   homeImage.src =
     image.download_url;
 
+
   homeImage.alt =
     image.name;
 
 }
+
 
 
 /* =========================================================
@@ -876,14 +1076,16 @@ function nextHomeImage() {
 }
 
 
+
 /* =========================================================
-   HOME IMAGE CLICK
+   HOME CLICK
 ========================================================= */
 
 homeImageWrap.addEventListener(
   "click",
   nextHomeImage
 );
+
 
 
 /* =========================================================
@@ -904,14 +1106,16 @@ async function loadCategory(
 
     const folders =
       contents
-        .filter(item =>
-          item.type === "dir"
+        .filter(
+          item =>
+            item.type === "dir"
         )
-        .sort((a, b) =>
-          naturalSort(
-            a.name,
-            b.name
-          )
+        .sort(
+          (a, b) =>
+            naturalSort(
+              a.name,
+              b.name
+            )
         );
 
 
@@ -932,15 +1136,19 @@ async function loadCategory(
 
         const images =
           files
-            .filter(item =>
-              item.type === "file"
+            .filter(
+              item =>
+                item.type === "file"
             )
-            .filter(isImage)
-            .sort((a, b) =>
-              naturalSort(
-                a.name,
-                b.name
-              )
+            .filter(
+              isImage
+            )
+            .sort(
+              (a, b) =>
+                naturalSort(
+                  a.name,
+                  b.name
+                )
             );
 
 
@@ -997,11 +1205,14 @@ async function loadCategory(
       error
     );
 
-    projectList.innerHTML = "";
+
+    projectList.innerHTML =
+      "";
 
   }
 
 }
+
 
 
 /* =========================================================
@@ -1012,7 +1223,8 @@ function renderProjectList(
   category
 ) {
 
-  projectList.innerHTML = "";
+  projectList.innerHTML =
+    "";
 
 
   const projects =
@@ -1022,7 +1234,10 @@ function renderProjectList(
 
 
   projects.forEach(
-    (project, index) => {
+    (
+      project,
+      index
+    ) => {
 
       const button =
         document.createElement(
@@ -1065,6 +1280,7 @@ function renderProjectList(
 }
 
 
+
 /* =========================================================
    OPEN PROJECT
 ========================================================= */
@@ -1100,7 +1316,7 @@ function openProject(
 
 
   /*
-    홈 숨기기
+    HOME 숨기기
   */
 
   home.style.display =
@@ -1108,7 +1324,7 @@ function openProject(
 
 
   /*
-    프로젝트 페이지 표시
+    DETAIL 표시
   */
 
   detail.classList.add(
@@ -1117,7 +1333,7 @@ function openProject(
 
 
   /*
-    메뉴 닫기
+    MENU 닫기
   */
 
   menuPanel.classList.remove(
@@ -1130,11 +1346,13 @@ function openProject(
 
 
   /*
-    제목
+    TITLE
   */
 
   detailCategory.textContent =
-    capitalize(category);
+    capitalize(
+      category
+    );
 
 
   detailTitle.textContent =
@@ -1152,8 +1370,13 @@ function openProject(
   /*
     프로젝트 이미지 생성
 
-    한 줄에 한 장.
-    원본 비율 유지.
+    한 줄에 한 장
+
+    원본 비율 유지
+
+    화면 높이에 맞춰 축소
+
+    크롭 없음
   */
 
   project.images.forEach(
@@ -1190,7 +1413,7 @@ function openProject(
 
 
   /*
-    페이지 맨 위
+    맨 위로 이동
   */
 
   window.scrollTo(
@@ -1199,6 +1422,7 @@ function openProject(
   );
 
 }
+
 
 
 /* =========================================================
@@ -1215,6 +1439,7 @@ function capitalize(
   );
 
 }
+
 
 
 /* =========================================================
@@ -1285,6 +1510,7 @@ menuButton.addEventListener(
 );
 
 
+
 /* =========================================================
    INFO BUTTON
 ========================================================= */
@@ -1308,6 +1534,7 @@ infoButton.addEventListener(
 
   }
 );
+
 
 
 /* =========================================================
@@ -1380,6 +1607,7 @@ document
   );
 
 
+
 /* =========================================================
    LOGO → HOME
 ========================================================= */
@@ -1423,8 +1651,9 @@ logo.addEventListener(
 );
 
 
+
 /* =========================================================
-   BACK BUTTON
+   BACK
 ========================================================= */
 
 backButton.addEventListener(
@@ -1447,6 +1676,7 @@ backButton.addEventListener(
 
   }
 );
+
 
 
 /* =========================================================
