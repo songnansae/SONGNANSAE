@@ -43,7 +43,7 @@ header {
 
   padding: 0 14px;
 
-  background: rgba(255,255,255,0.96);
+  background: rgba(255, 255, 255, 0.96);
 }
 
 .menu-button {
@@ -210,14 +210,6 @@ main {
   padding: 0;
 }
 
-/*
-  HOME 메인 이미지
-
-  사진 한 장만 화면에 크게 표시.
-  원본 비율 유지.
-  크롭 없음.
-*/
-
 .home-image-wrap {
   width: 100%;
   height: calc(100vh - 52px);
@@ -274,9 +266,20 @@ main {
   font-size: 13px;
 }
 
+/*
+  프로젝트 상세 이미지
+
+  한 줄에 한 장.
+  원본 비율 유지.
+  절대 크롭하지 않음.
+*/
+
 .detail-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
   gap: 10px;
 }
 
@@ -287,6 +290,10 @@ main {
   height: auto;
 
   object-fit: contain;
+  object-position: center;
+
+  margin: 0;
+  padding: 0;
 }
 
 .back-button {
@@ -345,9 +352,20 @@ main {
     padding: 68px 10px 30px;
   }
 
+  /*
+    모바일도 한 줄에 한 장
+  */
+
   .detail-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 8px;
+    width: 100%;
+  }
+
+  .detail-image {
+    width: 100%;
+    height: auto;
   }
 }
 </style>
@@ -355,6 +373,10 @@ main {
 
 
 <body>
+
+<!-- =========================
+     HEADER
+========================= -->
 
 <header>
 
@@ -390,13 +412,17 @@ main {
 
   <div>Commercial Photographer</div>
   <div>Seoul, Korea</div>
+
   <br>
+
   <div>For commissions and inquiries</div>
+
   <div>
     <a href="mailto:songnansae@gmail.com">
       songnansae@gmail.com
     </a>
   </div>
+
   <div>
     <a
       href="https://www.instagram.com/songnansae/"
@@ -473,7 +499,10 @@ main {
 
 <main>
 
-  <!-- HOME -->
+  <!-- =====================
+       HOME
+  ====================== -->
+
   <section
     id="home"
     class="home"
@@ -496,7 +525,10 @@ main {
   </section>
 
 
-  <!-- DETAIL -->
+  <!-- =====================
+       PROJECT DETAIL
+  ====================== -->
+
   <section
     id="detail"
     class="detail"
@@ -539,7 +571,7 @@ main {
 <script>
 
 /* =========================================================
-   GITHUB
+   GITHUB SETTINGS
 ========================================================= */
 
 const GITHUB_OWNER = "songnansae";
@@ -550,7 +582,7 @@ const IMAGE_ROOT = "images";
 
 
 /* =========================================================
-   CATEGORY
+   CATEGORIES
 ========================================================= */
 
 const categories = [
@@ -565,24 +597,47 @@ const categories = [
    ELEMENTS
 ========================================================= */
 
-const menuButton = document.getElementById("menuButton");
-const logo = document.getElementById("logo");
-const infoButton = document.getElementById("infoButton");
+const menuButton =
+  document.getElementById("menuButton");
 
-const menuPanel = document.getElementById("menuPanel");
-const infoPanel = document.getElementById("infoPanel");
+const logo =
+  document.getElementById("logo");
 
-const projectList = document.getElementById("projectList");
+const infoButton =
+  document.getElementById("infoButton");
 
-const home = document.getElementById("home");
-const homeImage = document.getElementById("homeImage");
-const homeImageWrap = document.getElementById("homeImageWrap");
+const menuPanel =
+  document.getElementById("menuPanel");
 
-const detail = document.getElementById("detail");
-const detailCategory = document.getElementById("detailCategory");
-const detailTitle = document.getElementById("detailTitle");
-const detailGrid = document.getElementById("detailGrid");
-const backButton = document.getElementById("backButton");
+const infoPanel =
+  document.getElementById("infoPanel");
+
+const projectList =
+  document.getElementById("projectList");
+
+const home =
+  document.getElementById("home");
+
+const homeImage =
+  document.getElementById("homeImage");
+
+const homeImageWrap =
+  document.getElementById("homeImageWrap");
+
+const detail =
+  document.getElementById("detail");
+
+const detailCategory =
+  document.getElementById("detailCategory");
+
+const detailTitle =
+  document.getElementById("detailTitle");
+
+const detailGrid =
+  document.getElementById("detailGrid");
+
+const backButton =
+  document.getElementById("backButton");
 
 
 /* =========================================================
@@ -592,20 +647,26 @@ const backButton = document.getElementById("backButton");
 let currentCategory = "commercial";
 
 let projectsByCategory = {
+
   commercial: [],
+
   magazine: [],
+
   personal: [],
+
   film: []
+
 };
 
 let currentProjectIndex = 0;
 
 
 /* =========================================================
-   HOME IMAGES
+   HOME STATE
 ========================================================= */
 
 let homeImages = [];
+
 let currentHomeIndex = 0;
 
 
@@ -628,14 +689,16 @@ function naturalSort(a, b) {
 
 
 /* =========================================================
-   PATH ENCODING
+   ENCODE GITHUB PATH
 ========================================================= */
 
 function encodePath(path) {
 
   return path
     .split("/")
-    .map(part => encodeURIComponent(part))
+    .map(part =>
+      encodeURIComponent(part)
+    )
     .join("/");
 
 }
@@ -654,13 +717,19 @@ async function getGitHubContents(path) {
     `contents/${encodePath(path)}` +
     `?ref=${GITHUB_BRANCH}`;
 
-  const response = await fetch(url);
+
+  const response =
+    await fetch(url);
+
 
   if (!response.ok) {
+
     throw new Error(
       `GitHub API error: ${response.status}`
     );
+
   }
+
 
   return await response.json();
 
@@ -668,24 +737,29 @@ async function getGitHubContents(path) {
 
 
 /* =========================================================
-   IMAGE CHECK
+   IMAGE FILE CHECK
 ========================================================= */
 
 function isImage(file) {
 
-  if (!file || !file.name) {
+  if (
+    !file ||
+    !file.name
+  ) {
+
     return false;
+
   }
 
-  return /\.(jpg|jpeg|png|webp|gif|avif)$/i.test(
-    file.name
-  );
+
+  return /\.(jpg|jpeg|png|webp|gif|avif)$/i
+    .test(file.name);
 
 }
 
 
 /* =========================================================
-   LOAD HOME
+   LOAD HOME IMAGES
 ========================================================= */
 
 async function loadHome() {
@@ -697,32 +771,49 @@ async function loadHome() {
         `${IMAGE_ROOT}/home`
       );
 
-    homeImages = contents
-      .filter(item => item.type === "file")
-      .filter(isImage)
-      .sort((a, b) =>
-        naturalSort(a.name, b.name)
-      );
 
-    if (homeImages.length === 0) {
+    homeImages =
+      contents
+        .filter(item =>
+          item.type === "file"
+        )
+        .filter(isImage)
+        .sort((a, b) =>
+          naturalSort(
+            a.name,
+            b.name
+          )
+        );
 
-      homeImage.style.display = "none";
+
+    if (
+      homeImages.length === 0
+    ) {
+
+      homeImage.style.display =
+        "none";
 
       return;
+
     }
+
 
     currentHomeIndex = 0;
 
     showHomeImage();
 
-  } catch (error) {
+  }
+
+  catch (error) {
 
     console.error(
       "Home images could not be loaded:",
       error
     );
 
-    homeImage.style.display = "none";
+    homeImage.style.display =
+      "none";
+
   }
 
 }
@@ -737,14 +828,23 @@ function showHomeImage() {
   if (
     !homeImages.length
   ) {
+
     return;
+
   }
 
-  const image =
-    homeImages[currentHomeIndex];
 
-  homeImage.src = image.download_url;
-  homeImage.alt = image.name;
+  const image =
+    homeImages[
+      currentHomeIndex
+    ];
+
+
+  homeImage.src =
+    image.download_url;
+
+  homeImage.alt =
+    image.name;
 
 }
 
@@ -758,12 +858,18 @@ function nextHomeImage() {
   if (
     homeImages.length <= 1
   ) {
+
     return;
+
   }
 
+
   currentHomeIndex =
-    (currentHomeIndex + 1) %
+    (
+      currentHomeIndex + 1
+    ) %
     homeImages.length;
+
 
   showHomeImage();
 
@@ -771,7 +877,7 @@ function nextHomeImage() {
 
 
 /* =========================================================
-   HOME CLICK
+   HOME IMAGE CLICK
 ========================================================= */
 
 homeImageWrap.addEventListener(
@@ -784,7 +890,9 @@ homeImageWrap.addEventListener(
    LOAD CATEGORY
 ========================================================= */
 
-async function loadCategory(category) {
+async function loadCategory(
+  category
+) {
 
   try {
 
@@ -793,11 +901,17 @@ async function loadCategory(category) {
         `${IMAGE_ROOT}/${category}`
       );
 
+
     const folders =
       contents
-        .filter(item => item.type === "dir")
+        .filter(item =>
+          item.type === "dir"
+        )
         .sort((a, b) =>
-          naturalSort(a.name, b.name)
+          naturalSort(
+            a.name,
+            b.name
+          )
         );
 
 
@@ -815,6 +929,7 @@ async function loadCategory(category) {
             folder.path
           );
 
+
         const images =
           files
             .filter(item =>
@@ -822,7 +937,10 @@ async function loadCategory(category) {
             )
             .filter(isImage)
             .sort((a, b) =>
-              naturalSort(a.name, b.name)
+              naturalSort(
+                a.name,
+                b.name
+              )
             );
 
 
@@ -832,17 +950,22 @@ async function loadCategory(category) {
 
           projects.push({
 
-            name: folder.name,
+            name:
+              folder.name,
 
-            path: folder.path,
+            path:
+              folder.path,
 
-            images: images
+            images:
+              images
 
           });
 
         }
 
-      } catch (error) {
+      }
+
+      catch (error) {
 
         console.error(
           "Project could not be loaded:",
@@ -855,12 +978,18 @@ async function loadCategory(category) {
     }
 
 
-    projectsByCategory[category] =
-      projects;
+    projectsByCategory[
+      category
+    ] = projects;
 
-    renderProjectList(category);
 
-  } catch (error) {
+    renderProjectList(
+      category
+    );
+
+  }
+
+  catch (error) {
 
     console.error(
       "Category could not be loaded:",
@@ -879,25 +1008,35 @@ async function loadCategory(category) {
    RENDER PROJECT LIST
 ========================================================= */
 
-function renderProjectList(category) {
+function renderProjectList(
+  category
+) {
 
   projectList.innerHTML = "";
 
 
   const projects =
-    projectsByCategory[category] || [];
+    projectsByCategory[
+      category
+    ] || [];
 
 
   projects.forEach(
     (project, index) => {
 
       const button =
-        document.createElement("button");
+        document.createElement(
+          "button"
+        );
 
-      button.type = "button";
+
+      button.type =
+        "button";
+
 
       button.className =
         "project-item";
+
 
       button.textContent =
         project.name;
@@ -936,61 +1075,107 @@ function openProject(
 ) {
 
   const projects =
-    projectsByCategory[category] || [];
+    projectsByCategory[
+      category
+    ] || [];
+
 
   const project =
     projects[index];
 
 
   if (!project) {
+
     return;
+
   }
 
 
   currentCategory =
     category;
 
+
   currentProjectIndex =
     index;
 
 
+  /*
+    홈 숨기기
+  */
+
   home.style.display =
     "none";
+
+
+  /*
+    프로젝트 페이지 표시
+  */
 
   detail.classList.add(
     "show"
   );
+
+
+  /*
+    메뉴 닫기
+  */
 
   menuPanel.classList.remove(
     "show"
   );
 
 
+  menuButton.textContent =
+    "+";
+
+
+  /*
+    제목
+  */
+
   detailCategory.textContent =
     capitalize(category);
+
 
   detailTitle.textContent =
     project.name;
 
 
+  /*
+    기존 이미지 제거
+  */
+
   detailGrid.innerHTML =
     "";
 
+
+  /*
+    프로젝트 이미지 생성
+
+    한 줄에 한 장.
+    원본 비율 유지.
+  */
 
   project.images.forEach(
     image => {
 
       const img =
-        document.createElement("img");
+        document.createElement(
+          "img"
+        );
+
 
       img.className =
         "detail-image";
 
+
       img.src =
         image.download_url;
 
+
       img.alt =
         image.name;
+
 
       img.loading =
         "lazy";
@@ -1004,6 +1189,10 @@ function openProject(
   );
 
 
+  /*
+    페이지 맨 위
+  */
+
   window.scrollTo(
     0,
     0
@@ -1016,10 +1205,14 @@ function openProject(
    CAPITALIZE
 ========================================================= */
 
-function capitalize(text) {
+function capitalize(
+  text
+) {
 
-  return text.charAt(0).toUpperCase() +
-         text.slice(1);
+  return (
+    text.charAt(0).toUpperCase() +
+    text.slice(1)
+  );
 
 }
 
@@ -1044,32 +1237,41 @@ menuButton.addEventListener(
         "show"
       );
 
+
       menuButton.textContent =
         "+";
 
-    } else {
+    }
+
+    else {
 
       menuPanel.classList.add(
         "show"
       );
 
+
       infoPanel.classList.remove(
         "show"
       );
+
 
       menuButton.textContent =
         "−";
 
 
       if (
-        !projectsByCategory[currentCategory].length
+        !projectsByCategory[
+          currentCategory
+        ].length
       ) {
 
         await loadCategory(
           currentCategory
         );
 
-      } else {
+      }
+
+      else {
 
         renderProjectList(
           currentCategory
@@ -1095,9 +1297,11 @@ infoButton.addEventListener(
       "show"
     );
 
+
     menuPanel.classList.remove(
       "show"
     );
+
 
     menuButton.textContent =
       "+";
@@ -1107,61 +1311,73 @@ infoButton.addEventListener(
 
 
 /* =========================================================
-   MENU CATEGORY
+   CATEGORY TABS
 ========================================================= */
 
 document
-  .querySelectorAll(".menu-tab")
-  .forEach(tab => {
+  .querySelectorAll(
+    ".menu-tab"
+  )
+  .forEach(
+    tab => {
 
-    tab.addEventListener(
-      "click",
-      async () => {
+      tab.addEventListener(
+        "click",
+        async () => {
 
-        const category =
-          tab.dataset.category;
-
-
-        currentCategory =
-          category;
+          const category =
+            tab.dataset.category;
 
 
-        document
-          .querySelectorAll(".menu-tab")
-          .forEach(item => {
+          currentCategory =
+            category;
 
-            item.classList.remove(
-              "active"
+
+          document
+            .querySelectorAll(
+              ".menu-tab"
+            )
+            .forEach(
+              item => {
+
+                item.classList.remove(
+                  "active"
+                );
+
+              }
             );
 
-          });
 
-
-        tab.classList.add(
-          "active"
-        );
-
-
-        if (
-          !projectsByCategory[category].length
-        ) {
-
-          await loadCategory(
-            category
+          tab.classList.add(
+            "active"
           );
 
-        } else {
 
-          renderProjectList(
-            category
-          );
+          if (
+            !projectsByCategory[
+              category
+            ].length
+          ) {
+
+            await loadCategory(
+              category
+            );
+
+          }
+
+          else {
+
+            renderProjectList(
+              category
+            );
+
+          }
 
         }
+      );
 
-      }
-    );
-
-  });
+    }
+  );
 
 
 /* =========================================================
@@ -1179,6 +1395,7 @@ logo.addEventListener(
       "show"
     );
 
+
     home.style.display =
       "flex";
 
@@ -1187,9 +1404,11 @@ logo.addEventListener(
       "show"
     );
 
+
     infoPanel.classList.remove(
       "show"
     );
+
 
     menuButton.textContent =
       "+";
@@ -1205,7 +1424,7 @@ logo.addEventListener(
 
 
 /* =========================================================
-   BACK
+   BACK BUTTON
 ========================================================= */
 
 backButton.addEventListener(
@@ -1215,6 +1434,7 @@ backButton.addEventListener(
     detail.classList.remove(
       "show"
     );
+
 
     home.style.display =
       "flex";
