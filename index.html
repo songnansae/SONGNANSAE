@@ -7,7 +7,6 @@
 <title>SONGNANSAE</title>
 
 <style>
-
 * {
   box-sizing: border-box;
 }
@@ -35,10 +34,8 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-
   width: 100%;
   height: 52px;
-
   z-index: 1000;
 
   display: grid;
@@ -47,11 +44,12 @@ header {
 
   padding: 0 14px;
 
-  background: #fff;
+  background: rgba(255, 255, 255, 0.96);
 }
 
-.menu-button,
-.info-button {
+.menu-button {
+  justify-self: start;
+
   border: 0;
   background: none;
 
@@ -65,14 +63,6 @@ header {
   cursor: pointer;
 }
 
-.menu-button {
-  justify-self: start;
-}
-
-.info-button {
-  justify-self: end;
-}
-
 .logo {
   justify-self: center;
 
@@ -81,6 +71,22 @@ header {
 
   font-size: 13px;
   line-height: 1;
+}
+
+.info-button {
+  justify-self: end;
+
+  border: 0;
+  background: none;
+
+  padding: 0;
+  margin: 0;
+
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1;
+
+  cursor: pointer;
 }
 
 
@@ -92,7 +98,6 @@ header {
   display: none;
 
   position: fixed;
-
   top: 52px;
   right: 14px;
 
@@ -128,7 +133,6 @@ header {
   display: none;
 
   position: fixed;
-
   top: 52px;
   left: 14px;
 
@@ -169,7 +173,6 @@ header {
 .project-list {
   display: flex;
   flex-direction: column;
-
   gap: 5px;
 }
 
@@ -207,10 +210,9 @@ main {
 
 .home {
   width: 100%;
-  height: calc(100vh - 52px);
+  min-height: calc(100vh - 52px);
 
   display: flex;
-
   align-items: center;
   justify-content: center;
 
@@ -222,7 +224,6 @@ main {
   height: calc(100vh - 52px);
 
   display: flex;
-
   align-items: center;
   justify-content: center;
 
@@ -234,11 +235,8 @@ main {
 .home-image {
   display: block;
 
-  width: auto;
-  height: auto;
-
-  max-width: 100%;
-  max-height: calc(100vh - 52px);
+  width: 100%;
+  height: 100%;
 
   object-fit: contain;
   object-position: center;
@@ -249,7 +247,7 @@ main {
 
 
 /* =========================
-   DETAIL
+   PROJECT DETAIL
 ========================= */
 
 .detail {
@@ -264,57 +262,56 @@ main {
 
 .detail-header {
   display: flex;
-
   justify-content: space-between;
   align-items: baseline;
 
   margin-bottom: 24px;
 }
 
-.detail-title,
+.detail-title {
+  font-size: 13px;
+}
+
 .detail-category {
   font-size: 13px;
 }
 
 
-/* 한 줄에 한 장 */
+/*
+  프로젝트 사진
+
+  한 줄에 한 장.
+  전체 이미지가 보이도록 함.
+  원본 비율 유지.
+  크롭 없음.
+*/
 
 .detail-grid {
-  width: 100%;
-
   display: flex;
   flex-direction: column;
-
   align-items: center;
+
+  width: 100%;
 
   gap: 30px;
 }
 
-
-/*
-  사진 전체가 보이도록
-  비율 유지
-  크롭 없음
-*/
-
 .detail-image {
   display: block;
+
+  max-width: 90%;
+  max-height: calc(100vh - 190px);
 
   width: auto;
   height: auto;
 
-  max-width: 100%;
-  max-height: calc(100vh - 150px);
-
   object-fit: contain;
+  object-position: center;
 
   margin: 0 auto;
+  padding: 0;
 }
 
-
-/* =========================
-   BACK
-========================= */
 
 .back-button {
   margin-top: 40px;
@@ -362,15 +359,11 @@ main {
   }
 
   .home {
-    height: calc(100vh - 48px);
+    min-height: calc(100vh - 48px);
   }
 
   .home-image-wrap {
     height: calc(100vh - 48px);
-  }
-
-  .home-image {
-    max-height: calc(100vh - 48px);
   }
 
   .detail {
@@ -378,13 +371,22 @@ main {
   }
 
   .detail-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+
     gap: 20px;
   }
 
   .detail-image {
-    max-height: calc(100vh - 120px);
-  }
+    max-width: 92%;
+    max-height: calc(100vh - 150px);
 
+    width: auto;
+    height: auto;
+  }
 }
 
 </style>
@@ -423,6 +425,7 @@ main {
 </header>
 
 
+
 <!-- =========================
      INFO PANEL
 ========================= -->
@@ -433,6 +436,7 @@ main {
 >
 
   <div>Commercial Photographer</div>
+
   <div>Seoul, Korea</div>
 
   <br>
@@ -458,8 +462,9 @@ main {
 </div>
 
 
+
 <!-- =========================
-     MENU
+     MENU PANEL
 ========================= -->
 
 <div
@@ -518,6 +523,7 @@ main {
 </div>
 
 
+
 <!-- =========================
      MAIN
 ========================= -->
@@ -542,6 +548,7 @@ main {
       <img
         id="homeImage"
         class="home-image"
+        src=""
         alt=""
       >
 
@@ -550,8 +557,9 @@ main {
   </section>
 
 
+
   <!-- =====================
-       DETAIL
+       PROJECT DETAIL
   ====================== -->
 
   <section
@@ -594,22 +602,26 @@ main {
 </main>
 
 
+
 <script>
 
 
 /* =========================================================
-   GITHUB
+   GITHUB SETTINGS
 ========================================================= */
 
-const OWNER = "songnansae";
-const REPO = "SONGNANSAE";
-const BRANCH = "main";
+const GITHUB_OWNER = "songnansae";
 
-const ROOT = "images";
+const GITHUB_REPO = "SONGNANSAE";
+
+const GITHUB_BRANCH = "main";
+
+const IMAGE_ROOT = "images";
+
 
 
 /* =========================================================
-   CATEGORY
+   CATEGORIES
 ========================================================= */
 
 const categories = [
@@ -620,89 +632,141 @@ const categories = [
 ];
 
 
+
 /* =========================================================
-   ELEMENT
+   ELEMENTS
 ========================================================= */
 
 const menuButton =
-  document.getElementById("menuButton");
+  document.getElementById(
+    "menuButton"
+  );
 
-const menuPanel =
-  document.getElementById("menuPanel");
-
-const infoButton =
-  document.getElementById("infoButton");
-
-const infoPanel =
-  document.getElementById("infoPanel");
 
 const logo =
-  document.getElementById("logo");
+  document.getElementById(
+    "logo"
+  );
+
+
+const infoButton =
+  document.getElementById(
+    "infoButton"
+  );
+
+
+const menuPanel =
+  document.getElementById(
+    "menuPanel"
+  );
+
+
+const infoPanel =
+  document.getElementById(
+    "infoPanel"
+  );
+
 
 const projectList =
-  document.getElementById("projectList");
+  document.getElementById(
+    "projectList"
+  );
+
 
 const home =
-  document.getElementById("home");
+  document.getElementById(
+    "home"
+  );
+
 
 const homeImage =
-  document.getElementById("homeImage");
+  document.getElementById(
+    "homeImage"
+  );
+
 
 const homeImageWrap =
-  document.getElementById("homeImageWrap");
+  document.getElementById(
+    "homeImageWrap"
+  );
+
 
 const detail =
-  document.getElementById("detail");
+  document.getElementById(
+    "detail"
+  );
+
 
 const detailCategory =
-  document.getElementById("detailCategory");
+  document.getElementById(
+    "detailCategory"
+  );
+
 
 const detailTitle =
-  document.getElementById("detailTitle");
+  document.getElementById(
+    "detailTitle"
+  );
+
 
 const detailGrid =
-  document.getElementById("detailGrid");
+  document.getElementById(
+    "detailGrid"
+  );
+
 
 const backButton =
-  document.getElementById("backButton");
+  document.getElementById(
+    "backButton"
+  );
+
 
 
 /* =========================================================
    STATE
 ========================================================= */
 
-let currentCategory = "commercial";
+let currentCategory =
+  "commercial";
+
 
 let projectsByCategory = {
+
   commercial: [],
+
   magazine: [],
+
   personal: [],
+
   film: []
+
 };
 
-let homeImages = [];
 
-let currentHomeIndex = 0;
+let currentProjectIndex =
+  0;
+
 
 
 /* =========================================================
-   FORCE INITIAL STATE
+   HOME STATE
 ========================================================= */
 
-menuPanel.classList.remove("show");
-infoPanel.classList.remove("show");
+let homeImages = [];
 
-menuButton.textContent = "+";
+let currentHomeIndex =
+  0;
 
-home.style.display = "flex";
-detail.classList.remove("show");
 
 
 /* =========================================================
    NATURAL SORT
 ========================================================= */
 
-function naturalSort(a, b) {
+function naturalSort(
+  a,
+  b
+) {
 
   return a.localeCompare(
     b,
@@ -716,65 +780,79 @@ function naturalSort(a, b) {
 }
 
 
+
 /* =========================================================
-   GITHUB PATH
+   ENCODE GITHUB PATH
 ========================================================= */
 
-function encodePath(path) {
+function encodePath(
+  path
+) {
 
   return path
     .split("/")
-    .map(part =>
-      encodeURIComponent(part)
+    .map(
+      part =>
+        encodeURIComponent(part)
     )
     .join("/");
 
 }
 
 
+
 /* =========================================================
    GITHUB API
 ========================================================= */
 
-async function github(path) {
+async function getGitHubContents(
+  path
+) {
 
   const url =
-    "https://api.github.com/repos/" +
-    OWNER + "/" +
-    REPO +
-    "/contents/" +
-    encodePath(path) +
-    "?ref=" +
-    BRANCH;
+    `https://api.github.com/repos/` +
+    `${GITHUB_OWNER}/` +
+    `${GITHUB_REPO}/` +
+    `contents/${encodePath(path)}` +
+    `?ref=${GITHUB_BRANCH}`;
+
 
   const response =
-    await fetch(url, {
-      cache: "no-store"
-    });
+    await fetch(url);
+
 
   if (!response.ok) {
 
     throw new Error(
-      "GitHub API error: " +
-      response.status
+      `GitHub API error: ${response.status}`
     );
 
   }
+
 
   return await response.json();
 
 }
 
 
+
 /* =========================================================
    IMAGE CHECK
 ========================================================= */
 
-function isImage(file) {
+function isImage(
+  file
+) {
 
-  if (!file || !file.name) {
+  if (
+    !file ||
+    !file.name
+  ) {
+
     return false;
+
   }
+
 
   return /\.(jpg|jpeg|png|webp|gif|avif)$/i
     .test(file.name);
@@ -782,45 +860,52 @@ function isImage(file) {
 }
 
 
+
 /* =========================================================
-   HOME
+   LOAD HOME
 ========================================================= */
 
 async function loadHome() {
 
   try {
 
-    const files =
-      await github("images/home");
+    const contents =
+      await getGitHubContents(
+        `${IMAGE_ROOT}/home`
+      );
 
 
     homeImages =
-      files
-        .filter(file =>
-          file.type === "file"
+      contents
+        .filter(
+          item =>
+            item.type === "file"
         )
         .filter(isImage)
-        .sort((a, b) =>
-          naturalSort(
-            a.name,
-            b.name
-          )
+        .sort(
+          (a, b) =>
+            naturalSort(
+              a.name,
+              b.name
+            )
         );
 
 
-    if (!homeImages.length) {
+    if (
+      homeImages.length === 0
+    ) {
 
-      console.error(
-        "images/home 폴더에 사진이 없습니다."
-      );
-
-      homeImage.style.display = "none";
+      homeImage.style.display =
+        "none";
 
       return;
+
     }
 
 
-    currentHomeIndex = 0;
+    currentHomeIndex =
+      0;
+
 
     showHomeImage();
 
@@ -829,32 +914,44 @@ async function loadHome() {
   catch (error) {
 
     console.error(
-      "HOME LOAD ERROR:",
+      "Home images could not be loaded:",
       error
     );
 
-    homeImage.style.display = "none";
+
+    homeImage.style.display =
+      "none";
 
   }
 
 }
 
 
+
 /* =========================================================
-   SHOW HOME
+   SHOW HOME IMAGE
 ========================================================= */
 
 function showHomeImage() {
 
-  if (!homeImages.length) {
+  if (
+    !homeImages.length
+  ) {
+
     return;
+
   }
 
+
   const image =
-    homeImages[currentHomeIndex];
+    homeImages[
+      currentHomeIndex
+    ];
+
 
   homeImage.src =
     image.download_url;
+
 
   homeImage.alt =
     image.name;
@@ -862,15 +959,21 @@ function showHomeImage() {
 }
 
 
+
 /* =========================================================
-   NEXT HOME
+   NEXT HOME IMAGE
 ========================================================= */
 
 function nextHomeImage() {
 
-  if (homeImages.length <= 1) {
+  if (
+    homeImages.length <= 1
+  ) {
+
     return;
+
   }
+
 
   currentHomeIndex =
     (
@@ -878,9 +981,11 @@ function nextHomeImage() {
     ) %
     homeImages.length;
 
+
   showHomeImage();
 
 }
+
 
 
 /* =========================================================
@@ -893,64 +998,84 @@ homeImageWrap.addEventListener(
 );
 
 
+
 /* =========================================================
    LOAD CATEGORY
 ========================================================= */
 
-async function loadCategory(category) {
+async function loadCategory(
+  category
+) {
 
   try {
 
-    const folders =
-      await github(
-        "images/" + category
+    const contents =
+      await getGitHubContents(
+        `${IMAGE_ROOT}/${category}`
       );
 
 
-    const projectFolders =
-      folders
-        .filter(item =>
-          item.type === "dir"
+    const folders =
+      contents
+        .filter(
+          item =>
+            item.type === "dir"
         )
-        .sort((a, b) =>
-          naturalSort(
-            a.name,
-            b.name
-          )
+        .sort(
+          (a, b) =>
+            naturalSort(
+              a.name,
+              b.name
+            )
         );
 
 
     const projects = [];
 
 
-    for (const folder of projectFolders) {
+    for (
+      const folder of folders
+    ) {
 
       try {
 
         const files =
-          await github(folder.path);
+          await getGitHubContents(
+            folder.path
+          );
 
 
         const images =
           files
-            .filter(file =>
-              file.type === "file"
+            .filter(
+              item =>
+                item.type === "file"
             )
             .filter(isImage)
-            .sort((a, b) =>
-              naturalSort(
-                a.name,
-                b.name
-              )
+            .sort(
+              (a, b) =>
+                naturalSort(
+                  a.name,
+                  b.name
+                )
             );
 
 
-        if (images.length) {
+        if (
+          images.length > 0
+        ) {
 
           projects.push({
-            name: folder.name,
-            path: folder.path,
-            images: images
+
+            name:
+              folder.name,
+
+            path:
+              folder.path,
+
+            images:
+              images
+
           });
 
         }
@@ -960,7 +1085,7 @@ async function loadCategory(category) {
       catch (error) {
 
         console.error(
-          "PROJECT LOAD ERROR:",
+          "Project could not be loaded:",
           folder.name,
           error
         );
@@ -970,43 +1095,58 @@ async function loadCategory(category) {
     }
 
 
-    projectsByCategory[category] =
-      projects;
+    projectsByCategory[
+      category
+    ] = projects;
 
 
-    renderProjectList(category);
+    renderProjectList(
+      category
+    );
 
   }
 
   catch (error) {
 
     console.error(
-      "CATEGORY LOAD ERROR:",
+      "Category could not be loaded:",
       category,
       error
     );
 
-    projectList.innerHTML = "";
+
+    projectList.innerHTML =
+      "";
 
   }
 
 }
 
 
+
 /* =========================================================
-   PROJECT LIST
+   RENDER PROJECT LIST
 ========================================================= */
 
-function renderProjectList(category) {
+function renderProjectList(
+  category
+) {
 
-  projectList.innerHTML = "";
+  projectList.innerHTML =
+    "";
+
 
   const projects =
-    projectsByCategory[category] || [];
+    projectsByCategory[
+      category
+    ] || [];
 
 
   projects.forEach(
-    (project, index) => {
+    (
+      project,
+      index
+    ) => {
 
       const button =
         document.createElement(
@@ -1014,10 +1154,13 @@ function renderProjectList(category) {
         );
 
 
-      button.type = "button";
+      button.type =
+        "button";
+
 
       button.className =
         "project-item";
+
 
       button.textContent =
         project.name;
@@ -1025,7 +1168,7 @@ function renderProjectList(category) {
 
       button.addEventListener(
         "click",
-        function() {
+        () => {
 
           openProject(
             category,
@@ -1046,6 +1189,7 @@ function renderProjectList(category) {
 }
 
 
+
 /* =========================================================
    OPEN PROJECT
 ========================================================= */
@@ -1056,49 +1200,61 @@ function openProject(
 ) {
 
   const projects =
-    projectsByCategory[category] || [];
+    projectsByCategory[
+      category
+    ] || [];
+
 
   const project =
     projects[index];
 
 
   if (!project) {
+
     return;
+
   }
 
 
-  /* HOME HIDE */
-
-  home.style.display = "none";
-
-
-  /* DETAIL SHOW */
-
-  detail.classList.add("show");
+  currentCategory =
+    category;
 
 
-  /* MENU CLOSE */
-
-  menuPanel.classList.remove("show");
-
-  menuButton.textContent = "+";
+  currentProjectIndex =
+    index;
 
 
-  /* TITLE */
+  home.style.display =
+    "none";
+
+
+  detail.classList.add(
+    "show"
+  );
+
+
+  menuPanel.classList.remove(
+    "show"
+  );
+
+
+  menuButton.textContent =
+    "+";
+
 
   detailCategory.textContent =
-    capitalize(category);
+    capitalize(
+      category
+    );
+
 
   detailTitle.textContent =
     project.name;
 
 
-  /* CLEAR */
+  detailGrid.innerHTML =
+    "";
 
-  detailGrid.innerHTML = "";
-
-
-  /* IMAGES */
 
   project.images.forEach(
     image => {
@@ -1112,11 +1268,14 @@ function openProject(
       img.className =
         "detail-image";
 
+
       img.src =
         image.download_url;
 
+
       img.alt =
         image.name;
+
 
       img.loading =
         "lazy";
@@ -1138,11 +1297,14 @@ function openProject(
 }
 
 
+
 /* =========================================================
    CAPITALIZE
 ========================================================= */
 
-function capitalize(text) {
+function capitalize(
+  text
+) {
 
   return (
     text.charAt(0).toUpperCase() +
@@ -1152,16 +1314,19 @@ function capitalize(text) {
 }
 
 
+
 /* =========================================================
    MENU BUTTON
 ========================================================= */
 
 menuButton.addEventListener(
   "click",
-  async function() {
+  async () => {
 
     const isOpen =
-      menuPanel.classList.contains("show");
+      menuPanel.classList.contains(
+        "show"
+      );
 
 
     if (isOpen) {
@@ -1170,49 +1335,53 @@ menuButton.addEventListener(
         "show"
       );
 
+
       menuButton.textContent =
         "+";
-
-      return;
-    }
-
-
-    /* MENU OPEN */
-
-    menuPanel.classList.add(
-      "show"
-    );
-
-    infoPanel.classList.remove(
-      "show"
-    );
-
-    menuButton.textContent =
-      "−";
-
-
-    /* LOAD COMMERCIAL */
-
-    if (
-      projectsByCategory[currentCategory].length === 0
-    ) {
-
-      await loadCategory(
-        currentCategory
-      );
 
     }
 
     else {
 
-      renderProjectList(
-        currentCategory
+      menuPanel.classList.add(
+        "show"
       );
+
+
+      infoPanel.classList.remove(
+        "show"
+      );
+
+
+      menuButton.textContent =
+        "−";
+
+
+      if (
+        !projectsByCategory[
+          currentCategory
+        ].length
+      ) {
+
+        await loadCategory(
+          currentCategory
+        );
+
+      }
+
+      else {
+
+        renderProjectList(
+          currentCategory
+        );
+
+      }
 
     }
 
   }
 );
+
 
 
 /* =========================================================
@@ -1221,15 +1390,17 @@ menuButton.addEventListener(
 
 infoButton.addEventListener(
   "click",
-  function() {
+  () => {
 
     infoPanel.classList.toggle(
       "show"
     );
 
+
     menuPanel.classList.remove(
       "show"
     );
+
 
     menuButton.textContent =
       "+";
@@ -1238,18 +1409,21 @@ infoButton.addEventListener(
 );
 
 
+
 /* =========================================================
    CATEGORY TABS
 ========================================================= */
 
 document
-  .querySelectorAll(".menu-tab")
+  .querySelectorAll(
+    ".menu-tab"
+  )
   .forEach(
     tab => {
 
       tab.addEventListener(
         "click",
-        async function() {
+        async () => {
 
           const category =
             tab.dataset.category;
@@ -1260,7 +1434,9 @@ document
 
 
           document
-            .querySelectorAll(".menu-tab")
+            .querySelectorAll(
+              ".menu-tab"
+            )
             .forEach(
               item => {
 
@@ -1278,7 +1454,9 @@ document
 
 
           if (
-            projectsByCategory[category].length === 0
+            !projectsByCategory[
+              category
+            ].length
           ) {
 
             await loadCategory(
@@ -1302,13 +1480,14 @@ document
   );
 
 
+
 /* =========================================================
    LOGO → HOME
 ========================================================= */
 
 logo.addEventListener(
   "click",
-  function(event) {
+  event => {
 
     event.preventDefault();
 
@@ -1326,9 +1505,11 @@ logo.addEventListener(
       "show"
     );
 
+
     infoPanel.classList.remove(
       "show"
     );
+
 
     menuButton.textContent =
       "+";
@@ -1343,13 +1524,14 @@ logo.addEventListener(
 );
 
 
+
 /* =========================================================
-   BACK
+   BACK BUTTON
 ========================================================= */
 
 backButton.addEventListener(
   "click",
-  function() {
+  () => {
 
     detail.classList.remove(
       "show"
@@ -1369,8 +1551,9 @@ backButton.addEventListener(
 );
 
 
+
 /* =========================================================
-   START
+   INITIALIZE
 ========================================================= */
 
 loadHome();
