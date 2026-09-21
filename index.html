@@ -7,2181 +7,1233 @@
 <title>SONGNANSAE</title>
 
 <style>
-
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html,
 body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-
-    font-family:
-        Helvetica,
-        "Helvetica Neue",
-        Arial,
-        sans-serif;
-
-    font-size: 13px;
-    font-weight: 400;
-
-    background: #fff;
-    color: #000;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  color: #111;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
 }
 
-button {
-    font: inherit;
-    color: inherit;
-    background: none;
-    border: 0;
-    padding: 0;
-    cursor: pointer;
+body {
+  overflow-x: hidden;
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-
-/* ==================================================
+/* =========================
    HEADER
-================================================== */
+========================= */
 
 header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 52px;
+  z-index: 1000;
 
-    position: fixed;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
 
-    top: 0;
-    left: 0;
+  padding: 0 14px;
 
-    width: 100%;
-    height: 52px;
-
-    padding: 0 14px;
-
-    display: grid;
-
-    grid-template-columns:
-        1fr auto 1fr;
-
-    align-items: center;
-
-    background: #fff;
-
-    z-index: 1000;
+  background: rgba(255,255,255,0.96);
 }
-
-
-.header-left {
-    justify-self: start;
-}
-
-
-.header-center {
-    justify-self: center;
-}
-
-
-.header-right {
-    justify-self: end;
-}
-
 
 .menu-button {
+  justify-self: start;
 
-    width: 20px;
+  border: 0;
+  background: none;
 
-    font-size: 20px;
+  padding: 0;
+  margin: 0;
 
-    line-height: 1;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1;
+
+  cursor: pointer;
 }
-
 
 .logo {
+  justify-self: center;
 
-    cursor: pointer;
+  color: #111;
+  text-decoration: none;
 
-    white-space: nowrap;
+  font-size: 13px;
+  line-height: 1;
 }
-
 
 .info-button {
+  justify-self: end;
 
-    cursor: pointer;
+  border: 0;
+  background: none;
+
+  padding: 0;
+  margin: 0;
+
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1;
+
+  cursor: pointer;
 }
 
-
-/* ==================================================
+/* =========================
    INFO
-================================================== */
+========================= */
 
 .info-panel {
+  display: none;
 
-    position: fixed;
+  position: fixed;
+  top: 52px;
+  right: 14px;
 
-    top: 52px;
-    right: 14px;
+  z-index: 900;
 
-    width: 260px;
+  width: 260px;
 
-    display: none;
+  background: #fff;
 
-    line-height: 1.35;
-
-    background: #fff;
-
-    z-index: 1200;
+  font-size: 13px;
+  line-height: 1.4;
 }
 
-
-.info-panel.active {
-    display: block;
+.info-panel.show {
+  display: block;
 }
-
 
 .info-panel a {
-    text-decoration: underline;
+  color: #111;
+  text-decoration: none;
 }
 
+.info-panel a:hover {
+  text-decoration: underline;
+}
 
-/* ==================================================
+/* =========================
    MENU
-================================================== */
+========================= */
 
 .menu-panel {
+  display: none;
 
-    position: fixed;
+  position: fixed;
+  top: 52px;
+  left: 14px;
 
-    top: 52px;
-    left: 0;
+  z-index: 900;
 
-    width: 100%;
+  width: 300px;
 
-    padding:
-        15px
-        14px
-        25px;
-
-    display: none;
-
-    background: #fff;
-
-    z-index: 950;
+  background: #fff;
 }
 
-
-.menu-panel.active {
-    display: block;
+.menu-panel.show {
+  display: block;
 }
-
-
-/* CATEGORY TABS */
 
 .menu-tabs {
+  display: flex;
+  gap: 18px;
 
-    display: flex;
-
-    align-items: center;
-
-    gap: 36px;
-
-    margin-bottom: 15px;
+  margin-bottom: 20px;
 }
-
 
 .menu-tab {
+  border: 0;
+  background: none;
 
-    cursor: pointer;
+  padding: 0;
 
-    opacity: 0.18;
+  font-family: inherit;
+  font-size: 13px;
 
-    white-space: nowrap;
+  cursor: pointer;
 }
-
 
 .menu-tab.active {
-
-    opacity: 1;
-
-    text-decoration: underline;
-
-    text-underline-offset: 3px;
+  text-decoration: underline;
 }
-
-
-/* PROJECT LIST */
 
 .project-list {
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: flex-start;
-
-    gap: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
+.project-item {
+  border: 0;
+  background: none;
 
-.project-list-item {
+  padding: 0;
 
-    cursor: pointer;
+  text-align: left;
 
-    line-height: 1.25;
+  font-family: inherit;
+  font-size: 13px;
+
+  cursor: pointer;
 }
 
-
-.project-list-item:hover {
-
-    text-decoration: underline;
+.project-item:hover {
+  text-decoration: underline;
 }
 
-
-/* ==================================================
-   MAIN
-================================================== */
+/* =========================
+   HOME
+========================= */
 
 main {
-
-    padding-top: 52px;
+  padding-top: 52px;
 }
-
-
-/* ==================================================
-   HOME
-================================================== */
 
 .home {
+  width: 100%;
+  min-height: calc(100vh - 52px);
 
-    width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
 }
-
-
-/* ==================================================
-   HOME BANNER
-================================================== */
 
 /*
-    home 폴더의 사진만 들어오는 영역.
+  HOME 메인 이미지
 
-    가로사진:
-    넓게 표시
-
-    세로사진:
-    좁게 표시
-
-    모든 사진:
-    높이 동일
-
-    크롭 없음
+  사진 한 장만 화면에 크게 표시.
+  원본 비율 유지.
+  크롭 없음.
 */
 
-.home-banner {
+.home-image-wrap {
+  width: 100%;
+  height: calc(100vh - 52px);
 
-    width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    height: 280px;
+  cursor: pointer;
 
-    display: flex;
-
-    gap: 10px;
-
-    overflow-x: auto;
-
-    overflow-y: hidden;
-
-    padding:
-        0
-        14px;
-
-    scrollbar-width: none;
-
-    -ms-overflow-style: none;
+  padding: 0;
 }
-
-
-.home-banner::-webkit-scrollbar {
-
-    display: none;
-}
-
-
-.home-banner-item {
-
-    height: 100%;
-
-    width: auto;
-
-    flex: 0 0 auto;
-
-    display: block;
-
-    object-fit: contain;
-
-    object-position: center;
-
-    background: #f2f2f2;
-}
-
-
-/* ==================================================
-   MAIN 3 COLUMNS
-================================================== */
-
-.home-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 10px;
-
-    padding:
-        30px
-        14px
-        40px;
-}
-
-
-.home-card {
-
-    min-width: 0;
-
-    cursor: pointer;
-}
-
-
-/* ==================================================
-   MAIN IMAGE 4:5
-================================================== */
 
 .home-image {
+  display: block;
 
-    display: block;
+  width: 100%;
+  height: 100%;
 
-    width: 100%;
+  object-fit: contain;
+  object-position: center;
 
-    height: auto;
-
-    aspect-ratio: 4 / 5;
-
-    object-fit: cover;
-
-    background: #f2f2f2;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
-
-.home-image.loading {
-
-    visibility: hidden;
-}
-
-
-/* EMPTY */
-
-.empty-card {
-
-    width: 100%;
-
-    aspect-ratio: 4 / 5;
-
-    background: #f2f2f2;
-}
-
-
-/* ==================================================
-   CAPTION
-================================================== */
-
-.home-caption {
-
-    padding-top: 7px;
-
-    min-height: 36px;
-
-    line-height: 1.25;
-}
-
-
-.home-caption-category,
-.home-caption-project {
-
-    display: block;
-}
-
-
-/* ==================================================
+/* =========================
    DETAIL
-================================================== */
+========================= */
 
 .detail {
+  display: none;
 
-    display: none;
-
-    padding:
-        0
-        14px
-        50px;
+  padding: 78px 14px 40px;
 }
 
-
-.detail.active {
-
-    display: block;
+.detail.show {
+  display: block;
 }
-
 
 .detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 
-    padding:
-        15px
-        0
-        25px;
+  margin-bottom: 24px;
 }
-
 
 .detail-title {
-
-    margin-bottom: 3px;
+  font-size: 13px;
 }
-
 
 .detail-category {
-
-    opacity: 0.5;
+  font-size: 13px;
 }
 
-
-/* DETAIL IMAGES */
-
-.detail-images {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 10px;
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
 }
 
+.detail-image {
+  display: block;
 
-.detail-images img {
+  width: 100%;
+  height: auto;
 
-    width: 100%;
-
-    height: auto;
-
-    display: block;
+  object-fit: contain;
 }
-
-
-/* BACK */
 
 .back-button {
+  margin-top: 40px;
 
-    display: inline-block;
+  border: 0;
+  background: none;
 
-    margin-top: 30px;
+  padding: 0;
 
-    cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+
+  cursor: pointer;
 }
-
 
 .back-button:hover {
-
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
-
-/* ==================================================
+/* =========================
    MOBILE
-================================================== */
+========================= */
 
 @media (max-width: 700px) {
 
-    html,
-    body {
+  header {
+    height: 48px;
+    padding: 0 12px;
+  }
 
-        font-size: 13px;
-    }
+  main {
+    padding-top: 48px;
+  }
 
+  .info-panel {
+    top: 48px;
+    right: 12px;
+  }
 
-    header {
+  .menu-panel {
+    top: 48px;
+    left: 12px;
+    width: calc(100% - 24px);
+  }
 
-        height: 48px;
+  .home {
+    min-height: calc(100vh - 48px);
+  }
 
-        padding: 0 10px;
-    }
+  .home-image-wrap {
+    height: calc(100vh - 48px);
+  }
 
+  .detail {
+    padding: 68px 10px 30px;
+  }
 
-    main {
-
-        padding-top: 48px;
-    }
-
-
-    .info-panel {
-
-        top: 48px;
-
-        right: 10px;
-    }
-
-
-    .menu-panel {
-
-        top: 48px;
-
-        padding:
-            14px
-            10px
-            24px;
-    }
-
-
-    .menu-tabs {
-
-        gap: 25px;
-
-        overflow-x: auto;
-
-        white-space: nowrap;
-    }
-
-
-    /* MOBILE HOME BANNER */
-
-    .home-banner {
-
-        height: 220px;
-
-        gap: 8px;
-
-        padding:
-            0
-            10px;
-    }
-
-
-    .home-grid {
-
-        grid-template-columns: 1fr;
-
-        gap: 25px;
-
-        padding:
-            30px
-            10px
-            30px;
-    }
-
-
-    .home-image,
-    .empty-card {
-
-        aspect-ratio: 4 / 5;
-    }
-
-
-    .detail {
-
-        padding:
-            0
-            10px
-            40px;
-    }
-
-
-    .detail-images {
-
-        grid-template-columns: 1fr;
-
-        gap: 8px;
-    }
-
+  .detail-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
 }
-
 </style>
 </head>
 
 
 <body>
 
-
-<!-- ==================================================
-     HEADER
-================================================== -->
-
 <header>
 
+  <button
+    id="menuButton"
+    class="menu-button"
+    type="button"
+  >+</button>
 
-    <div class="header-left">
+  <a
+    href="#"
+    id="logo"
+    class="logo"
+  >SONGNANSAE</a>
 
-        <button
-            id="menuButton"
-            class="menu-button"
-            aria-label="Open menu"
-        >
-            +
-        </button>
-
-    </div>
-
-
-    <div class="header-center">
-
-        <div
-            class="logo"
-            onclick="goHome()"
-        >
-            SONGNANSAE
-        </div>
-
-    </div>
-
-
-    <div class="header-right">
-
-        <button
-            id="infoButton"
-            class="info-button"
-        >
-            Info
-        </button>
-
-    </div>
-
+  <button
+    id="infoButton"
+    class="info-button"
+    type="button"
+  >Info</button>
 
 </header>
 
 
-
-<!-- ==================================================
-     INFO
-================================================== -->
+<!-- =========================
+     INFO PANEL
+========================= -->
 
 <div
-    id="infoPanel"
-    class="info-panel"
+  id="infoPanel"
+  class="info-panel"
 >
 
-    <div>
-        Commercial Photographer
-    </div>
-
-    <div>
-        Seoul, Korea
-    </div>
-
-    <br>
-
-    <div>
-        For commissions and inquiries
-    </div>
-
-    <div>
-
-        <a href="mailto:songnansae@gmail.com">
-            songnansae@gmail.com
-        </a>
-
-    </div>
-
-    <div>
-
-        <a
-            href="https://www.instagram.com/songnansae/"
-            target="_blank"
-        >
-            Instagram
-        </a>
-
-    </div>
+  <div>Commercial Photographer</div>
+  <div>Seoul, Korea</div>
+  <br>
+  <div>For commissions and inquiries</div>
+  <div>
+    <a href="mailto:songnansae@gmail.com">
+      songnansae@gmail.com
+    </a>
+  </div>
+  <div>
+    <a
+      href="https://www.instagram.com/songnansae/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Instagram
+    </a>
+  </div>
 
 </div>
 
 
-
-<!-- ==================================================
-     MENU
-================================================== -->
+<!-- =========================
+     MENU PANEL
+========================= -->
 
 <div
-    id="menuPanel"
-    class="menu-panel"
+  id="menuPanel"
+  class="menu-panel"
 >
 
+  <div
+    id="menuTabs"
+    class="menu-tabs"
+  >
 
-    <div class="menu-tabs">
+    <button
+      class="menu-tab active"
+      data-category="commercial"
+      type="button"
+    >
+      Commercial
+    </button>
+
+    <button
+      class="menu-tab"
+      data-category="magazine"
+      type="button"
+    >
+      Magazine
+    </button>
+
+    <button
+      class="menu-tab"
+      data-category="personal"
+      type="button"
+    >
+      Personal
+    </button>
+
+    <button
+      class="menu-tab"
+      data-category="film"
+      type="button"
+    >
+      Film
+    </button>
+
+  </div>
 
 
-        <button
-            class="menu-tab active"
-            data-category="commercial"
-            onclick="selectMenuCategory('commercial')"
-        >
-            Commercial
-        </button>
+  <div
+    id="projectList"
+    class="project-list"
+  ></div>
+
+</div>
 
 
-        <button
-            class="menu-tab"
-            data-category="magazine"
-            onclick="selectMenuCategory('magazine')"
-        >
-            Magazine
-        </button>
+<!-- =========================
+     MAIN
+========================= -->
+
+<main>
+
+  <!-- HOME -->
+  <section
+    id="home"
+    class="home"
+  >
+
+    <div
+      id="homeImageWrap"
+      class="home-image-wrap"
+    >
+
+      <img
+        id="homeImage"
+        class="home-image"
+        src=""
+        alt=""
+      >
+
+    </div>
+
+  </section>
 
 
-        <button
-            class="menu-tab"
-            data-category="personal"
-            onclick="selectMenuCategory('personal')"
-        >
-            Personal
-        </button>
+  <!-- DETAIL -->
+  <section
+    id="detail"
+    class="detail"
+  >
 
+    <div class="detail-header">
 
-        <button
-            class="menu-tab"
-            data-category="film"
-            onclick="selectMenuCategory('film')"
-        >
-            Film
-        </button>
+      <div
+        id="detailCategory"
+        class="detail-category"
+      ></div>
 
+      <div
+        id="detailTitle"
+        class="detail-title"
+      ></div>
 
     </div>
 
 
     <div
-        id="projectList"
-        class="project-list"
+      id="detailGrid"
+      class="detail-grid"
     ></div>
 
 
-</div>
-
-
-
-<!-- ==================================================
-     MAIN
-================================================== -->
-
-<main>
-
-
-    <!-- ==================================================
-         HOME
-    ================================================== -->
-
-    <section
-        id="home"
-        class="home"
+    <button
+      id="backButton"
+      class="back-button"
+      type="button"
     >
+      Back
+    </button>
 
-
-        <!-- ==========================================
-             HOME PHOTO BANNER
-        =========================================== -->
-
-        <div
-            id="homeBanner"
-            class="home-banner"
-        ></div>
-
-
-
-        <!-- ==========================================
-             THREE MAIN COLUMNS
-        =========================================== -->
-
-        <div class="home-grid">
-
-
-            <!-- COMMERCIAL -->
-
-            <div
-                class="home-card"
-                onclick="nextProject('commercial')"
-            >
-
-                <div
-                    id="commercialImageContainer"
-                ></div>
-
-                <div
-                    id="commercialCaption"
-                    class="home-caption"
-                ></div>
-
-            </div>
-
-
-
-            <!-- MAGAZINE -->
-
-            <div
-                class="home-card"
-                onclick="nextProject('magazine')"
-            >
-
-                <div
-                    id="magazineImageContainer"
-                ></div>
-
-                <div
-                    id="magazineCaption"
-                    class="home-caption"
-                ></div>
-
-            </div>
-
-
-
-            <!-- PERSONAL -->
-
-            <div
-                class="home-card"
-                onclick="nextProject('personal')"
-            >
-
-                <div
-                    id="personalImageContainer"
-                ></div>
-
-                <div
-                    id="personalCaption"
-                    class="home-caption"
-                ></div>
-
-            </div>
-
-
-        </div>
-
-
-    </section>
-
-
-
-    <!-- ==================================================
-         DETAIL
-    ================================================== -->
-
-    <section
-        id="detail"
-        class="detail"
-    >
-
-
-        <div class="detail-header">
-
-
-            <div
-                id="detailTitle"
-                class="detail-title"
-            ></div>
-
-
-            <div
-                id="detailCategory"
-                class="detail-category"
-            ></div>
-
-
-        </div>
-
-
-        <div
-            id="detailImages"
-            class="detail-images"
-        ></div>
-
-
-        <div
-            class="back-button"
-            onclick="goHome()"
-        >
-            ← Back
-        </div>
-
-
-    </section>
-
+  </section>
 
 </main>
 
 
-
 <script>
 
+/* =========================================================
+   GITHUB
+========================================================= */
 
-/* ==================================================
-   GITHUB SETTINGS
-================================================== */
+const GITHUB_OWNER = "songnansae";
+const GITHUB_REPO = "SONGNANSAE";
+const GITHUB_BRANCH = "main";
 
-const GITHUB_OWNER =
-    "songnansae";
-
-
-const GITHUB_REPO =
-    "SONGNANSAE";
+const IMAGE_ROOT = "images";
 
 
-const GITHUB_BRANCH =
-    "main";
-
-
-const IMAGE_ROOT =
-    "images";
-
-
-/*
-    메뉴에 들어가는 카테고리
-*/
+/* =========================================================
+   CATEGORY
+========================================================= */
 
 const categories = [
-
-    "commercial",
-    "magazine",
-    "personal",
-    "film"
-
+  "commercial",
+  "magazine",
+  "personal",
+  "film"
 ];
 
 
-/*
-    프로젝트 데이터
-*/
+/* =========================================================
+   ELEMENTS
+========================================================= */
 
-const projects = {
+const menuButton = document.getElementById("menuButton");
+const logo = document.getElementById("logo");
+const infoButton = document.getElementById("infoButton");
 
-    commercial: [],
-    magazine: [],
-    personal: [],
-    film: []
+const menuPanel = document.getElementById("menuPanel");
+const infoPanel = document.getElementById("infoPanel");
 
+const projectList = document.getElementById("projectList");
+
+const home = document.getElementById("home");
+const homeImage = document.getElementById("homeImage");
+const homeImageWrap = document.getElementById("homeImageWrap");
+
+const detail = document.getElementById("detail");
+const detailCategory = document.getElementById("detailCategory");
+const detailTitle = document.getElementById("detailTitle");
+const detailGrid = document.getElementById("detailGrid");
+const backButton = document.getElementById("backButton");
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let currentCategory = "commercial";
+
+let projectsByCategory = {
+  commercial: [],
+  magazine: [],
+  personal: [],
+  film: []
 };
 
-
-/*
-    메인 3개 카드의 현재 프로젝트
-*/
-
-const currentIndex = {
-
-    commercial: 0,
-    magazine: 0,
-    personal: 0
-
-};
+let currentProjectIndex = 0;
 
 
-/*
-    메뉴에서 현재 선택된 카테고리
-*/
+/* =========================================================
+   HOME IMAGES
+========================================================= */
 
-let selectedMenuCategory =
-    "commercial";
-
-
-/* ==================================================
-   GITHUB API URL
-================================================== */
-
-function githubContentsURL(path) {
+let homeImages = [];
+let currentHomeIndex = 0;
 
 
-    const encodedPath =
-
-        path
-            .split("/")
-            .map(
-                part =>
-                    encodeURIComponent(part)
-            )
-            .join("/");
-
-
-    return (
-
-        "https://api.github.com/repos/" +
-
-        GITHUB_OWNER +
-
-        "/" +
-
-        GITHUB_REPO +
-
-        "/contents/" +
-
-        encodedPath +
-
-        "?ref=" +
-
-        encodeURIComponent(
-            GITHUB_BRANCH
-        )
-
-    );
-
-}
-
-
-/* ==================================================
+/* =========================================================
    NATURAL SORT
-================================================== */
+========================================================= */
 
 function naturalSort(a, b) {
 
-
-    return a.localeCompare(
-
-        b,
-
-        undefined,
-
-        {
-
-            numeric: true,
-
-            sensitivity: "base"
-
-        }
-
-    );
+  return a.localeCompare(
+    b,
+    undefined,
+    {
+      numeric: true,
+      sensitivity: "base"
+    }
+  );
 
 }
 
 
-/* ==================================================
-   GITHUB CONTENTS
-================================================== */
+/* =========================================================
+   PATH ENCODING
+========================================================= */
+
+function encodePath(path) {
+
+  return path
+    .split("/")
+    .map(part => encodeURIComponent(part))
+    .join("/");
+
+}
+
+
+/* =========================================================
+   GITHUB API
+========================================================= */
 
 async function getGitHubContents(path) {
 
+  const url =
+    `https://api.github.com/repos/` +
+    `${GITHUB_OWNER}/` +
+    `${GITHUB_REPO}/` +
+    `contents/${encodePath(path)}` +
+    `?ref=${GITHUB_BRANCH}`;
 
-    try {
+  const response = await fetch(url);
 
+  if (!response.ok) {
+    throw new Error(
+      `GitHub API error: ${response.status}`
+    );
+  }
 
-        const response =
-
-            await fetch(
-
-                githubContentsURL(
-                    path
-                )
-
-            );
-
-
-        if (!response.ok) {
-
-            console.log(
-                "GitHub API error:",
-                path,
-                response.status
-            );
-
-            return [];
-
-        }
-
-
-        const data =
-            await response.json();
-
-
-        if (!Array.isArray(data)) {
-
-            return [];
-
-        }
-
-
-        return data;
-
-
-    }
-
-    catch (error) {
-
-
-        console.log(
-            "GitHub fetch error:",
-            error
-        );
-
-
-        return [];
-
-    }
+  return await response.json();
 
 }
 
 
-/* ==================================================
+/* =========================================================
    IMAGE CHECK
-================================================== */
+========================================================= */
 
 function isImage(file) {
 
+  if (!file || !file.name) {
+    return false;
+  }
 
-    if (
-        !file ||
-        !file.name
-    ) {
-
-        return false;
-
-    }
-
-
-    const extension =
-
-        file.name
-            .split(".")
-            .pop()
-            .toLowerCase();
-
-
-    return [
-
-        "jpg",
-        "jpeg",
-        "png",
-        "webp",
-        "gif"
-
-    ].includes(
-        extension
-    );
+  return /\.(jpg|jpeg|png|webp|gif|avif)$/i.test(
+    file.name
+  );
 
 }
 
 
-/* ==================================================
-   LOAD HOME BANNER
-================================================== */
+/* =========================================================
+   LOAD HOME
+========================================================= */
 
-async function loadHomeBanner() {
+async function loadHome() {
 
-
-    const banner =
-        document.getElementById(
-            "homeBanner"
-        );
-
-
-    banner.innerHTML =
-        "";
-
-
-    /*
-        images/home/
-
-        안의 사진만 가져옴.
-
-        폴더는 무시하고
-        실제 이미지 파일만 사용.
-    */
-
-    const files =
-        await getGitHubContents(
-            "images/home"
-        );
-
-
-    const imageFiles =
-
-        files
-
-            .filter(
-                file =>
-                    file.type === "file" &&
-                    isImage(file)
-            )
-
-            .sort(
-                (a, b) =>
-                    naturalSort(
-                        a.name,
-                        b.name
-                    )
-            );
-
-
-    /*
-        사진이 없으면
-        아무것도 표시하지 않음.
-    */
-
-    if (
-        imageFiles.length === 0
-    ) {
-
-        return;
-
-    }
-
-
-    /*
-        각 사진을
-        원본 비율 그대로 표시.
-    */
-
-    imageFiles.forEach(
-        file => {
-
-
-            const img =
-                document.createElement(
-                    "img"
-                );
-
-
-            img.className =
-                "home-banner-item";
-
-
-            img.src =
-                file.download_url;
-
-
-            img.alt =
-                "";
-
-
-            img.loading =
-                "eager";
-
-
-            banner.appendChild(
-                img
-            );
-
-
-        }
-    );
-
-}
-
-
-/* ==================================================
-   LOAD CATEGORY
-================================================== */
-
-async function loadCategory(
-    category
-) {
-
-
-    const categoryPath =
-
-        `${IMAGE_ROOT}/${category}`;
-
+  try {
 
     const contents =
+      await getGitHubContents(
+        `${IMAGE_ROOT}/home`
+      );
 
-        await getGitHubContents(
-            categoryPath
+    homeImages = contents
+      .filter(item => item.type === "file")
+      .filter(isImage)
+      .sort((a, b) =>
+        naturalSort(a.name, b.name)
+      );
+
+    if (homeImages.length === 0) {
+
+      homeImage.style.display = "none";
+
+      return;
+    }
+
+    currentHomeIndex = 0;
+
+    showHomeImage();
+
+  } catch (error) {
+
+    console.error(
+      "Home images could not be loaded:",
+      error
+    );
+
+    homeImage.style.display = "none";
+  }
+
+}
+
+
+/* =========================================================
+   SHOW HOME IMAGE
+========================================================= */
+
+function showHomeImage() {
+
+  if (
+    !homeImages.length
+  ) {
+    return;
+  }
+
+  const image =
+    homeImages[currentHomeIndex];
+
+  homeImage.src = image.download_url;
+  homeImage.alt = image.name;
+
+}
+
+
+/* =========================================================
+   NEXT HOME IMAGE
+========================================================= */
+
+function nextHomeImage() {
+
+  if (
+    homeImages.length <= 1
+  ) {
+    return;
+  }
+
+  currentHomeIndex =
+    (currentHomeIndex + 1) %
+    homeImages.length;
+
+  showHomeImage();
+
+}
+
+
+/* =========================================================
+   HOME CLICK
+========================================================= */
+
+homeImageWrap.addEventListener(
+  "click",
+  nextHomeImage
+);
+
+
+/* =========================================================
+   LOAD CATEGORY
+========================================================= */
+
+async function loadCategory(category) {
+
+  try {
+
+    const contents =
+      await getGitHubContents(
+        `${IMAGE_ROOT}/${category}`
+      );
+
+    const folders =
+      contents
+        .filter(item => item.type === "dir")
+        .sort((a, b) =>
+          naturalSort(a.name, b.name)
         );
 
 
-    /*
-        category 안의
-        실제 폴더만 프로젝트.
-    */
-
-    const folders =
-
-        contents
-
-            .filter(
-                item =>
-                    item.type === "dir"
-            )
-
-            .sort(
-                (a, b) =>
-                    naturalSort(
-                        a.name,
-                        b.name
-                    )
-            );
-
-
-    const loadedProjects = [];
+    const projects = [];
 
 
     for (
-        const folder of folders
+      const folder of folders
     ) {
 
-
-        const folderPath =
-
-            `${categoryPath}/${folder.name}`;
-
+      try {
 
         const files =
+          await getGitHubContents(
+            folder.path
+          );
 
-            await getGitHubContents(
-                folderPath
+        const images =
+          files
+            .filter(item =>
+              item.type === "file"
+            )
+            .filter(isImage)
+            .sort((a, b) =>
+              naturalSort(a.name, b.name)
             );
 
 
-        const imageFiles =
-
-            files
-
-                .filter(
-                    file =>
-                        file.type === "file" &&
-                        isImage(file)
-                )
-
-                .sort(
-                    (a, b) =>
-                        naturalSort(
-                            a.name,
-                            b.name
-                        )
-                );
-
-
-        /*
-            사진 없는 폴더는 제외.
-        */
-
         if (
-            imageFiles.length === 0
+          images.length > 0
         ) {
 
-            continue;
+          projects.push({
+
+            name: folder.name,
+
+            path: folder.path,
+
+            images: images
+
+          });
 
         }
 
+      } catch (error) {
 
-        loadedProjects.push({
+        console.error(
+          "Project could not be loaded:",
+          folder.name,
+          error
+        );
 
-            name:
-                folder.name,
-
-            category:
-                category,
-
-            images:
-
-                imageFiles.map(
-                    file => ({
-
-                        name:
-                            file.name,
-
-                        url:
-                            file.download_url
-
-                    })
-                )
-
-        });
-
+      }
 
     }
 
 
-    projects[category] =
-        loadedProjects;
+    projectsByCategory[category] =
+      projects;
+
+    renderProjectList(category);
+
+  } catch (error) {
+
+    console.error(
+      "Category could not be loaded:",
+      category,
+      error
+    );
+
+    projectList.innerHTML = "";
+
+  }
 
 }
 
 
-/* ==================================================
-   LOAD EVERYTHING
-================================================== */
+/* =========================================================
+   RENDER PROJECT LIST
+========================================================= */
 
-async function loadAllProjects() {
+function renderProjectList(category) {
 
+  projectList.innerHTML = "";
 
-    /*
-        홈 배너와
-        4개 카테고리를
-        동시에 불러옴.
-    */
 
-    await Promise.all([
+  const projects =
+    projectsByCategory[category] || [];
 
-        loadHomeBanner(),
 
-        ...categories.map(
-            category =>
-                loadCategory(
-                    category
-                )
-        )
+  projects.forEach(
+    (project, index) => {
 
-    ]);
+      const button =
+        document.createElement("button");
 
+      button.type = "button";
 
-    renderHome();
+      button.className =
+        "project-item";
 
-    renderProjectList();
-
-}
-
-
-/* ==================================================
-   RENDER HOME
-================================================== */
-
-function renderHome() {
-
-
-    renderHomeCard(
-
-        "commercial",
-
-        "commercialImageContainer",
-
-        "commercialCaption"
-
-    );
-
-
-    renderHomeCard(
-
-        "magazine",
-
-        "magazineImageContainer",
-
-        "magazineCaption"
-
-    );
-
-
-    renderHomeCard(
-
-        "personal",
-
-        "personalImageContainer",
-
-        "personalCaption"
-
-    );
-
-}
-
-
-/* ==================================================
-   RENDER HOME CARD
-================================================== */
-
-function renderHomeCard(
-
-    category,
-
-    imageContainerId,
-
-    captionId
-
-) {
-
-
-    const imageContainer =
-
-        document.getElementById(
-            imageContainerId
-        );
-
-
-    const caption =
-
-        document.getElementById(
-            captionId
-        );
-
-
-    imageContainer.innerHTML =
-        "";
-
-
-    caption.innerHTML =
-        "";
-
-
-    const categoryProjects =
-        projects[category];
-
-
-    /*
-        프로젝트가 없는 경우
-    */
-
-    if (
-
-        !categoryProjects ||
-
-        categoryProjects.length === 0
-
-    ) {
-
-
-        imageContainer.innerHTML =
-
-            '<div class="empty-card"></div>';
-
-
-        caption.innerHTML = `
-
-            <span
-                class="home-caption-category"
-            >
-                ${capitalize(category)}
-            </span>
-
-        `;
-
-
-        return;
-
-    }
-
-
-    /*
-        현재 프로젝트
-    */
-
-    const index =
-
-        currentIndex[category] %
-
-        categoryProjects.length;
-
-
-    const project =
-
-        categoryProjects[index];
-
-
-    /*
-        첫 번째 파일이
-        메인 대표 이미지.
-
-        따라서
-        01_ 파일을 넣으면
-        그 사진이 메인.
-    */
-
-    const cover =
-        project.images[0];
-
-
-    if (!cover) {
-
-        return;
-
-    }
-
-
-    const img =
-        document.createElement(
-            "img"
-        );
-
-
-    img.className =
-        "home-image loading";
-
-
-    img.src =
-        cover.url;
-
-
-    img.alt =
+      button.textContent =
         project.name;
 
 
-    img.onload = () => {
-
-        img.classList.remove(
-            "loading"
-        );
-
-    };
-
-
-    img.onerror = () => {
-
-        imageContainer.innerHTML =
-
-            '<div class="empty-card"></div>';
-
-    };
-
-
-    imageContainer.appendChild(
-        img
-    );
-
-
-    /*
-        캡션
-    */
-
-    caption.innerHTML = `
-
-        <span
-            class="home-caption-category"
-        >
-            ${capitalize(category)}
-        </span>
-
-        <span
-            class="home-caption-project"
-        >
-            ${escapeHTML(
-                project.name
-            )}
-        </span>
-
-    `;
-
-}
-
-
-/* ==================================================
-   NEXT PROJECT
-================================================== */
-
-function nextProject(
-    category
-) {
-
-
-    if (
-
-        !projects[category] ||
-
-        projects[category].length === 0
-
-    ) {
-
-        return;
-
-    }
-
-
-    currentIndex[category]++;
-
-
-    if (
-
-        currentIndex[category] >=
-
-        projects[category].length
-
-    ) {
-
-        currentIndex[category] =
-            0;
-
-    }
-
-
-    renderHomeCard(
-
-        category,
-
-        `${category}ImageContainer`,
-
-        `${category}Caption`
-
-    );
-
-}
-
-
-/* ==================================================
-   MENU CATEGORY
-================================================== */
-
-function selectMenuCategory(
-    category
-) {
-
-
-    selectedMenuCategory =
-        category;
-
-
-    document
-        .querySelectorAll(
-            ".menu-tab"
-        )
-        .forEach(
-            tab => {
-
-
-                if (
-
-                    tab.dataset.category ===
-                    category
-
-                ) {
-
-                    tab.classList.add(
-                        "active"
-                    );
-
-                }
-
-                else {
-
-                    tab.classList.remove(
-                        "active"
-                    );
-
-                }
-
-            }
-        );
-
-
-    renderProjectList();
-
-}
-
-
-/* ==================================================
-   PROJECT LIST
-================================================== */
-
-function renderProjectList() {
-
-
-    const container =
-        document.getElementById(
-            "projectList"
-        );
-
-
-    container.innerHTML =
-        "";
-
-
-    const categoryProjects =
-
-        projects[
-            selectedMenuCategory
-        ];
-
-
-    if (
-
-        !categoryProjects ||
-
-        categoryProjects.length === 0
-
-    ) {
-
-        return;
-
-    }
-
-
-    categoryProjects.forEach(
-
-        (project, index) => {
-
-
-            const item =
-                document.createElement(
-                    "div"
-                );
-
-
-            item.className =
-                "project-list-item";
-
-
-            item.textContent =
-                project.name;
-
-
-            item.onclick = () => {
-
-                openProject(
-
-                    selectedMenuCategory,
-
-                    index
-
-                );
-
-            };
-
-
-            container.appendChild(
-                item
-            );
-
+      button.addEventListener(
+        "click",
+        () => {
+
+          openProject(
+            category,
+            index
+          );
 
         }
+      );
 
-    );
+
+      projectList.appendChild(
+        button
+      );
+
+    }
+  );
 
 }
 
 
-/* ==================================================
+/* =========================================================
    OPEN PROJECT
-================================================== */
+========================================================= */
 
 function openProject(
-
-    category,
-
-    index
-
+  category,
+  index
 ) {
 
+  const projects =
+    projectsByCategory[category] || [];
 
-    const project =
-        projects[category][index];
+  const project =
+    projects[index];
 
 
-    if (!project) {
+  if (!project) {
+    return;
+  }
 
-        return;
+
+  currentCategory =
+    category;
+
+  currentProjectIndex =
+    index;
+
+
+  home.style.display =
+    "none";
+
+  detail.classList.add(
+    "show"
+  );
+
+  menuPanel.classList.remove(
+    "show"
+  );
+
+
+  detailCategory.textContent =
+    capitalize(category);
+
+  detailTitle.textContent =
+    project.name;
+
+
+  detailGrid.innerHTML =
+    "";
+
+
+  project.images.forEach(
+    image => {
+
+      const img =
+        document.createElement("img");
+
+      img.className =
+        "detail-image";
+
+      img.src =
+        image.download_url;
+
+      img.alt =
+        image.name;
+
+      img.loading =
+        "lazy";
+
+
+      detailGrid.appendChild(
+        img
+      );
 
     }
+  );
 
 
-    document.getElementById(
-        "home"
-    ).style.display =
-        "none";
-
-
-    document.getElementById(
-        "detail"
-    ).classList.add(
-        "active"
-    );
-
-
-    document.getElementById(
-        "detailTitle"
-    ).textContent =
-        project.name;
-
-
-    document.getElementById(
-        "detailCategory"
-    ).textContent =
-        capitalize(
-            category
-        );
-
-
-    const detailImages =
-        document.getElementById(
-            "detailImages"
-        );
-
-
-    detailImages.innerHTML =
-        "";
-
-
-    project.images.forEach(
-
-        image => {
-
-
-            const img =
-                document.createElement(
-                    "img"
-                );
-
-
-            img.src =
-                image.url;
-
-
-            img.alt =
-                project.name;
-
-
-            img.loading =
-                "lazy";
-
-
-            detailImages.appendChild(
-                img
-            );
-
-
-        }
-
-    );
-
-
-    closeMenu();
-
-
-    window.scrollTo(
-        0,
-        0
-    );
+  window.scrollTo(
+    0,
+    0
+  );
 
 }
 
 
-/* ==================================================
-   GO HOME
-================================================== */
+/* =========================================================
+   CAPITALIZE
+========================================================= */
 
-function goHome() {
+function capitalize(text) {
 
-
-    document.getElementById(
-        "detail"
-    ).classList.remove(
-        "active"
-    );
-
-
-    document.getElementById(
-        "home"
-    ).style.display =
-        "";
-
-
-    closeMenu();
-
-
-    window.scrollTo(
-        0,
-        0
-    );
+  return text.charAt(0).toUpperCase() +
+         text.slice(1);
 
 }
 
 
-/* ==================================================
-   MENU
-================================================== */
-
-const menuButton =
-    document.getElementById(
-        "menuButton"
-    );
-
-
-const menuPanel =
-    document.getElementById(
-        "menuPanel"
-    );
-
+/* =========================================================
+   MENU BUTTON
+========================================================= */
 
 menuButton.addEventListener(
+  "click",
+  async () => {
 
-    "click",
-
-    () => {
-
-
-        if (
-
-            menuPanel.classList.contains(
-                "active"
-            )
-
-        ) {
-
-            closeMenu();
-
-        }
-
-        else {
-
-            openMenu();
-
-        }
-
-    }
-
-);
+    const isOpen =
+      menuPanel.classList.contains(
+        "show"
+      );
 
 
-function openMenu() {
+    if (isOpen) {
 
+      menuPanel.classList.remove(
+        "show"
+      );
 
-    menuPanel.classList.add(
-        "active"
-    );
+      menuButton.textContent =
+        "+";
 
+    } else {
 
-    menuButton.textContent =
+      menuPanel.classList.add(
+        "show"
+      );
+
+      infoPanel.classList.remove(
+        "show"
+      );
+
+      menuButton.textContent =
         "−";
 
 
-    /*
-        메뉴를 열면
-        Commercial부터 선택.
-    */
+      if (
+        !projectsByCategory[currentCategory].length
+      ) {
 
-    selectMenuCategory(
-        "commercial"
-    );
+        await loadCategory(
+          currentCategory
+        );
 
+      } else {
 
-    infoPanel.classList.remove(
-        "active"
-    );
+        renderProjectList(
+          currentCategory
+        );
 
-}
-
-
-function closeMenu() {
-
-
-    menuPanel.classList.remove(
-        "active"
-    );
-
-
-    menuButton.textContent =
-        "+";
-
-}
-
-
-/* ==================================================
-   INFO
-================================================== */
-
-const infoButton =
-    document.getElementById(
-        "infoButton"
-    );
-
-
-const infoPanel =
-    document.getElementById(
-        "infoPanel"
-    );
-
-
-infoButton.addEventListener(
-
-    "click",
-
-    () => {
-
-
-        const opening =
-
-            !infoPanel.classList.contains(
-                "active"
-            );
-
-
-        closeMenu();
-
-
-        if (opening) {
-
-            infoPanel.classList.add(
-                "active"
-            );
-
-        }
-
-        else {
-
-            infoPanel.classList.remove(
-                "active"
-            );
-
-        }
+      }
 
     }
 
+  }
 );
 
 
-/* ==================================================
-   ESCAPE HTML
-================================================== */
+/* =========================================================
+   INFO BUTTON
+========================================================= */
 
-function escapeHTML(
-    value
-) {
+infoButton.addEventListener(
+  "click",
+  () => {
 
-
-    return String(value)
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
-
-
-/* ==================================================
-   CAPITALIZE
-================================================== */
-
-function capitalize(
-    value
-) {
-
-
-    return (
-
-        value.charAt(0).toUpperCase() +
-
-        value.slice(1)
-
+    infoPanel.classList.toggle(
+      "show"
     );
 
-}
+    menuPanel.classList.remove(
+      "show"
+    );
+
+    menuButton.textContent =
+      "+";
+
+  }
+);
 
 
-/* ==================================================
-   START
-================================================== */
+/* =========================================================
+   MENU CATEGORY
+========================================================= */
 
-loadAllProjects();
+document
+  .querySelectorAll(".menu-tab")
+  .forEach(tab => {
+
+    tab.addEventListener(
+      "click",
+      async () => {
+
+        const category =
+          tab.dataset.category;
+
+
+        currentCategory =
+          category;
+
+
+        document
+          .querySelectorAll(".menu-tab")
+          .forEach(item => {
+
+            item.classList.remove(
+              "active"
+            );
+
+          });
+
+
+        tab.classList.add(
+          "active"
+        );
+
+
+        if (
+          !projectsByCategory[category].length
+        ) {
+
+          await loadCategory(
+            category
+          );
+
+        } else {
+
+          renderProjectList(
+            category
+          );
+
+        }
+
+      }
+    );
+
+  });
+
+
+/* =========================================================
+   LOGO → HOME
+========================================================= */
+
+logo.addEventListener(
+  "click",
+  event => {
+
+    event.preventDefault();
+
+
+    detail.classList.remove(
+      "show"
+    );
+
+    home.style.display =
+      "flex";
+
+
+    menuPanel.classList.remove(
+      "show"
+    );
+
+    infoPanel.classList.remove(
+      "show"
+    );
+
+    menuButton.textContent =
+      "+";
+
+
+    window.scrollTo(
+      0,
+      0
+    );
+
+  }
+);
+
+
+/* =========================================================
+   BACK
+========================================================= */
+
+backButton.addEventListener(
+  "click",
+  () => {
+
+    detail.classList.remove(
+      "show"
+    );
+
+    home.style.display =
+      "flex";
+
+
+    window.scrollTo(
+      0,
+      0
+    );
+
+  }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+loadHome();
 
 </script>
 
