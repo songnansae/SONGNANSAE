@@ -235,11 +235,6 @@ main {
 .home-image {
   display: block;
 
-  /*
-    홈 배너 크기
-    화면의 약 68% 정도
-  */
-
   max-width: 68%;
   max-height: calc(100vh - 150px);
 
@@ -284,14 +279,6 @@ main {
   font-size: 13px;
 }
 
-
-/*
-  프로젝트 상세 사진
-
-  한 줄에 한 장.
-  사진 전체가 보임.
-  원본 비율 유지.
-*/
 
 .detail-grid {
   display: flex;
@@ -372,10 +359,6 @@ main {
   .home-image-wrap {
     height: calc(100vh - 48px);
   }
-
-  /*
-    모바일 홈 배너
-  */
 
   .home-image {
     max-width: 90%;
@@ -801,6 +784,33 @@ function naturalSort(
 
 
 /* =========================================================
+   DISPLAY PROJECT NAME
+   관리용 번호는 사이트에서 숨김
+
+   예:
+   01_the vinylhouse , 2024
+   ↓
+   the vinylhouse , 2024
+
+   02_Arena
+   ↓
+   Arena
+========================================================= */
+
+function displayProjectName(
+  name
+) {
+
+  return name.replace(
+    /^\d+[_\-\.\s]+/,
+    ""
+  );
+
+}
+
+
+
+/* =========================================================
    ENCODE GITHUB PATH
 ========================================================= */
 
@@ -1181,8 +1191,14 @@ function renderProjectList(
         "project-item";
 
 
+      /*
+        여기서 관리용 번호를 숨김
+      */
+
       button.textContent =
-        project.name;
+        displayProjectName(
+          project.name
+        );
 
 
       button.addEventListener(
@@ -1267,8 +1283,15 @@ function openProject(
     );
 
 
+  /*
+    상세 페이지 제목에서도
+    관리용 번호를 숨김
+  */
+
   detailTitle.textContent =
-    project.name;
+    displayProjectName(
+      project.name
+    );
 
 
   detailGrid.innerHTML =
