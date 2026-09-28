@@ -76,6 +76,7 @@ header {
   line-height: 1;
 }
 
+
 /* =========================
    INFO
 ========================= */
@@ -109,6 +110,7 @@ header {
   text-decoration: underline;
 }
 
+
 /* =========================
    MENU
 ========================= */
@@ -121,7 +123,7 @@ header {
   left: 14px;
   z-index: 900;
 
-  width: 560px;
+  width: 700px;
 
   background: #fff;
 }
@@ -152,6 +154,7 @@ header {
   text-decoration: underline;
 }
 
+
 /* =========================
    PROJECT LIST
 ========================= */
@@ -179,6 +182,7 @@ header {
 .project-item:hover {
   text-decoration: underline;
 }
+
 
 /* =========================
    HOME
@@ -226,6 +230,7 @@ main {
   user-select: none;
   -webkit-user-drag: none;
 }
+
 
 /* =========================
    DETAIL
@@ -298,6 +303,7 @@ main {
   text-decoration: underline;
 }
 
+
 /* =========================
    MOBILE
 ========================= */
@@ -356,6 +362,7 @@ main {
 }
 </style>
 </head>
+
 
 <body>
 
@@ -632,11 +639,9 @@ function naturalSort(a, b) {
 
 
 /*
-  01_the vinylhouse , 2024
-
+  01_project name
   →
-  
-  the vinylhouse , 2024
+  project name
 */
 
 function displayProjectName(name) {
@@ -650,8 +655,6 @@ function displayProjectName(name) {
 
 
 /*
-  폴더 앞의 번호 추출
-
   01_xxx → 1
   02_xxx → 2
 */
@@ -674,11 +677,7 @@ function extractOrder(name) {
 
 
 /*
-  프로젝트 이름에서 연도 추출
-
-  예:
-  "Pesade, 2024"
-  → 2024
+  project name에서 연도 추출
 */
 
 function extractYear(name) {
@@ -701,7 +700,7 @@ function extractYear(name) {
 
 
 /*
-  이미지 파일인지 확인
+  이미지 확장자
 */
 
 function isImagePath(path) {
@@ -712,7 +711,7 @@ function isImagePath(path) {
 
 
 /*
-  GitHub Raw 이미지 URL
+  GitHub Raw URL
 */
 
 function getRawImageUrl(path) {
@@ -742,15 +741,6 @@ function getRawImageUrl(path) {
 /* =========================================================
    HOME SORT
 ========================================================= */
-
-/*
-  숫자로 시작하는 파일을 먼저.
-
-  01.jpg
-  02.jpg
-  03.jpg
-  _DSF1582.jpg
-*/
 
 function homeSort(a, b) {
 
@@ -808,11 +798,6 @@ function homeSort(a, b) {
    LOAD GITHUB TREE
 ========================================================= */
 
-/*
-  GitHub API를 프로젝트마다 요청하지 않고
-  전체 파일 구조를 한 번만 가져온다.
-*/
-
 async function loadGithubTree() {
 
   if (githubTree) {
@@ -842,15 +827,6 @@ async function loadGithubTree() {
 
   const data =
     await response.json();
-
-
-  if (data.truncated) {
-
-    console.warn(
-      "GitHub tree response was truncated."
-    );
-
-  }
 
 
   githubTree =
@@ -926,7 +902,7 @@ async function loadHome() {
         .sort(homeSort);
 
 
-    if (homeImages.length === 0) {
+    if (!homeImages.length) {
 
       homeImage.style.display =
         "none";
@@ -957,7 +933,7 @@ async function loadHome() {
 
 
 /* =========================================================
-   SHOW HOME IMAGE
+   SHOW HOME
 ========================================================= */
 
 function showHomeImage() {
@@ -981,10 +957,6 @@ function showHomeImage() {
 
 }
 
-
-/* =========================================================
-   NEXT HOME IMAGE
-========================================================= */
 
 function nextHomeImage() {
 
@@ -1020,6 +992,19 @@ async function loadAllProjects() {
     await loadGithubTree();
 
 
+  /*
+    중요:
+    기존 데이터 완전 초기화
+  */
+
+  projectsByCategory = {
+    commercial: [],
+    magazine: [],
+    personal: [],
+    film: []
+  };
+
+
   const projectMap = {};
 
 
@@ -1050,11 +1035,8 @@ async function loadAllProjects() {
 
     /*
       images
-      /
       category
-      /
       project
-      /
       image
     */
 
@@ -1087,6 +1069,21 @@ async function loadAllProjects() {
       parts[2];
 
 
+    /*
+      혹시 Personal 아래에
+      Magazine이라는 잘못된 데이터가
+      GitHub Tree에 남아 있더라도
+      Personal 프로젝트로 표시하지 않음.
+    */
+
+    if (
+      category === "personal" &&
+      projectName.toLowerCase() === "magazine"
+    ) {
+      return;
+    }
+
+
     const projectPath =
       `${IMAGE_ROOT}/${category}/${projectName}`;
 
@@ -1101,9 +1098,11 @@ async function loadAllProjects() {
         category
       ][projectPath] = {
 
-        name: projectName,
+        name:
+          projectName,
 
-        path: projectPath,
+        path:
+          projectPath,
 
         images: []
 
@@ -1137,7 +1136,7 @@ async function loadAllProjects() {
 
 
   /* =========================
-     CATEGORY DATA
+     MAKE CATEGORY DATA
   ========================= */
 
   categories.forEach(
@@ -1154,8 +1153,7 @@ async function loadAllProjects() {
 
 
       /*
-        프로젝트 내부 이미지
-        자연스러운 파일명 순서
+        프로젝트 내부 사진 정렬
       */
 
       projectsByCategory[
@@ -1176,11 +1174,10 @@ async function loadAllProjects() {
 
 
       /*
-        핵심 정렬
+        정렬:
 
-        1. 연도 최신순
-        2. 같은 연도 안에서는
-           01 → 02 → 03 순서
+        1. 최신 연도
+        2. 같은 연도는 01 → 02 → 03
       */
 
       projectsByCategory[
@@ -1200,8 +1197,9 @@ async function loadAllProjects() {
 
 
           /*
-            연도가 둘 다 있으면
-            최신 연도 먼저
+            둘 다 연도가 있고
+            연도가 다르면
+            최신 연도 우선
           */
 
           if (
@@ -1216,8 +1214,7 @@ async function loadAllProjects() {
 
 
           /*
-            연도 없는 프로젝트는
-            아래쪽으로
+            연도 있는 프로젝트 우선
           */
 
           if (
@@ -1242,7 +1239,7 @@ async function loadAllProjects() {
 
           /*
             같은 연도에서는
-            폴더 앞 번호 순서 유지
+            관리번호 순서
           */
 
           return (
@@ -1262,13 +1259,6 @@ async function loadAllProjects() {
 /* =========================================================
    RENDER PROJECT LIST
 ========================================================= */
-
-/*
-  여기서는 연도 제목을 만들지 않는다.
-
-  그냥 정렬된 프로젝트를
-  그대로 한 줄씩 출력한다.
-*/
 
 function renderProjectList(
   category
@@ -1415,11 +1405,6 @@ function openProject(
         image.name;
 
 
-      /*
-        첫 번째 사진은 즉시,
-        나머지는 lazy loading.
-      */
-
       if (index !== 0) {
 
         img.loading =
@@ -1501,8 +1486,7 @@ menuButton.addEventListener(
 
 
     /*
-      데이터가 아직 없다면
-      한 번만 로드.
+      데이터가 없을 때만 로드
     */
 
     if (
@@ -1604,8 +1588,8 @@ document
 
 
           /*
-            이미 데이터가 있으면
-            GitHub API를 다시 호출하지 않음.
+            이미 전체 데이터가 있으면
+            GitHub에 다시 요청하지 않음.
           */
 
           if (
@@ -1718,7 +1702,7 @@ async function initializeSite() {
   try {
 
     /*
-      GitHub Tree와 Home을
+      GitHub 데이터와 Home을
       동시에 준비
     */
 
@@ -1729,15 +1713,14 @@ async function initializeSite() {
 
 
     /*
-      전체 프로젝트 정보 구성
+      전체 프로젝트 데이터 구성
     */
 
     await loadAllProjects();
 
 
     /*
-      처음 메뉴를 열면
-      바로 표시할 수 있도록 준비
+      첫 메뉴는 Commercial
     */
 
     renderProjectList(
