@@ -24,6 +24,7 @@ body {
   overflow-x: hidden;
 }
 
+
 /* =========================
    HEADER
 ========================= */
@@ -123,7 +124,7 @@ header {
   left: 14px;
   z-index: 900;
 
-  width: 700px;
+  width: 300px;
 
   background: #fff;
 }
@@ -1141,8 +1142,7 @@ async function loadAllProjects() {
 
 
     /*
-      Personal 안에 잘못 들어온
-      Magazine 폴더 방지
+      Personal 안의 Magazine 제외
     */
 
     if (
@@ -1250,11 +1250,8 @@ async function loadAllProjects() {
 
 
       /*
-        정렬
-
         1. 최신 연도
-        2. 같은 연도는
-           01 → 02 → 03
+        2. 같은 연도는 번호 순
       */
 
       projectsByCategory[
@@ -1303,11 +1300,6 @@ async function loadAllProjects() {
 
           }
 
-
-          /*
-            같은 연도에서는
-            관리번호 순서
-          */
 
           return (
             extractOrder(a.name) -
@@ -1451,11 +1443,6 @@ function openProject(
     "";
 
 
-  /*
-    프로젝트 안의 사진/영상을
-    하나씩 생성
-  */
-
   project.media.forEach(
     (media, index) => {
 
@@ -1464,8 +1451,7 @@ function openProject(
       ) {
 
         createVideo(
-          media,
-          index
+          media
         );
 
       } else {
@@ -1516,11 +1502,6 @@ function createImage(
     media.name;
 
 
-  /*
-    첫 번째 이미지는 바로 로드.
-    나머지는 lazy.
-  */
-
   if (index !== 0) {
 
     img.loading =
@@ -1541,8 +1522,7 @@ function createImage(
 ========================================================= */
 
 function createVideo(
-  media,
-  index
+  media
 ) {
 
   const video =
@@ -1555,52 +1535,25 @@ function createVideo(
     "detail-video";
 
 
-  /*
-    영상 컨트롤 표시
-  */
-
   video.controls =
     true;
 
-
-  /*
-    자동재생을 위해
-    음소거
-  */
 
   video.muted =
     true;
 
 
-  /*
-    iPhone / iPad에서
-    전체화면 전환 없이
-    페이지 안에서 재생
-  */
-
   video.playsInline =
     true;
 
-
-  /*
-    자동재생
-  */
 
   video.autoplay =
     true;
 
 
-  /*
-    필요한 부분만 우선 로딩
-  */
-
   video.preload =
     "metadata";
 
-
-  /*
-    모바일 Safari 대응
-  */
 
   video.setAttribute(
     "playsinline",
@@ -1614,10 +1567,6 @@ function createVideo(
   );
 
 
-  /*
-    영상 소스
-  */
-
   const source =
     document.createElement(
       "source"
@@ -1627,10 +1576,6 @@ function createVideo(
   source.src =
     media.download_url;
 
-
-  /*
-    확장자별 MIME
-  */
 
   if (
     /\.mp4$/i.test(
@@ -1664,18 +1609,6 @@ function createVideo(
 
   video.appendChild(
     source
-  );
-
-
-  /*
-    브라우저가 영상을 지원하지
-    않을 경우 표시되는 문구
-  */
-
-  video.appendChild(
-    document.createTextNode(
-      "Your browser does not support this video."
-    )
   );
 
 
