@@ -269,6 +269,11 @@ main {
   gap: 30px;
 }
 
+
+/* =========================
+   DETAIL IMAGE
+========================= */
+
 .detail-image {
   display: block;
 
@@ -284,6 +289,34 @@ main {
   margin: 0 auto;
   padding: 0;
 }
+
+
+/* =========================
+   DETAIL VIDEO
+========================= */
+
+.detail-video {
+  display: block;
+
+  max-width: 90%;
+  max-height: calc(100vh - 190px);
+
+  width: auto;
+  height: auto;
+
+  object-fit: contain;
+  object-position: center;
+
+  margin: 0 auto;
+  padding: 0;
+
+  background: #000;
+}
+
+
+/* =========================
+   BACK
+========================= */
 
 .back-button {
   margin-top: 40px;
@@ -356,6 +389,11 @@ main {
   }
 
   .detail-image {
+    max-width: 92%;
+    max-height: calc(100vh - 150px);
+  }
+
+  .detail-video {
     max-width: 92%;
     max-height: calc(100vh - 150px);
   }
@@ -677,7 +715,7 @@ function extractOrder(name) {
 
 
 /*
-  project name에서 연도 추출
+  프로젝트 이름에서 연도 추출
 */
 
 function extractYear(name) {
@@ -700,7 +738,7 @@ function extractYear(name) {
 
 
 /*
-  이미지 확장자
+  이미지 파일인지
 */
 
 function isImagePath(path) {
@@ -711,10 +749,35 @@ function isImagePath(path) {
 
 
 /*
+  영상 파일인지
+*/
+
+function isVideoPath(path) {
+
+  return /\.(mp4|mov|webm|m4v)$/i.test(path);
+
+}
+
+
+/*
+  이미지 또는 영상인지
+*/
+
+function isMediaPath(path) {
+
+  return (
+    isImagePath(path) ||
+    isVideoPath(path)
+  );
+
+}
+
+
+/*
   GitHub Raw URL
 */
 
-function getRawImageUrl(path) {
+function getRawMediaUrl(path) {
 
   const encodedPath =
     path
@@ -875,6 +938,7 @@ async function loadHome() {
             );
 
           return !relativePath.includes("/");
+
         })
 
         .filter(item =>
@@ -892,7 +956,7 @@ async function loadHome() {
             name: fileName,
             path: item.path,
             download_url:
-              getRawImageUrl(
+              getRawMediaUrl(
                 item.path
               )
           };
@@ -933,7 +997,7 @@ async function loadHome() {
 
 
 /* =========================================================
-   SHOW HOME
+   SHOW HOME IMAGE
 ========================================================= */
 
 function showHomeImage() {
@@ -957,6 +1021,10 @@ function showHomeImage() {
 
 }
 
+
+/* =========================================================
+   NEXT HOME IMAGE
+========================================================= */
 
 function nextHomeImage() {
 
@@ -993,8 +1061,7 @@ async function loadAllProjects() {
 
 
   /*
-    중요:
-    기존 데이터 완전 초기화
+    기존 데이터 초기화
   */
 
   projectsByCategory = {
@@ -1024,7 +1091,11 @@ async function loadAllProjects() {
     }
 
 
-    if (!isImagePath(item.path)) {
+    /*
+      이미지 + 영상 모두 허용
+    */
+
+    if (!isMediaPath(item.path)) {
       return;
     }
 
@@ -1037,7 +1108,7 @@ async function loadAllProjects() {
       images
       category
       project
-      image
+      media
     */
 
     if (parts.length < 4) {
@@ -1070,10 +1141,8 @@ async function loadAllProjects() {
 
 
     /*
-      혹시 Personal 아래에
-      Magazine이라는 잘못된 데이터가
-      GitHub Tree에 남아 있더라도
-      Personal 프로젝트로 표시하지 않음.
+      Personal 안에 잘못 들어온
+      Magazine 폴더 방지
     */
 
     if (
@@ -1104,7 +1173,7 @@ async function loadAllProjects() {
         path:
           projectPath,
 
-        images: []
+        media: []
 
       };
 
@@ -1114,7 +1183,7 @@ async function loadAllProjects() {
     projectMap[
       category
     ][projectPath]
-      .images
+      .media
       .push({
 
         name:
@@ -1126,9 +1195,16 @@ async function loadAllProjects() {
           item.path,
 
         download_url:
-          getRawImageUrl(
+          getRawMediaUrl(
+            item.path
+          ),
+
+        type:
+          isVideoPath(
             item.path
           )
+          ? "video"
+          : "image"
 
       });
 
@@ -1136,7 +1212,7 @@ async function loadAllProjects() {
 
 
   /* =========================
-     MAKE CATEGORY DATA
+     CATEGORY DATA
   ========================= */
 
   categories.forEach(
@@ -1153,7 +1229,7 @@ async function loadAllProjects() {
 
 
       /*
-        프로젝트 내부 사진 정렬
+        프로젝트 내부 미디어 정렬
       */
 
       projectsByCategory[
@@ -1161,7 +1237,7 @@ async function loadAllProjects() {
       ].forEach(
         project => {
 
-          project.images.sort(
+          project.media.sort(
             (a, b) =>
               naturalSort(
                 a.name,
@@ -1174,10 +1250,11 @@ async function loadAllProjects() {
 
 
       /*
-        정렬:
+        정렬
 
         1. 최신 연도
-        2. 같은 연도는 01 → 02 → 03
+        2. 같은 연도는
+           01 → 02 → 03
       */
 
       projectsByCategory[
@@ -1196,12 +1273,6 @@ async function loadAllProjects() {
             );
 
 
-          /*
-            둘 다 연도가 있고
-            연도가 다르면
-            최신 연도 우선
-          */
-
           if (
             yearA !== null &&
             yearB !== null &&
@@ -1212,10 +1283,6 @@ async function loadAllProjects() {
 
           }
 
-
-          /*
-            연도 있는 프로젝트 우선
-          */
 
           if (
             yearA === null &&
@@ -1384,38 +1451,31 @@ function openProject(
     "";
 
 
-  project.images.forEach(
-    (image, index) => {
+  /*
+    프로젝트 안의 사진/영상을
+    하나씩 생성
+  */
 
-      const img =
-        document.createElement(
-          "img"
+  project.media.forEach(
+    (media, index) => {
+
+      if (
+        media.type === "video"
+      ) {
+
+        createVideo(
+          media,
+          index
         );
 
+      } else {
 
-      img.className =
-        "detail-image";
-
-
-      img.src =
-        image.download_url;
-
-
-      img.alt =
-        image.name;
-
-
-      if (index !== 0) {
-
-        img.loading =
-          "lazy";
+        createImage(
+          media,
+          index
+        );
 
       }
-
-
-      detailGrid.appendChild(
-        img
-      );
 
     }
   );
@@ -1424,6 +1484,203 @@ function openProject(
   window.scrollTo(
     0,
     0
+  );
+
+}
+
+
+/* =========================================================
+   CREATE IMAGE
+========================================================= */
+
+function createImage(
+  media,
+  index
+) {
+
+  const img =
+    document.createElement(
+      "img"
+    );
+
+
+  img.className =
+    "detail-image";
+
+
+  img.src =
+    media.download_url;
+
+
+  img.alt =
+    media.name;
+
+
+  /*
+    첫 번째 이미지는 바로 로드.
+    나머지는 lazy.
+  */
+
+  if (index !== 0) {
+
+    img.loading =
+      "lazy";
+
+  }
+
+
+  detailGrid.appendChild(
+    img
+  );
+
+}
+
+
+/* =========================================================
+   CREATE VIDEO
+========================================================= */
+
+function createVideo(
+  media,
+  index
+) {
+
+  const video =
+    document.createElement(
+      "video"
+    );
+
+
+  video.className =
+    "detail-video";
+
+
+  /*
+    영상 컨트롤 표시
+  */
+
+  video.controls =
+    true;
+
+
+  /*
+    자동재생을 위해
+    음소거
+  */
+
+  video.muted =
+    true;
+
+
+  /*
+    iPhone / iPad에서
+    전체화면 전환 없이
+    페이지 안에서 재생
+  */
+
+  video.playsInline =
+    true;
+
+
+  /*
+    자동재생
+  */
+
+  video.autoplay =
+    true;
+
+
+  /*
+    필요한 부분만 우선 로딩
+  */
+
+  video.preload =
+    "metadata";
+
+
+  /*
+    모바일 Safari 대응
+  */
+
+  video.setAttribute(
+    "playsinline",
+    ""
+  );
+
+
+  video.setAttribute(
+    "webkit-playsinline",
+    ""
+  );
+
+
+  /*
+    영상 소스
+  */
+
+  const source =
+    document.createElement(
+      "source"
+    );
+
+
+  source.src =
+    media.download_url;
+
+
+  /*
+    확장자별 MIME
+  */
+
+  if (
+    /\.mp4$/i.test(
+      media.name
+    )
+  ) {
+
+    source.type =
+      "video/mp4";
+
+  } else if (
+    /\.webm$/i.test(
+      media.name
+    )
+  ) {
+
+    source.type =
+      "video/webm";
+
+  } else if (
+    /\.mov$/i.test(
+      media.name
+    )
+  ) {
+
+    source.type =
+      "video/quicktime";
+
+  }
+
+
+  video.appendChild(
+    source
+  );
+
+
+  /*
+    브라우저가 영상을 지원하지
+    않을 경우 표시되는 문구
+  */
+
+  video.appendChild(
+    document.createTextNode(
+      "Your browser does not support this video."
+    )
+  );
+
+
+  detailGrid.appendChild(
+    video
   );
 
 }
@@ -1484,10 +1741,6 @@ menuButton.addEventListener(
     menuButton.textContent =
       "−";
 
-
-    /*
-      데이터가 없을 때만 로드
-    */
 
     if (
       !projectsByCategory[
@@ -1586,11 +1839,6 @@ document
             "active"
           );
 
-
-          /*
-            이미 전체 데이터가 있으면
-            GitHub에 다시 요청하지 않음.
-          */
 
           if (
             !projectsByCategory[
@@ -1701,27 +1949,14 @@ async function initializeSite() {
 
   try {
 
-    /*
-      GitHub 데이터와 Home을
-      동시에 준비
-    */
-
     await Promise.all([
       loadGithubTree(),
       loadHome()
     ]);
 
 
-    /*
-      전체 프로젝트 데이터 구성
-    */
-
     await loadAllProjects();
 
-
-    /*
-      첫 메뉴는 Commercial
-    */
 
     renderProjectList(
       currentCategory
